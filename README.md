@@ -18,6 +18,8 @@ It scans the repo, writes `skillpack.yaml`, then compiles it into:
 - `.cursor/rules/<project>.mdc`
 - `.github/copilot-instructions.md`
 
+Skillpack Forge is a compiler for repo-specific agent instructions, not a skill registry, skill installer, readiness-score linter, or agent runtime. See the [competitive analysis](docs/competitive-analysis.md) for how it differs from adjacent projects such as MDA, repo2agent, and skillpack.
+
 ## Why This Can Win Stars
 
 The high-star signal is clear: developers are collecting agent instructions and skills, but the ecosystem is fragmented.
