@@ -12,6 +12,7 @@ Compile one repo manifest into portable AGENTS.md, AI coding skills, and agent r
 - test: `npm test`
 - doctor: `npm run doctor`
 - scan: `npm run scan`
+- diff: `npm run diff`
 
 ## Preferred Workflow
 - Inspect the current project context and nearby files

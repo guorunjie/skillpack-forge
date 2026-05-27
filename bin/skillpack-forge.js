@@ -2,7 +2,7 @@
 import { stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { compileProject, doctorProject } from "../src/compiler.js";
+import { compileProjectWithOptions, diffProject, doctorProject } from "../src/compiler.js";
 import { createManifestFromScan, stringifyManifest } from "../src/manifest.js";
 import { scanProject } from "../src/scanner.js";
 
@@ -21,8 +21,9 @@ function help() {
 Usage:
   skillpack-forge scan [path] [--json]
   skillpack-forge init [path] [--force]
-  skillpack-forge compile [path]
+  skillpack-forge compile [path] [--dry-run]
   skillpack-forge doctor [path]
+  skillpack-forge diff [path]
 `;
 }
 
@@ -65,8 +66,12 @@ async function main(argv = process.argv.slice(2)) {
 
   if (command === "compile") {
     const root = positional(args);
-    const result = await compileProject(root);
-    for (const file of result.files) console.log(`wrote ${file}`);
+    const result = await compileProjectWithOptions(root, { dryRun: args.includes("--dry-run") });
+    if (result.dryRun) {
+      for (const action of result.actions) console.log(`${action.exists ? "would overwrite" : "would create"} ${action.file}`);
+    } else {
+      for (const file of result.files) console.log(`wrote ${file}`);
+    }
     return 0;
   }
 
@@ -78,6 +83,17 @@ async function main(argv = process.argv.slice(2)) {
       return 1;
     }
     console.log("ok: skillpack is healthy");
+    return 0;
+  }
+
+  if (command === "diff") {
+    const root = positional(args);
+    const result = await diffProject(root);
+    if (!result.ok) {
+      for (const issue of result.issues) console.error(`issue: ${issue}`);
+      return 1;
+    }
+    console.log("ok: generated files match skillpack manifest");
     return 0;
   }
 

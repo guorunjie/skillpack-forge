@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
-import { compileProject, doctorProject } from "../src/compiler.js";
+import { compileProject, compileProjectWithOptions, diffProject, doctorProject } from "../src/compiler.js";
 import { stringifyManifest } from "../src/manifest.js";
 
 test("compileProject writes AGENTS, skills, Cursor, and Copilot files", async () => {
@@ -79,4 +79,71 @@ test("doctorProject reports missing generated files before compile and passes af
   const after = await doctorProject(root);
   assert.equal(after.ok, true);
   assert.deepEqual(after.issues, []);
+});
+
+test("compileProjectWithOptions dry-run lists outputs without writing files", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-dry-run-"));
+  await writeFile(
+    path.join(root, "skillpack.yaml"),
+    stringifyManifest({
+      name: "demo-agent-tool",
+      summary: "Browser automation CLI",
+      targets: ["agents", "codex"],
+      principles: ["Verify before completion"],
+      commands: {
+        test: "npm test"
+      },
+      skills: [
+        {
+          name: "demo-agent-tool-developer",
+          description: "Use when changing the demo agent tool.",
+          workflow: ["Run tests"]
+        }
+      ]
+    })
+  );
+
+  const result = await compileProjectWithOptions(root, { dryRun: true });
+
+  assert.equal(result.dryRun, true);
+  assert.deepEqual(result.files.sort(), [".codex/skills/demo-agent-tool-developer/SKILL.md", "AGENTS.md"].sort());
+  assert.equal(result.actions.every((action) => action.exists === false), true);
+  await assert.rejects(stat(path.join(root, "AGENTS.md")));
+});
+
+test("diffProject reports missing, stale, and clean generated outputs", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-diff-"));
+  await writeFile(
+    path.join(root, "skillpack.yaml"),
+    stringifyManifest({
+      name: "demo-agent-tool",
+      summary: "Browser automation CLI",
+      targets: ["agents"],
+      principles: ["Verify before completion"],
+      commands: {
+        test: "npm test"
+      },
+      skills: [
+        {
+          name: "demo-agent-tool-developer",
+          description: "Use when changing the demo agent tool.",
+          workflow: ["Run tests"]
+        }
+      ]
+    })
+  );
+
+  const missing = await diffProject(root);
+  assert.equal(missing.ok, false);
+  assert.ok(missing.issues.some((issue) => issue.includes("Missing generated file")));
+
+  await writeFile(path.join(root, "AGENTS.md"), "stale instructions\n");
+  const stale = await diffProject(root);
+  assert.equal(stale.ok, false);
+  assert.ok(stale.issues.some((issue) => issue.includes("stale")));
+
+  await compileProject(root);
+  const clean = await diffProject(root);
+  assert.equal(clean.ok, true);
+  assert.deepEqual(clean.issues, []);
 });

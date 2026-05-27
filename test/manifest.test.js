@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 
 import { createManifestFromScan, parseManifest, stringifyManifest } from "../src/manifest.js";
@@ -46,4 +47,13 @@ test("stringifyManifest and parseManifest round-trip the supported schema", () =
   const parsed = parseManifest(stringifyManifest(manifest));
 
   assert.deepEqual(parsed, manifest);
+});
+
+test("skillpack.schema.json describes the supported manifest shape", async () => {
+  const schema = JSON.parse(await readFile("skillpack.schema.json", "utf8"));
+
+  assert.equal(schema.title, "Skillpack Forge Manifest");
+  assert.deepEqual(schema.required, ["name", "summary", "targets", "principles", "commands", "skills"]);
+  assert.deepEqual(schema.properties.targets.items.enum, ["agents", "claude", "codex", "cursor", "copilot"]);
+  assert.equal(schema.properties.skills.items.required.includes("workflow"), true);
 });

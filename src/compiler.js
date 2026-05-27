@@ -110,17 +110,21 @@ ${list((manifest.skills?.[0]?.workflow) ?? [])}
 }
 
 function expectedFiles(manifest) {
-  const files = [];
+  return generatedArtifacts(manifest).map((artifact) => artifact.file);
+}
+
+function generatedArtifacts(manifest) {
+  const artifacts = [];
   const targets = new Set(manifest.targets ?? []);
   const skills = manifest.skills ?? [];
-  if (targets.has("agents")) files.push("AGENTS.md");
-  if (targets.has("cursor")) files.push(`.cursor/rules/${manifest.name}.mdc`);
-  if (targets.has("copilot")) files.push(".github/copilot-instructions.md");
+  if (targets.has("agents")) artifacts.push({ file: "AGENTS.md", content: renderAgents(manifest) });
+  if (targets.has("cursor")) artifacts.push({ file: `.cursor/rules/${manifest.name}.mdc`, content: renderCursorRule(manifest) });
+  if (targets.has("copilot")) artifacts.push({ file: ".github/copilot-instructions.md", content: renderCopilotInstructions(manifest) });
   for (const skill of skills) {
-    if (targets.has("claude")) files.push(`.claude/skills/${skill.name}/SKILL.md`);
-    if (targets.has("codex")) files.push(`.codex/skills/${skill.name}/SKILL.md`);
+    if (targets.has("claude")) artifacts.push({ file: `.claude/skills/${skill.name}/SKILL.md`, content: renderSkill(manifest, skill) });
+    if (targets.has("codex")) artifacts.push({ file: `.codex/skills/${skill.name}/SKILL.md`, content: renderSkill(manifest, skill) });
   }
-  return files;
+  return artifacts;
 }
 
 async function writeGenerated(root, relative, content) {
@@ -130,39 +134,66 @@ async function writeGenerated(root, relative, content) {
 }
 
 export async function compileProject(root = process.cwd()) {
+  return compileProjectWithOptions(root);
+}
+
+async function planWrites(root, artifacts) {
+  const actions = [];
+  for (const artifact of artifacts) {
+    actions.push({
+      file: artifact.file,
+      exists: await exists(path.join(root, artifact.file))
+    });
+  }
+  return actions;
+}
+
+export async function compileProjectWithOptions(root = process.cwd(), options = {}) {
   const projectRoot = path.resolve(root);
   const manifest = await readManifest(projectRoot);
-  const targets = new Set(manifest.targets ?? []);
-  const files = [];
+  const artifacts = generatedArtifacts(manifest);
+  const files = artifacts.map((artifact) => artifact.file);
+  const actions = await planWrites(projectRoot, artifacts);
 
-  if (targets.has("agents")) {
-    await writeGenerated(projectRoot, "AGENTS.md", renderAgents(manifest));
-    files.push("AGENTS.md");
-  }
-  if (targets.has("cursor")) {
-    const file = `.cursor/rules/${manifest.name}.mdc`;
-    await writeGenerated(projectRoot, file, renderCursorRule(manifest));
-    files.push(file);
-  }
-  if (targets.has("copilot")) {
-    await writeGenerated(projectRoot, ".github/copilot-instructions.md", renderCopilotInstructions(manifest));
-    files.push(".github/copilot-instructions.md");
+  if (options.dryRun) {
+    return { files, actions, dryRun: true };
   }
 
-  for (const skill of manifest.skills ?? []) {
-    if (targets.has("claude")) {
-      const file = `.claude/skills/${skill.name}/SKILL.md`;
-      await writeGenerated(projectRoot, file, renderSkill(manifest, skill));
-      files.push(file);
+  for (const artifact of artifacts) {
+    await writeGenerated(projectRoot, artifact.file, artifact.content);
+  }
+
+  return { files, actions, dryRun: false };
+}
+
+export async function diffProject(root = process.cwd()) {
+  const projectRoot = path.resolve(root);
+  const issues = [];
+  let manifest;
+  try {
+    manifest = await readManifest(projectRoot);
+  } catch (error) {
+    return { ok: false, issues: [error.message], files: [] };
+  }
+
+  const artifacts = generatedArtifacts(manifest);
+  for (const artifact of artifacts) {
+    const absolute = path.join(projectRoot, artifact.file);
+    if (!(await exists(absolute))) {
+      issues.push(`Missing generated file: ${artifact.file}`);
+      continue;
     }
-    if (targets.has("codex")) {
-      const file = `.codex/skills/${skill.name}/SKILL.md`;
-      await writeGenerated(projectRoot, file, renderSkill(manifest, skill));
-      files.push(file);
+    const current = await readFile(absolute, "utf8");
+    if (current !== artifact.content) {
+      issues.push(`Generated file is stale: ${artifact.file}`);
     }
   }
 
-  return { files };
+  return {
+    ok: issues.length === 0,
+    issues,
+    files: artifacts.map((artifact) => artifact.file)
+  };
 }
 
 export async function doctorProject(root = process.cwd()) {

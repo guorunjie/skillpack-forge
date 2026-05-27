@@ -26,3 +26,35 @@ test("CLI init and compile create a working skillpack", async () => {
   assert.match(await readFile(path.join(root, "AGENTS.md"), "utf8"), /cli-demo/);
   assert.match(stdout, /ok/);
 });
+
+test("CLI compile --dry-run does not write generated files and diff detects drift", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-cli-dry-run-"));
+  await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "cli-demo", scripts: { test: "node --test" } }));
+  await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "init", root], {
+    cwd: path.resolve(".")
+  });
+
+  const dryRun = await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "compile", root, "--dry-run"], {
+    cwd: path.resolve(".")
+  });
+  assert.match(dryRun.stdout, /would create AGENTS\.md/);
+  await assert.rejects(readFile(path.join(root, "AGENTS.md"), "utf8"));
+
+  await assert.rejects(
+    execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "diff", root], {
+      cwd: path.resolve(".")
+    }),
+    (error) => {
+      assert.match(error.stderr, /Missing generated file/);
+      return error.code === 1;
+    }
+  );
+
+  await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "compile", root], {
+    cwd: path.resolve(".")
+  });
+  const diff = await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "diff", root], {
+    cwd: path.resolve(".")
+  });
+  assert.match(diff.stdout, /generated files match/);
+});

@@ -6,8 +6,10 @@ AI coding tools now ask for the same project knowledge in different formats: `AG
 
 ```bash
 npx skillpack-forge init .
+npx skillpack-forge compile . --dry-run
 npx skillpack-forge compile .
 npx skillpack-forge doctor .
+npx skillpack-forge diff .
 ```
 
 It scans the repo, writes `skillpack.yaml`, then compiles it into:
@@ -46,8 +48,10 @@ Create a skillpack for any project:
 
 ```bash
 node ./bin/skillpack-forge.js init /path/to/project
+node ./bin/skillpack-forge.js compile /path/to/project --dry-run
 node ./bin/skillpack-forge.js compile /path/to/project
 node ./bin/skillpack-forge.js doctor /path/to/project
+node ./bin/skillpack-forge.js diff /path/to/project
 ```
 
 Inspect a repo without writing files:
@@ -55,6 +59,18 @@ Inspect a repo without writing files:
 ```bash
 node ./bin/skillpack-forge.js scan /path/to/project --json
 ```
+
+Compile an Agentic Workflow Guard safety skillpack:
+
+```bash
+node ../agentic-workflow-guard/bin/agentic-workflow-guard.js skillpack > skillpack.yaml
+node ./bin/skillpack-forge.js compile . --dry-run
+node ./bin/skillpack-forge.js compile .
+node ./bin/skillpack-forge.js doctor .
+node ./bin/skillpack-forge.js diff .
+```
+
+This gives automation security projects a portable context bundle for `AGENTS.md`, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions. See [Agentic Workflow Guard](https://github.com/guorunjie/agentic-workflow-guard) for the scanner side of the workflow.
 
 ## Example Manifest
 
@@ -108,10 +124,11 @@ skillpack-forge init . --force
 
 ### `compile`
 
-Compiles `skillpack.yaml` into the selected targets.
+Compiles `skillpack.yaml` into the selected targets. Use `--dry-run` first to list files that would be created or overwritten without changing the repo.
 
 ```bash
 skillpack-forge compile .
+skillpack-forge compile . --dry-run
 ```
 
 ### `doctor`
@@ -121,6 +138,18 @@ Checks that generated files exist and do not contain placeholder text.
 ```bash
 skillpack-forge doctor .
 ```
+
+### `diff`
+
+Checks whether generated files match the current `skillpack.yaml`. This exits non-zero when generated agent instructions are missing or stale, which makes it useful in CI.
+
+```bash
+skillpack-forge diff .
+```
+
+### JSON Schema
+
+Use [`skillpack.schema.json`](skillpack.schema.json) to validate manifest shape in editors or CI. The schema covers the current portable targets: AGENTS.md, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions.
 
 ## Positioning
 
@@ -135,11 +164,10 @@ It is intentionally small: no hosted service, no database, no LLM dependency, no
 
 ## Roadmap
 
-- Manifest schema validation and JSON Schema export.
+- Importers for existing `AGENTS.md`, `.cursor/rules`, and Copilot instructions.
 - MCP server target that exposes the compiled skillpack as tools/resources.
 - Browser automation recipe target for Playwright and browser-use style tools.
 - GitHub Action that runs `skillpack-forge doctor` on pull requests.
-- Importers for existing `AGENTS.md`, `.cursor/rules`, and Copilot instructions.
 - Public gallery of reusable automation skillpacks.
 
 ## Development
@@ -148,6 +176,7 @@ It is intentionally small: no hosted service, no database, no LLM dependency, no
 npm test
 node ./bin/skillpack-forge.js scan . --json
 node ./bin/skillpack-forge.js doctor .
+node ./bin/skillpack-forge.js diff .
 ```
 
 The implementation is dependency-free Node.js so the CLI stays easy to audit and install.
