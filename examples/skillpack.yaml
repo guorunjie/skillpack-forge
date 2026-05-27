@@ -1,0 +1,23 @@
+name: "browser-ops-agent"
+summary: "Browser automation skillpack for recurring operator workflows"
+targets:
+  - "agents"
+  - "claude"
+  - "codex"
+  - "cursor"
+  - "copilot"
+principles:
+  - "Use dry-run mode before live operations"
+  - "Capture evidence for browser automation changes"
+  - "Run verification before claiming success"
+commands:
+  install: "npm install"
+  test: "npm test"
+  dev: "npm run dev"
+skills:
+  - name: "browser-ops-agent-developer"
+    description: "Use when changing browser automation workflows."
+    workflow:
+      - "Inspect selectors, fixtures, and recent browser evidence"
+      - "Run npm test before completion"
+      - "Record any live-site limitation clearly"

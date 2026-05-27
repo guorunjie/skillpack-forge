@@ -1,0 +1,82 @@
+import assert from "node:assert/strict";
+import { mkdtemp, readFile, stat, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { test } from "node:test";
+
+import { compileProject, doctorProject } from "../src/compiler.js";
+import { stringifyManifest } from "../src/manifest.js";
+
+test("compileProject writes AGENTS, skills, Cursor, and Copilot files", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-compile-"));
+  const manifest = {
+    name: "demo-agent-tool",
+    summary: "Browser automation CLI",
+    targets: ["agents", "claude", "codex", "cursor", "copilot"],
+    principles: ["Keep edits scoped", "Run verification before success claims"],
+    commands: {
+      install: "npm install",
+      test: "npm test",
+      lint: "npm run lint"
+    },
+    skills: [
+      {
+        name: "demo-agent-tool-developer",
+        description: "Use when changing the demo agent tool.",
+        workflow: ["Inspect project context", "Run node --test"]
+      }
+    ]
+  };
+  await writeFile(path.join(root, "skillpack.yaml"), stringifyManifest(manifest));
+
+  const result = await compileProject(root);
+
+  assert.deepEqual(
+    result.files.sort(),
+    [
+      ".claude/skills/demo-agent-tool-developer/SKILL.md",
+      ".codex/skills/demo-agent-tool-developer/SKILL.md",
+      ".cursor/rules/demo-agent-tool.mdc",
+      ".github/copilot-instructions.md",
+      "AGENTS.md"
+    ].sort()
+  );
+  assert.match(await readFile(path.join(root, "AGENTS.md"), "utf8"), /demo-agent-tool/);
+  assert.match(
+    await readFile(path.join(root, ".codex/skills/demo-agent-tool-developer/SKILL.md"), "utf8"),
+    /Run node --test/
+  );
+  await stat(path.join(root, ".github/copilot-instructions.md"));
+});
+
+test("doctorProject reports missing generated files before compile and passes after compile", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-doctor-"));
+  await writeFile(
+    path.join(root, "skillpack.yaml"),
+    stringifyManifest({
+      name: "demo-agent-tool",
+      summary: "Browser automation CLI",
+      targets: ["agents"],
+      principles: ["Verify before completion"],
+      commands: {
+        test: "npm test"
+      },
+      skills: [
+        {
+          name: "demo-agent-tool-developer",
+          description: "Use when changing the demo agent tool.",
+          workflow: ["Run tests"]
+        }
+      ]
+    })
+  );
+
+  const before = await doctorProject(root);
+  assert.equal(before.ok, false);
+  assert.ok(before.issues.some((issue) => issue.includes("AGENTS.md")));
+
+  await compileProject(root);
+  const after = await doctorProject(root);
+  assert.equal(after.ok, true);
+  assert.deepEqual(after.issues, []);
+});

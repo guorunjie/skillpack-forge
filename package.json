@@ -1,0 +1,34 @@
+{
+  "name": "skillpack-forge",
+  "version": "0.1.0",
+  "description": "Compile one repo manifest into portable AGENTS.md, AI coding skills, and agent rules.",
+  "type": "module",
+  "bin": {
+    "skillpack-forge": "./bin/skillpack-forge.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "scan": "node ./bin/skillpack-forge.js scan .",
+    "doctor": "node ./bin/skillpack-forge.js doctor ."
+  },
+  "keywords": [
+    "agents.md",
+    "ai-agents",
+    "claude-skills",
+    "codex-skills",
+    "cursor-rules",
+    "copilot-instructions",
+    "automation"
+  ],
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}
