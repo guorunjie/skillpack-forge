@@ -1,6 +1,6 @@
 # Skillpack Forge
 
-Turn one repo manifest into portable agent instructions, skills, and rules.
+Skillpack Forge turns one repo manifest into portable agent instructions, skills, and rules for AGENTS.md, Claude, Codex, Cursor, and GitHub Copilot.
 
 AI coding tools now ask for the same project knowledge in different formats: `AGENTS.md`, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, and MCP-adjacent docs. Skillpack Forge gives maintainers one source of truth:
 
