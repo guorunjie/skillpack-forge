@@ -1,5 +1,10 @@
 # Skillpack Forge
 
+[![test](https://github.com/guorunjie/skillpack-forge/actions/workflows/test.yml/badge.svg)](https://github.com/guorunjie/skillpack-forge/actions/workflows/test.yml)
+[![GitHub release](https://img.shields.io/github/v/release/guorunjie/skillpack-forge?include_prereleases&sort=semver)](https://github.com/guorunjie/skillpack-forge/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
+
 Skillpack Forge turns one repo manifest into portable agent instructions, skills, and rules for AGENTS.md, Claude, Codex, Cursor, and GitHub Copilot.
 
 AI coding tools now ask for the same project knowledge in different formats: `AGENTS.md`, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, and MCP-adjacent docs. Skillpack Forge gives maintainers one source of truth:

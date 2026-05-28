@@ -30,8 +30,6 @@ Body:
 
 ## First Issues
 
-- Add JSON Schema for `skillpack.yaml`.
-- Add `diff` command to detect stale generated files.
 - Add GitHub Action wrapper for `doctor`.
 - Add template pack for Playwright browser automation.
 - Add importer for existing AGENTS.md.

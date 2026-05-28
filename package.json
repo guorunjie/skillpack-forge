@@ -1,7 +1,7 @@
 {
   "name": "skillpack-forge",
-  "version": "0.2.0",
-  "description": "Compile one repo manifest into portable AGENTS.md, AI coding skills, and agent rules.",
+  "version": "1.0.0",
+  "description": "One manifest for every AI coding agent: generate AGENTS.md, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions.",
   "type": "module",
   "bin": {
     "skillpack-forge": "./bin/skillpack-forge.js"
@@ -34,7 +34,15 @@
     "README.md",
     "LICENSE"
   ],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/guorunjie/skillpack-forge.git"
+  },
+  "homepage": "https://github.com/guorunjie/skillpack-forge#readme",
+  "bugs": {
+    "url": "https://github.com/guorunjie/skillpack-forge/issues"
+  },
+  "author": "guorunjie",
   "license": "MIT",
   "engines": {
     "node": ">=20"

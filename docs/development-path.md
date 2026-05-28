@@ -12,6 +12,8 @@ Delivered in this repo:
 - `init`: creates `skillpack.yaml`.
 - `compile`: writes AGENTS, Claude Skill, Codex Skill, Cursor rule, and Copilot instructions.
 - `doctor`: verifies generated files exist and contain no placeholder text.
+- `diff`: detects stale or missing generated agent files.
+- JSON Schema for editor and CI validation of `skillpack.yaml`.
 - tests for scanner, manifest round-trip, compiler, doctor, and CLI flow.
 - README, market map, roadmap, and launch positioning.
 
@@ -29,8 +31,6 @@ Goal: make the project immediately understandable in under 30 seconds.
 
 Goal: prove it is safe enough for maintainers.
 
-- Add JSON Schema for `skillpack.yaml`.
-- Add `skillpack-forge diff` to show generated-file drift.
 - Add `skillpack-forge check --strict` for CI.
 - Add GitHub Action documentation.
 - Add importers for existing `AGENTS.md`, Copilot instructions, and Cursor rules.
