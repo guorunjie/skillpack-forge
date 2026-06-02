@@ -1,0 +1,78 @@
+import assert from "node:assert/strict";
+import { mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { test } from "node:test";
+
+import { compileProject } from "../src/compiler.js";
+import { importManifestFromProject } from "../src/importer.js";
+import { stringifyManifest } from "../src/manifest.js";
+
+test("importManifestFromProject detects generated agent targets and metadata", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-import-"));
+  await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "import-demo", scripts: { test: "node --test" } }));
+  await writeFile(
+    path.join(root, "skillpack.yaml"),
+    stringifyManifest({
+      name: "import-demo",
+      summary: "Existing browser automation repo",
+      targets: ["agents", "claude", "codex", "cursor", "copilot"],
+      principles: ["Keep edits scoped", "Run verification"],
+      commands: {
+        test: "npm test"
+      },
+      skills: [
+        {
+          name: "import-demo-developer",
+          description: "Use when changing import-demo.",
+          workflow: ["Inspect context", "Run npm test"]
+        }
+      ]
+    })
+  );
+  await compileProject(root);
+
+  const manifest = await importManifestFromProject(root);
+
+  assert.equal(manifest.name, "import-demo");
+  assert.equal(manifest.summary, "Existing browser automation repo");
+  assert.deepEqual(manifest.targets.sort(), ["agents", "claude", "codex", "copilot", "cursor"].sort());
+  assert.equal(manifest.commands.test, "npm test");
+  assert.equal(manifest.skills[0].name, "import-demo-developer");
+});
+
+test("importManifestFromProject creates a manifest from a hand-written AGENTS.md", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-import-agents-"));
+  await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "handwritten-demo" }));
+  await writeFile(
+    path.join(root, "AGENTS.md"),
+    `# Agent Guide: handwritten-demo
+
+## Project
+Hand-written agent instructions.
+
+## Working Principles
+- Preserve user changes
+- Verify before completion
+
+## Commands
+- test: \`npm test\`
+
+## Agent Workflows
+### handwritten-demo-developer
+Use when changing handwritten-demo.
+
+- Inspect context
+- Run npm test
+`
+  );
+
+  const manifest = await importManifestFromProject(root);
+
+  assert.equal(manifest.summary, "Hand-written agent instructions.");
+  assert.deepEqual(manifest.targets, ["agents"]);
+  assert.deepEqual(manifest.principles, ["Preserve user changes", "Verify before completion"]);
+  assert.equal(manifest.commands.test, "npm test");
+  assert.equal(manifest.skills[0].description, "Use when changing handwritten-demo.");
+  assert.deepEqual(manifest.skills[0].workflow, ["Inspect context", "Run npm test"]);
+});

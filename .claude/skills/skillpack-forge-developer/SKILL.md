@@ -5,8 +5,10 @@ description: Use when changing, testing, or automating skillpack-forge.
 
 # skillpack-forge-developer
 
+Generated from `skillpack.yaml` by Skillpack Forge.
+
 ## Project
-Compile one repo manifest into portable AGENTS.md, AI coding skills, and agent rules.
+Compile one repo manifest into portable AGENTS.md, AI coding skills, agent rules, and CI checks.
 
 ## Workflow
 - Inspect the current project context and nearby files
@@ -16,9 +18,13 @@ Compile one repo manifest into portable AGENTS.md, AI coding skills, and agent r
 ## Commands
 - install: `npm install`
 - test: `npm test`
+- compile: `npm run compile`
 - doctor: `npm run doctor`
 - scan: `npm run scan`
 - diff: `npm run diff`
+- check: `npm run check`
+- templates: `npm run templates`
+- import-json: `npm run import-json`
 
 ## Principles
 - Preserve user changes and keep edits scoped

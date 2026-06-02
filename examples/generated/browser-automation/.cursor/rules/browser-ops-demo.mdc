@@ -1,0 +1,22 @@
+---
+description: Agent rules for browser-ops-demo
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# browser-ops-demo
+
+Generated from `skillpack.yaml` by Skillpack Forge.
+
+Browser automation workflows for testing, scraping, and operator tasks.
+
+## Principles
+- Prefer deterministic selectors and explicit waits
+- Capture screenshots or traces when a browser flow fails
+- Avoid storing secrets, cookies, or private page content in generated files
+
+## Commands
+- install: `npm install`
+- test: `npm test`
+- doctor: `npm run doctor`

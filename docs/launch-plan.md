@@ -30,15 +30,21 @@ Body:
 
 ## First Issues
 
-- Add GitHub Action wrapper for `doctor`.
-- Add template pack for Playwright browser automation.
-- Add importer for existing AGENTS.md.
+- Add a short terminal GIF for `init -> compile -> doctor`.
+- Add importer support for `CLAUDE.md`.
+- Add template pack for Playwright-specific browser automation.
 - Add MCP target that exposes skillpack commands as tools.
 
 ## Distribution Checklist
 
+Done:
+
 - Publish npm package.
-- Add npm, test, and license badges.
+- Add test, release, license, and zero-dependency badges.
+- Add GitHub Action docs.
+
+Next:
+
 - Submit to `github/awesome-copilot`.
 - Submit to `ComposioHQ/awesome-claude-skills`.
 - Submit to `punkpeye/awesome-mcp-servers` after MCP target lands.

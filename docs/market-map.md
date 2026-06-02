@@ -44,13 +44,14 @@ Skillpack Forge turns one `skillpack.yaml` into the files that multiple agents a
 
 ## First Wedge
 
-The first version should focus on developer adoption:
+The first stable version focuses on developer adoption:
 
 1. zero-dependency CLI;
-2. `init`, `compile`, and `doctor` commands;
+2. `scan`, `init`, `import`, `new`, `compile`, `doctor`, and `diff` commands;
 3. generated targets for AGENTS, Claude, Codex, Cursor, and Copilot;
-4. docs that explain the multi-agent fragmentation problem;
-5. roadmap toward MCP and browser automation targets.
+4. templates for browser, docs, release, ops, and data automation;
+5. GitHub Action checks for generated-file freshness;
+6. docs that explain the multi-agent fragmentation problem.
 
 ## Star Strategy
 
@@ -58,5 +59,6 @@ The first version should focus on developer adoption:
 - Include generated output examples so users can trust the tool quickly.
 - Keep installation simple through `npx`.
 - Publish to Hacker News, X, Reddit, and relevant awesome lists with a comparison table.
-- Add templates for popular stacks: Node, Python, browser automation, data automation, ops automation.
-- Add a GitHub Action so maintainers can enforce agent-context freshness in pull requests.
+- Add more generated examples and a short terminal GIF.
+- Add deeper templates for Playwright, release automation, and docs automation.
+- Add an MCP target once the manifest model is stable.

@@ -1,5 +1,5 @@
 name: "skillpack-forge"
-summary: "Compile one repo manifest into portable AGENTS.md, AI coding skills, and agent rules."
+summary: "Compile one repo manifest into portable AGENTS.md, AI coding skills, agent rules, and CI checks."
 targets:
   - "agents"
   - "claude"
@@ -13,9 +13,13 @@ principles:
 commands:
   install: "npm install"
   test: "npm test"
+  compile: "npm run compile"
   doctor: "npm run doctor"
   scan: "npm run scan"
   diff: "npm run diff"
+  check: "npm run check"
+  templates: "npm run templates"
+  import-json: "npm run import-json"
 skills:
   - name: "skillpack-forge-developer"
     description: "Use when changing, testing, or automating skillpack-forge."

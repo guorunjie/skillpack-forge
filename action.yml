@@ -1,0 +1,37 @@
+name: Skillpack Forge
+description: Verify generated AI coding agent files from skillpack.yaml.
+
+inputs:
+  path:
+    description: Project path that contains skillpack.yaml.
+    required: false
+    default: "."
+  version:
+    description: skillpack-forge npm version to run.
+    required: false
+    default: "latest"
+  diff:
+    description: Run generated-file freshness checks.
+    required: false
+    default: "true"
+  strict:
+    description: Also fail on unexpected stale Skillpack Forge generated files.
+    required: false
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - name: Run skillpack check
+      if: ${{ inputs.diff == 'true' }}
+      shell: bash
+      run: |
+        args=()
+        if [ "${{ inputs.strict }}" = "true" ]; then
+          args+=(--strict)
+        fi
+        npx --yes "skillpack-forge@${{ inputs.version }}" check "${{ inputs.path }}" "${args[@]}"
+    - name: Run skillpack doctor only
+      if: ${{ inputs.diff != 'true' }}
+      shell: bash
+      run: npx --yes "skillpack-forge@${{ inputs.version }}" doctor "${{ inputs.path }}"

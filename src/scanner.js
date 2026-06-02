@@ -79,7 +79,7 @@ export async function scanProject(root = process.cwd()) {
     languages.push("javascript");
     packageManagers = packageManagersFor(rootFiles);
     commands.install = packageManagers[0] === "pnpm" ? "pnpm install" : packageManagers[0] === "yarn" ? "yarn install" : "npm install";
-    for (const scriptName of ["dev", "test", "lint", "build", "format", "doctor", "scan"]) {
+    for (const scriptName of ["dev", "test", "lint", "build", "format", "compile", "doctor", "scan", "diff", "check", "templates", "import-json"]) {
       if (pkg.scripts?.[scriptName]) commands[scriptName] = scriptCommand(scriptName, packageManagers);
     }
     const deps = dependencyNames(pkg);

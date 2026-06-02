@@ -1,0 +1,8 @@
+{
+  "name": "browser-ops-demo",
+  "description": "Browser automation demo project for Skillpack Forge.",
+  "scripts": {
+    "test": "node --test",
+    "doctor": "node ./scripts/doctor.js"
+  }
+}

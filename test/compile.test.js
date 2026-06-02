@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
-import { compileProject, compileProjectWithOptions, diffProject, doctorProject } from "../src/compiler.js";
+import { checkProject, compileProject, compileProjectWithOptions, diffProject, doctorProject } from "../src/compiler.js";
 import { stringifyManifest } from "../src/manifest.js";
 
 test("compileProject writes AGENTS, skills, Cursor, and Copilot files", async () => {
@@ -146,4 +146,55 @@ test("diffProject reports missing, stale, and clean generated outputs", async ()
   const clean = await diffProject(root);
   assert.equal(clean.ok, true);
   assert.deepEqual(clean.issues, []);
+});
+
+test("checkProject strict mode reports unexpected old generated files", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-check-"));
+  await writeFile(
+    path.join(root, "skillpack.yaml"),
+    stringifyManifest({
+      name: "demo-agent-tool",
+      summary: "Browser automation CLI",
+      targets: ["codex"],
+      principles: ["Verify before completion"],
+      commands: {
+        test: "npm test"
+      },
+      skills: [
+        {
+          name: "demo-agent-tool-old",
+          description: "Use when changing the old skill.",
+          workflow: ["Run tests"]
+        }
+      ]
+    })
+  );
+  await compileProject(root);
+  await writeFile(
+    path.join(root, "skillpack.yaml"),
+    stringifyManifest({
+      name: "demo-agent-tool",
+      summary: "Browser automation CLI",
+      targets: ["codex"],
+      principles: ["Verify before completion"],
+      commands: {
+        test: "npm test"
+      },
+      skills: [
+        {
+          name: "demo-agent-tool-new",
+          description: "Use when changing the new skill.",
+          workflow: ["Run tests"]
+        }
+      ]
+    })
+  );
+  await compileProject(root);
+
+  const normal = await checkProject(root);
+  assert.equal(normal.ok, true);
+
+  const strict = await checkProject(root, { strict: true });
+  assert.equal(strict.ok, false);
+  assert.ok(strict.issues.some((issue) => issue.includes("demo-agent-tool-old")));
 });

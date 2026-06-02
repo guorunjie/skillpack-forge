@@ -1,7 +1,9 @@
-import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { parseManifest } from "./manifest.js";
+
+const GENERATED_MARKER = "Generated from `skillpack.yaml` by Skillpack Forge.";
 
 async function exists(filePath) {
   try {
@@ -33,7 +35,7 @@ function commandList(commands) {
 function renderAgents(manifest) {
   return `# Agent Guide: ${manifest.name}
 
-Generated from \`skillpack.yaml\` by Skillpack Forge.
+${GENERATED_MARKER}
 
 ## Project
 ${manifest.summary}
@@ -59,6 +61,8 @@ description: ${skill.description}
 
 # ${skill.name}
 
+${GENERATED_MARKER}
+
 ## Project
 ${manifest.summary}
 
@@ -83,6 +87,8 @@ alwaysApply: true
 
 # ${manifest.name}
 
+${GENERATED_MARKER}
+
 ${manifest.summary}
 
 ## Principles
@@ -95,6 +101,8 @@ ${commandList(manifest.commands)}
 
 function renderCopilotInstructions(manifest) {
   return `# Copilot Instructions for ${manifest.name}
+
+${GENERATED_MARKER}
 
 ${manifest.summary}
 
@@ -148,6 +156,40 @@ async function planWrites(root, artifacts) {
   return actions;
 }
 
+async function collectMatchingFiles(root, dir, matcher) {
+  const absolute = path.join(root, dir);
+  if (!(await exists(absolute))) return [];
+  const entries = await readdir(absolute, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const relative = path.join(dir, entry.name).replaceAll(path.sep, "/");
+    if (entry.isDirectory()) {
+      files.push(...(await collectMatchingFiles(root, relative, matcher)));
+    } else if (matcher(relative)) {
+      files.push(relative);
+    }
+  }
+  return files;
+}
+
+async function generatedFilesOnDisk(root) {
+  const candidates = [
+    "AGENTS.md",
+    ".github/copilot-instructions.md",
+    ...(await collectMatchingFiles(root, ".cursor/rules", (file) => file.endsWith(".mdc"))),
+    ...(await collectMatchingFiles(root, ".claude/skills", (file) => file.endsWith("/SKILL.md"))),
+    ...(await collectMatchingFiles(root, ".codex/skills", (file) => file.endsWith("/SKILL.md")))
+  ];
+  const files = [];
+  for (const file of candidates) {
+    const absolute = path.join(root, file);
+    if (!(await exists(absolute))) continue;
+    const content = await readFile(absolute, "utf8");
+    if (content.includes(GENERATED_MARKER)) files.push(file);
+  }
+  return files.sort();
+}
+
 export async function compileProjectWithOptions(root = process.cwd(), options = {}) {
   const projectRoot = path.resolve(root);
   const manifest = await readManifest(projectRoot);
@@ -194,6 +236,29 @@ export async function diffProject(root = process.cwd()) {
     issues,
     files: artifacts.map((artifact) => artifact.file)
   };
+}
+
+export async function checkProject(root = process.cwd(), options = {}) {
+  const projectRoot = path.resolve(root);
+  const doctor = await doctorProject(projectRoot);
+  const diff = await diffProject(projectRoot);
+  const issues = [...new Set([...doctor.issues, ...diff.issues])];
+
+  if (options.strict) {
+    let manifest;
+    try {
+      manifest = await readManifest(projectRoot);
+    } catch {
+      return { ok: issues.length === 0, issues };
+    }
+    const expected = new Set(expectedFiles(manifest));
+    const generated = await generatedFilesOnDisk(projectRoot);
+    for (const file of generated) {
+      if (!expected.has(file)) issues.push(`Unexpected generated file: ${file}`);
+    }
+  }
+
+  return { ok: issues.length === 0, issues };
 }
 
 export async function doctorProject(root = process.cwd()) {

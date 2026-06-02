@@ -18,6 +18,8 @@ test("scanProject detects package metadata, commands, and docs", async () => {
           dev: "vite --host 127.0.0.1",
           test: "node --test",
           lint: "eslint .",
+          compile: "node ./bin/demo.js compile .",
+          diff: "node ./bin/demo.js diff .",
           doctor: "node ./bin/demo.js doctor ."
         },
         dependencies: {
@@ -39,6 +41,8 @@ test("scanProject detects package metadata, commands, and docs", async () => {
   assert.equal(scan.commands.dev, "npm run dev");
   assert.equal(scan.commands.test, "npm test");
   assert.equal(scan.commands.lint, "npm run lint");
+  assert.equal(scan.commands.compile, "npm run compile");
+  assert.equal(scan.commands.diff, "npm run diff");
   assert.equal(scan.commands.doctor, "npm run doctor");
   assert.ok(scan.capabilities.includes("browser-automation"));
   assert.ok(scan.docs.includes("README.md"));

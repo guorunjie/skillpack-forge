@@ -1,16 +1,20 @@
 {
   "name": "skillpack-forge",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "One manifest for every AI coding agent: generate AGENTS.md, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions.",
   "type": "module",
   "bin": {
-    "skillpack-forge": "./bin/skillpack-forge.js"
+    "skillpack-forge": "bin/skillpack-forge.js"
   },
   "scripts": {
     "test": "node --test",
     "scan": "node ./bin/skillpack-forge.js scan .",
+    "compile": "node ./bin/skillpack-forge.js compile .",
+    "templates": "node ./bin/skillpack-forge.js new --list",
+    "import-json": "node ./bin/skillpack-forge.js import . --json",
     "doctor": "node ./bin/skillpack-forge.js doctor .",
-    "diff": "node ./bin/skillpack-forge.js diff ."
+    "diff": "node ./bin/skillpack-forge.js diff .",
+    "check": "node ./bin/skillpack-forge.js check . --strict"
   },
   "keywords": [
     "agents.md",
@@ -30,8 +34,10 @@
     "src",
     "docs",
     "examples",
+    "action.yml",
     "skillpack.schema.json",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "repository": {

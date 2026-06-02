@@ -1,6 +1,8 @@
 # Copilot Instructions for skillpack-forge
 
-Compile one repo manifest into portable AGENTS.md, AI coding skills, and agent rules.
+Generated from `skillpack.yaml` by Skillpack Forge.
+
+Compile one repo manifest into portable AGENTS.md, AI coding skills, agent rules, and CI checks.
 
 ## Principles
 - Preserve user changes and keep edits scoped
@@ -10,9 +12,13 @@ Compile one repo manifest into portable AGENTS.md, AI coding skills, and agent r
 ## Commands
 - install: `npm install`
 - test: `npm test`
+- compile: `npm run compile`
 - doctor: `npm run doctor`
 - scan: `npm run scan`
 - diff: `npm run diff`
+- check: `npm run check`
+- templates: `npm run templates`
+- import-json: `npm run import-json`
 
 ## Preferred Workflow
 - Inspect the current project context and nearby files

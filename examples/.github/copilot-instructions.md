@@ -1,5 +1,7 @@
 # Copilot Instructions for browser-ops-agent
 
+Generated from `skillpack.yaml` by Skillpack Forge.
+
 Browser automation skillpack for recurring operator workflows
 
 ## Principles

@@ -2,9 +2,11 @@
 import { stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { compileProjectWithOptions, diffProject, doctorProject } from "../src/compiler.js";
+import { checkProject, compileProjectWithOptions, diffProject, doctorProject } from "../src/compiler.js";
+import { importManifestFromProject } from "../src/importer.js";
 import { createManifestFromScan, stringifyManifest } from "../src/manifest.js";
 import { scanProject } from "../src/scanner.js";
+import { createTemplateManifest, templateNames } from "../src/templates.js";
 
 async function exists(filePath) {
   try {
@@ -21,14 +23,25 @@ function help() {
 Usage:
   skillpack-forge scan [path] [--json]
   skillpack-forge init [path] [--force]
+  skillpack-forge import [path] [--force] [--json]
+  skillpack-forge new [template] [path] [--force] [--json]
   skillpack-forge compile [path] [--dry-run]
   skillpack-forge doctor [path]
   skillpack-forge diff [path]
+  skillpack-forge check [path] [--strict]
 `;
 }
 
 function positional(args, fallback = process.cwd()) {
   return args.find((arg) => !arg.startsWith("--")) ?? fallback;
+}
+
+function positionals(args) {
+  return args.filter((arg) => !arg.startsWith("--"));
+}
+
+function looksLikePath(value) {
+  return value === "." || value === ".." || value.startsWith("/") || value.startsWith("./") || value.startsWith("../");
 }
 
 async function main(argv = process.argv.slice(2)) {
@@ -64,6 +77,57 @@ async function main(argv = process.argv.slice(2)) {
     return 0;
   }
 
+  if (command === "import") {
+    const root = path.resolve(positional(args));
+    const manifest = await importManifestFromProject(root);
+    if (args.includes("--json")) {
+      console.log(JSON.stringify(manifest, null, 2));
+      return 0;
+    }
+    const manifestPath = path.join(root, "skillpack.yaml");
+    if ((await exists(manifestPath)) && !args.includes("--force")) {
+      throw new Error("skillpack.yaml already exists. Re-run with --force to overwrite it.");
+    }
+    await writeFile(manifestPath, stringifyManifest(manifest));
+    console.log(`imported ${manifestPath}`);
+    return 0;
+  }
+
+  if (command === "new") {
+    if (args.includes("--list")) {
+      console.log(templateNames().join("\n"));
+      return 0;
+    }
+    const values = positionals(args);
+    let template = "automation";
+    let rootArg = process.cwd();
+    if (values[0]) {
+      if (templateNames().includes(values[0])) {
+        template = values[0];
+        rootArg = values[1] ?? process.cwd();
+      } else if (looksLikePath(values[0])) {
+        rootArg = values[0];
+      } else {
+        template = values[0];
+        rootArg = values[1] ?? process.cwd();
+      }
+    }
+
+    const root = path.resolve(rootArg);
+    const manifest = await createTemplateManifest(template, root);
+    if (args.includes("--json")) {
+      console.log(JSON.stringify(manifest, null, 2));
+      return 0;
+    }
+    const manifestPath = path.join(root, "skillpack.yaml");
+    if ((await exists(manifestPath)) && !args.includes("--force")) {
+      throw new Error("skillpack.yaml already exists. Re-run with --force to overwrite it.");
+    }
+    await writeFile(manifestPath, stringifyManifest(manifest));
+    console.log(`created ${manifestPath} from ${template}`);
+    return 0;
+  }
+
   if (command === "compile") {
     const root = positional(args);
     const result = await compileProjectWithOptions(root, { dryRun: args.includes("--dry-run") });
@@ -94,6 +158,17 @@ async function main(argv = process.argv.slice(2)) {
       return 1;
     }
     console.log("ok: generated files match skillpack manifest");
+    return 0;
+  }
+
+  if (command === "check") {
+    const root = positional(args);
+    const result = await checkProject(root, { strict: args.includes("--strict") });
+    if (!result.ok) {
+      for (const issue of result.issues) console.error(`issue: ${issue}`);
+      return 1;
+    }
+    console.log(args.includes("--strict") ? "ok: strict skillpack checks passed" : "ok: skillpack checks passed");
     return 0;
   }
 

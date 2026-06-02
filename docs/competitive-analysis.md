@@ -80,15 +80,21 @@ Skillpack Forge should keep these as the primary claims:
 
 ## Optimization Points
 
-Highest-impact improvements:
+Completed growth improvements:
 
-- Add a README section named "How this differs from MDA, repo2agent, and skillpack" to preempt confusion.
-- Add `skillpack-forge diff` so CI can detect generated files that drift from `skillpack.yaml`.
-- Add JSON Schema for `skillpack.yaml` to make the manifest explicit and editor-friendly.
-- Add a GitHub Action wrapper around `doctor`.
-- Add importers for existing `AGENTS.md`, `.github/copilot-instructions.md`, and `.cursor/rules`.
+- README and docs explain how Skillpack Forge differs from agent standards, skill libraries, skill managers, generators, and linters.
+- `skillpack-forge diff` detects generated files that drift from `skillpack.yaml`.
+- JSON Schema makes the manifest explicit and editor-friendly.
+- A GitHub Action wrapper runs `check --strict` in CI.
+- `skillpack-forge import` creates a manifest from existing `AGENTS.md`, Copilot instructions, Cursor rules, and Skill files.
+- `skillpack-forge check --strict` catches missing, stale, and unexpected old generated files in one command.
+
+Highest-impact next improvements:
+
+- Add screenshots or a terminal GIF of `init -> compile -> doctor`.
+- Add more generated examples for release, docs, and ops automation templates.
 - Add `targets` for `CLAUDE.md` and MCP resources while keeping Claude/Codex Skill output.
-- Add template presets for browser automation, release automation, documentation automation, and data/ops automation.
+- Add deeper template presets for Playwright browser automation and release automation.
 
 ## Selling Points
 

@@ -13,7 +13,12 @@ Delivered in this repo:
 - `compile`: writes AGENTS, Claude Skill, Codex Skill, Cursor rule, and Copilot instructions.
 - `doctor`: verifies generated files exist and contain no placeholder text.
 - `diff`: detects stale or missing generated agent files.
+- `check --strict`: combines health, drift, and unexpected generated-file checks.
+- `import`: creates `skillpack.yaml` from existing agent files.
+- `new`: creates automation skillpack templates for browser, docs, release, ops, and data workflows.
+- GitHub Action wrapper for `doctor` and `diff`.
 - JSON Schema for editor and CI validation of `skillpack.yaml`.
+- generated browser automation example under `examples/generated`.
 - tests for scanner, manifest round-trip, compiler, doctor, and CLI flow.
 - README, market map, roadmap, and launch positioning.
 
@@ -22,18 +27,14 @@ Delivered in this repo:
 Goal: make the project immediately understandable in under 30 seconds.
 
 - Add screenshots or terminal GIF of `init -> compile -> doctor`.
-- Publish npm package as `skillpack-forge`.
 - Create a one-command demo using a public repo fixture.
-- Add generated examples under `examples/generated`.
-- Add badges for npm version, tests, license, and zero dependencies.
+- Add npm version badge once the badge endpoint stabilizes for the new package.
 
 ## Milestone 2: Developer Trust
 
 Goal: prove it is safe enough for maintainers.
 
-- Add `skillpack-forge check --strict` for CI.
-- Add GitHub Action documentation.
-- Add importers for existing `AGENTS.md`, Copilot instructions, and Cursor rules.
+- Improve importers for `CLAUDE.md`, custom Cursor glob rules, and mixed hand-written/generated files.
 
 ## Milestone 3: Automation Skillpacks
 

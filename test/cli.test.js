@@ -57,4 +57,56 @@ test("CLI compile --dry-run does not write generated files and diff detects drif
     cwd: path.resolve(".")
   });
   assert.match(diff.stdout, /generated files match/);
+  const check = await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "check", root, "--strict"], {
+    cwd: path.resolve(".")
+  });
+  assert.match(check.stdout, /strict skillpack checks passed/);
+});
+
+test("CLI import creates skillpack.yaml from existing agent instructions", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-cli-import-"));
+  await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "import-cli-demo" }));
+  await writeFile(
+    path.join(root, "AGENTS.md"),
+    `# Agent Guide: import-cli-demo
+
+## Project
+Imported CLI instructions.
+
+## Working Principles
+- Keep edits scoped
+
+## Commands
+- test: \`npm test\`
+
+## Agent Workflows
+### import-cli-demo-developer
+Use when changing import-cli-demo.
+
+- Run npm test
+`
+  );
+
+  const result = await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "import", root], {
+    cwd: path.resolve(".")
+  });
+
+  assert.match(result.stdout, /imported/);
+  const manifest = await readFile(path.join(root, "skillpack.yaml"), "utf8");
+  assert.match(manifest, /Imported CLI instructions/);
+  assert.match(manifest, /import-cli-demo-developer/);
+});
+
+test("CLI new creates a template skillpack", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-cli-new-"));
+  await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "new-cli-demo" }));
+
+  const result = await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "new", "release-automation", root], {
+    cwd: path.resolve(".")
+  });
+
+  assert.match(result.stdout, /release-automation/);
+  const manifest = await readFile(path.join(root, "skillpack.yaml"), "utf8");
+  assert.match(manifest, /Release automation/);
+  assert.match(manifest, /new-cli-demo-release-automation/);
 });
