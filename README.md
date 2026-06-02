@@ -280,3 +280,5 @@ node ./bin/skillpack-forge.js diff .
 ```
 
 The implementation is dependency-free Node.js so the CLI stays easy to audit and install.
+
+Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md) or open a template request for a workflow you want Skillpack Forge to generate.
