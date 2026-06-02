@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0
+
+- Added `data-pipeline` template for extraction, validation, transformation, and reporting workflows.
+- Added scanner support for common data pipeline scripts such as `data:validate`, `data:transform`, and `data:report`.
+- Added generated data pipeline example output under `examples/generated`.
+
 ## 1.3.0
 
 - Added `mcp` target that generates a zero-dependency local MCP stdio server.

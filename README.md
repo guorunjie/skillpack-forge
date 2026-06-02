@@ -50,6 +50,7 @@ Start from an automation template instead:
 ```bash
 npx skillpack-forge@latest new browser-automation .
 npx skillpack-forge@latest new playwright-browser .
+npx skillpack-forge@latest new data-pipeline .
 npx skillpack-forge@latest compile . --dry-run
 ```
 
@@ -129,7 +130,7 @@ This gives automation security projects a portable context bundle for `AGENTS.md
 
 See [`examples/skillpack.yaml`](examples/skillpack.yaml) and the generated files in [`examples/AGENTS.md`](examples/AGENTS.md), `examples/.claude/skills`, `examples/.codex/skills`, `examples/.cursor/rules`, and `examples/.github/copilot-instructions.md`.
 
-For template-driven examples, see [`examples/generated/browser-automation`](examples/generated/browser-automation), [`examples/generated/playwright-browser`](examples/generated/playwright-browser), [`examples/generated/release-automation`](examples/generated/release-automation), [`examples/generated/docs-automation`](examples/generated/docs-automation), [`examples/generated/ops-automation`](examples/generated/ops-automation), and the [generated examples index](examples/generated/README.md).
+For template-driven examples, see [`examples/generated/browser-automation`](examples/generated/browser-automation), [`examples/generated/playwright-browser`](examples/generated/playwright-browser), [`examples/generated/release-automation`](examples/generated/release-automation), [`examples/generated/docs-automation`](examples/generated/docs-automation), [`examples/generated/ops-automation`](examples/generated/ops-automation), [`examples/generated/data-pipeline`](examples/generated/data-pipeline), and the [generated examples index](examples/generated/README.md).
 
 ```yaml
 name: "my-agent-tool"
@@ -201,6 +202,7 @@ skillpack-forge new docs-automation .
 skillpack-forge new release-automation .
 skillpack-forge new ops-automation .
 skillpack-forge new data-automation .
+skillpack-forge new data-pipeline .
 ```
 
 ### `compile`
@@ -277,9 +279,14 @@ It is intentionally small: no hosted service, no database, no LLM dependency, no
 
 ## Roadmap
 
-- [Animated terminal demo](https://github.com/guorunjie/skillpack-forge/issues/1) for the README first screen.
-- [Target compatibility matrix](https://github.com/guorunjie/skillpack-forge/issues/2) across AGENTS.md, Claude, Codex, Cursor, Copilot, and MCP.
-- [Deeper data-pipeline automation templates](https://github.com/guorunjie/skillpack-forge/issues/3).
+Recently delivered:
+
+- Animated terminal demo for the README first screen.
+- Target compatibility matrix across AGENTS.md, Claude, Codex, Cursor, Copilot, and MCP.
+- Data pipeline automation template and generated example.
+
+Next:
+
 - [MCPB packaging exploration](https://github.com/guorunjie/skillpack-forge/issues/4) for generated local MCP servers.
 - Public gallery of reusable automation skillpacks.
 

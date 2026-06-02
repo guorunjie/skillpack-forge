@@ -79,8 +79,35 @@ export async function scanProject(root = process.cwd()) {
     languages.push("javascript");
     packageManagers = packageManagersFor(rootFiles);
     commands.install = packageManagers[0] === "pnpm" ? "pnpm install" : packageManagers[0] === "yarn" ? "yarn install" : "npm install";
-    for (const scriptName of ["dev", "test", "e2e", "test:e2e", "lint", "build", "format", "docs", "docs:check", "release", "compile", "doctor", "scan", "diff", "check", "templates", "import-json"]) {
+    for (const scriptName of [
+      "dev",
+      "test",
+      "e2e",
+      "test:e2e",
+      "lint",
+      "build",
+      "format",
+      "docs",
+      "docs:check",
+      "release",
+      "validate",
+      "data:validate",
+      "data:extract",
+      "data:transform",
+      "data:load",
+      "data:report",
+      "compile",
+      "doctor",
+      "scan",
+      "diff",
+      "check",
+      "templates",
+      "import-json"
+    ]) {
       if (pkg.scripts?.[scriptName]) commands[scriptName] = scriptCommand(scriptName, packageManagers);
+    }
+    if (["data:validate", "data:extract", "data:transform", "data:load", "data:report"].some((scriptName) => pkg.scripts?.[scriptName])) {
+      capabilities.push("data-pipeline");
     }
     const deps = dependencyNames(pkg);
     if (deps.some((dep) => ["playwright", "@playwright/test", "puppeteer", "selenium-webdriver"].includes(dep))) {

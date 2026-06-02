@@ -16,7 +16,8 @@ test("templateNames lists automation presets", () => {
     "docs-automation",
     "release-automation",
     "ops-automation",
-    "data-automation"
+    "data-automation",
+    "data-pipeline"
   ]);
 });
 
@@ -58,6 +59,37 @@ test("createTemplateManifest creates a compilable browser automation skillpack",
   const doctor = await doctorProject(root);
   assert.equal(doctor.ok, true);
   assert.match(await readFile(path.join(root, ".github/copilot-instructions.md"), "utf8"), /Browser automation/);
+});
+
+test("createTemplateManifest creates a data pipeline skillpack with pipeline commands", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-data-pipeline-template-"));
+  await writeFile(
+    path.join(root, "package.json"),
+    JSON.stringify({
+      name: "data-pipeline-demo",
+      scripts: {
+        test: "node --test",
+        "data:validate": "node scripts/validate-data.js",
+        "data:transform": "node scripts/transform-data.js",
+        "data:report": "node scripts/report-data.js"
+      }
+    })
+  );
+
+  const manifest = await createTemplateManifest("data-pipeline", root);
+
+  assert.equal(manifest.name, "data-pipeline-demo");
+  assert.equal(manifest.targets.includes("mcp"), true);
+  assert.equal(manifest.commands["data:validate"], "npm run data:validate");
+  assert.equal(manifest.commands["data:transform"], "npm run data:transform");
+  assert.equal(manifest.commands["data:report"], "npm run data:report");
+  assert.match(manifest.summary, /Data pipeline/);
+  assert.match(manifest.skills[0].workflow.join("\n"), /row counts/);
+
+  await writeFile(path.join(root, "skillpack.yaml"), stringifyManifest(manifest));
+  await compileProject(root);
+  const doctor = await doctorProject(root);
+  assert.equal(doctor.ok, true);
 });
 
 test("createTemplateManifest rejects unknown templates", async () => {

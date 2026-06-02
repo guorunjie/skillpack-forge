@@ -15,13 +15,13 @@ Delivered in this repo:
 - `diff`: detects stale or missing generated agent files.
 - `check --strict`: combines health, drift, and unexpected generated-file checks.
 - `import`: creates `skillpack.yaml` from existing agent files.
-- `new`: creates automation skillpack templates for browser, docs, release, ops, and data workflows.
+- `new`: creates automation skillpack templates for browser, docs, release, ops, data automation, and data pipeline workflows.
 - `claude-md` target: generates `CLAUDE.md` alongside Claude Skill output.
 - Playwright browser template for focused UI automation workflows.
 - `mcp` target: exposes the manifest, summary, commands, and workflows as read-only MCP resources/tools.
 - GitHub Action wrapper for `check --strict`.
 - JSON Schema for editor and CI validation of `skillpack.yaml`.
-- generated browser automation, Playwright, release, docs, and ops examples under `examples/generated`.
+- generated browser automation, Playwright, release, docs, ops, and data pipeline examples under `examples/generated`.
 - checked-in `npm run demo` script for the quick-start flow.
 - tests for scanner, manifest round-trip, compiler, doctor, and CLI flow.
 - README, market map, roadmap, and launch positioning.
@@ -30,7 +30,7 @@ Delivered in this repo:
 
 Goal: make the project immediately understandable in under 30 seconds.
 
-- Add screenshots or terminal GIF of `init -> compile -> check`.
+- Animated terminal preview of `init -> compile -> check`.
 - Create a public repo fixture demo.
 - Add npm version badge once the badge endpoint stabilizes for the new package.
 
@@ -44,7 +44,7 @@ Goal: prove it is safe enough for maintainers.
 
 Goal: turn the project from a compiler into a useful automation catalog.
 
-- Add deeper template packs for data pipelines, docs, release work, and ops workflows.
+- Add deeper template packs for docs, release work, ops workflows, and additional data pipeline patterns.
 - Add MCPB packaging or remote MCP transport after local stdio adoption feedback.
 
 ## Milestone 4: Community Flywheel

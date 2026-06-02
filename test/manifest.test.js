@@ -33,7 +33,9 @@ test("stringifyManifest and parseManifest round-trip the supported schema", () =
     principles: ["Preserve user changes", "Verify before completion"],
     commands: {
       install: "npm install",
-      test: "npm test"
+      test: "npm test",
+      "test:e2e": "npm run test:e2e",
+      "data:validate": "npm run data:validate"
     },
     skills: [
       {

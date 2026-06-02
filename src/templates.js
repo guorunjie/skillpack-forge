@@ -105,6 +105,22 @@ const DEFINITIONS = {
       "Validate counts, types, and important edge cases",
       "Generate the report and document assumptions"
     ]
+  },
+  "data-pipeline": {
+    summary: "Data pipeline workflows for extraction, validation, transformation, and reporting.",
+    principles: [
+      "Preserve raw inputs and keep derived outputs separate",
+      "Validate schemas, row counts, checksums, and representative samples",
+      "Run transformations on a narrow sample before full pipeline execution",
+      "Record data assumptions, freshness, and known quality gaps"
+    ],
+    workflow: [
+      "Locate source data, schema contracts, and expected output destinations",
+      "Run validation first, such as npm run data:validate, before transforming data",
+      "Run extraction or transformation on a small sample or dry run",
+      "Compare row counts, null rates, key fields, and generated report artifacts",
+      "Document assumptions, skipped checks, and any remaining data quality risk"
+    ]
   }
 };
 

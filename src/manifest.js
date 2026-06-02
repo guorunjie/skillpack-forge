@@ -51,6 +51,15 @@ function parseScalar(value) {
   return trimmed;
 }
 
+function parseIndentedScalarPair(line, indent) {
+  const prefix = " ".repeat(indent);
+  if (!line.startsWith(prefix)) return null;
+  const body = line.slice(indent);
+  const pair = body.match(/^(.*):\s+(.+)$/);
+  if (!pair) return null;
+  return [pair[1], parseScalar(pair[2])];
+}
+
 export function stringifyManifest(manifest) {
   const lines = [];
   for (const [key, value] of Object.entries(manifest)) {
@@ -150,9 +159,10 @@ export function parseManifest(text) {
 
     const object = {};
     i += 1;
-    while (i < lines.length && /^  [A-Za-z0-9_-]+:/.test(lines[i])) {
-      const nested = lines[i].match(/^  ([A-Za-z0-9_-]+):\s*(.*)$/);
-      object[nested[1]] = parseScalar(nested[2]);
+    while (i < lines.length) {
+      const nested = parseIndentedScalarPair(lines[i], 2);
+      if (!nested) break;
+      object[nested[0]] = nested[1];
       i += 1;
     }
     manifest[key] = object;

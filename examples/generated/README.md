@@ -89,3 +89,17 @@ Regenerate:
 npx skillpack-forge@latest new ops-automation examples/generated/ops-automation --force
 npx skillpack-forge@latest compile examples/generated/ops-automation
 ```
+
+## Data Pipeline
+
+- [`data-pipeline/skillpack.yaml`](data-pipeline/skillpack.yaml)
+- [`data-pipeline/AGENTS.md`](data-pipeline/AGENTS.md)
+- [`data-pipeline/CLAUDE.md`](data-pipeline/CLAUDE.md)
+- [`data-pipeline/.mcp/README.md`](data-pipeline/.mcp/README.md)
+
+Regenerate:
+
+```bash
+npx skillpack-forge@latest new data-pipeline examples/generated/data-pipeline --force
+npx skillpack-forge@latest compile examples/generated/data-pipeline
+```

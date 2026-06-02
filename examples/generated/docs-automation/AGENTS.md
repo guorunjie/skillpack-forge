@@ -13,7 +13,8 @@ Documentation automation workflows for keeping project docs current.
 ## Commands
 - install: `npm install`
 - test: `npm test`
-- docs: `check: "npm run docs:check"`
+- docs: `npm run docs`
+- docs:check: `npm run docs:check`
 
 ## Agent Workflows
 ### docs-ops-demo-docs-automation

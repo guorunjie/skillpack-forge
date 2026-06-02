@@ -22,6 +22,9 @@ test("scanProject detects package metadata, commands, and docs", async () => {
           docs: "node scripts/docs.js",
           "docs:check": "node scripts/docs-check.js",
           release: "node scripts/release.js",
+          "data:validate": "node scripts/validate-data.js",
+          "data:transform": "node scripts/transform-data.js",
+          "data:report": "node scripts/report-data.js",
           compile: "node ./bin/demo.js compile .",
           diff: "node ./bin/demo.js diff .",
           doctor: "node ./bin/demo.js doctor ."
@@ -49,10 +52,14 @@ test("scanProject detects package metadata, commands, and docs", async () => {
   assert.equal(scan.commands.docs, "npm run docs");
   assert.equal(scan.commands["docs:check"], "npm run docs:check");
   assert.equal(scan.commands.release, "npm run release");
+  assert.equal(scan.commands["data:validate"], "npm run data:validate");
+  assert.equal(scan.commands["data:transform"], "npm run data:transform");
+  assert.equal(scan.commands["data:report"], "npm run data:report");
   assert.equal(scan.commands.compile, "npm run compile");
   assert.equal(scan.commands.diff, "npm run diff");
   assert.equal(scan.commands.doctor, "npm run doctor");
   assert.ok(scan.capabilities.includes("browser-automation"));
+  assert.ok(scan.capabilities.includes("data-pipeline"));
   assert.ok(scan.docs.includes("README.md"));
   assert.ok(scan.docs.includes("docs/runbook.md"));
 });

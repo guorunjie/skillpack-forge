@@ -1,0 +1,25 @@
+---
+description: Agent rules for data-pipeline-demo
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# data-pipeline-demo
+
+Generated from `skillpack.yaml` by Skillpack Forge.
+
+Data pipeline workflows for extraction, validation, transformation, and reporting.
+
+## Principles
+- Preserve raw inputs and keep derived outputs separate
+- Validate schemas, row counts, checksums, and representative samples
+- Run transformations on a narrow sample before full pipeline execution
+- Record data assumptions, freshness, and known quality gaps
+
+## Commands
+- install: `npm install`
+- test: `npm test`
+- data:validate: `npm run data:validate`
+- data:transform: `npm run data:transform`
+- data:report: `npm run data:report`

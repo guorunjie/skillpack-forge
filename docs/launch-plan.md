@@ -41,13 +41,14 @@ Done:
 - Add test, release, license, and zero-dependency badges.
 - Add GitHub Action docs.
 - Add checked-in demo script.
+- Add animated terminal preview to the README.
 - Add Playwright-specific browser automation template.
+- Add data pipeline automation template and generated example.
 - Add `CLAUDE.md` target and importer support.
 - Add local MCP stdio target.
+- Submit to `punkpeye/awesome-mcp-servers`.
 
 Next:
 
 - Submit to `github/awesome-copilot`.
 - Submit to `ComposioHQ/awesome-claude-skills`.
-- Submit to `punkpeye/awesome-mcp-servers` after MCP target lands.
-- Post short demo video or terminal GIF.

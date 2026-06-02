@@ -2,8 +2,8 @@
 // Generated from `skillpack.yaml` by Skillpack Forge.
 
 const manifest = {
-  "name": "docs-ops-demo",
-  "summary": "Documentation automation workflows for keeping project docs current.",
+  "name": "data-pipeline-demo",
+  "summary": "Data pipeline workflows for extraction, validation, transformation, and reporting.",
   "targets": [
     "agents",
     "claude-md",
@@ -14,25 +14,28 @@ const manifest = {
     "mcp"
   ],
   "principles": [
-    "Prefer source-of-truth files over stale summaries",
-    "Keep generated documentation concise and easy to review",
-    "Link commands, files, and examples that readers can verify"
+    "Preserve raw inputs and keep derived outputs separate",
+    "Validate schemas, row counts, checksums, and representative samples",
+    "Run transformations on a narrow sample before full pipeline execution",
+    "Record data assumptions, freshness, and known quality gaps"
   ],
   "commands": {
     "install": "npm install",
     "test": "npm test",
-    "docs": "npm run docs",
-    "docs:check": "npm run docs:check"
+    "data:validate": "npm run data:validate",
+    "data:transform": "npm run data:transform",
+    "data:report": "npm run data:report"
   },
   "skills": [
     {
-      "name": "docs-ops-demo-docs-automation",
-      "description": "Use when running docs automation workflows for docs-ops-demo.",
+      "name": "data-pipeline-demo-data-pipeline",
+      "description": "Use when running data pipeline workflows for data-pipeline-demo.",
       "workflow": [
-        "Scan README, docs, package metadata, and generated agent files",
-        "Identify missing, stale, or duplicated documentation",
-        "Update the smallest useful set of docs",
-        "Run doc-related checks or explain why none exist"
+        "Locate source data, schema contracts, and expected output destinations",
+        "Run validation first, such as npm run data:validate, before transforming data",
+        "Run extraction or transformation on a small sample or dry run",
+        "Compare row counts, null rates, key fields, and generated report artifacts",
+        "Document assumptions, skipped checks, and any remaining data quality risk"
       ]
     }
   ]
