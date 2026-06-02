@@ -88,13 +88,15 @@ Completed growth improvements:
 - A GitHub Action wrapper runs `check --strict` in CI.
 - `skillpack-forge import` creates a manifest from existing `AGENTS.md`, Copilot instructions, Cursor rules, and Skill files.
 - `skillpack-forge check --strict` catches missing, stale, and unexpected old generated files in one command.
+- `claude-md` output generates `CLAUDE.md` while preserving Claude Skill output.
+- `playwright-browser` gives browser automation users a more specific starting template.
 
 Highest-impact next improvements:
 
-- Add screenshots or a terminal GIF of `init -> compile -> doctor`.
+- Add screenshots or a terminal GIF of `init -> compile -> check`.
 - Add more generated examples for release, docs, and ops automation templates.
-- Add `targets` for `CLAUDE.md` and MCP resources while keeping Claude/Codex Skill output.
-- Add deeper template presets for Playwright browser automation and release automation.
+- Add MCP resources while keeping Claude/Codex Skill output.
+- Add deeper template presets for release automation, docs automation, and ops automation.
 
 ## Selling Points
 

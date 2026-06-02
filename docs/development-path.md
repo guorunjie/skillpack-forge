@@ -10,15 +10,18 @@ Delivered in this repo:
 
 - `scan`: detects project metadata, commands, docs, and automation capabilities.
 - `init`: creates `skillpack.yaml`.
-- `compile`: writes AGENTS, Claude Skill, Codex Skill, Cursor rule, and Copilot instructions.
+- `compile`: writes AGENTS, CLAUDE.md, Claude Skill, Codex Skill, Cursor rule, and Copilot instructions.
 - `doctor`: verifies generated files exist and contain no placeholder text.
 - `diff`: detects stale or missing generated agent files.
 - `check --strict`: combines health, drift, and unexpected generated-file checks.
 - `import`: creates `skillpack.yaml` from existing agent files.
 - `new`: creates automation skillpack templates for browser, docs, release, ops, and data workflows.
-- GitHub Action wrapper for `doctor` and `diff`.
+- `claude-md` target: generates `CLAUDE.md` alongside Claude Skill output.
+- Playwright browser template for focused UI automation workflows.
+- GitHub Action wrapper for `check --strict`.
 - JSON Schema for editor and CI validation of `skillpack.yaml`.
-- generated browser automation example under `examples/generated`.
+- generated browser automation and Playwright examples under `examples/generated`.
+- checked-in `npm run demo` script for the quick-start flow.
 - tests for scanner, manifest round-trip, compiler, doctor, and CLI flow.
 - README, market map, roadmap, and launch positioning.
 
@@ -26,23 +29,21 @@ Delivered in this repo:
 
 Goal: make the project immediately understandable in under 30 seconds.
 
-- Add screenshots or terminal GIF of `init -> compile -> doctor`.
-- Create a one-command demo using a public repo fixture.
+- Add screenshots or terminal GIF of `init -> compile -> check`.
+- Create a public repo fixture demo.
 - Add npm version badge once the badge endpoint stabilizes for the new package.
 
 ## Milestone 2: Developer Trust
 
 Goal: prove it is safe enough for maintainers.
 
-- Improve importers for `CLAUDE.md`, custom Cursor glob rules, and mixed hand-written/generated files.
+- Improve importers for custom Cursor glob rules and mixed hand-written/generated files.
 
 ## Milestone 3: Automation Skillpacks
 
 Goal: turn the project from a compiler into a useful automation catalog.
 
-- Add template packs for browser automation, data pipelines, docs, release work, and ops workflows.
-- Add `skillpack-forge new browser-automation`.
-- Add Playwright recipe output.
+- Add deeper template packs for data pipelines, docs, release work, and ops workflows.
 - Add MCP target that exposes project commands and workflows as tools/resources.
 
 ## Milestone 4: Community Flywheel

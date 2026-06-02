@@ -12,11 +12,31 @@ test("templateNames lists automation presets", () => {
   assert.deepEqual(templateNames(), [
     "automation",
     "browser-automation",
+    "playwright-browser",
     "docs-automation",
     "release-automation",
     "ops-automation",
     "data-automation"
   ]);
+});
+
+test("createTemplateManifest creates a Playwright-specific browser skillpack", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-playwright-template-"));
+  await writeFile(
+    path.join(root, "package.json"),
+    JSON.stringify({
+      name: "playwright-demo",
+      scripts: { test: "playwright test", e2e: "playwright test" },
+      devDependencies: { "@playwright/test": "^1.0.0" }
+    })
+  );
+
+  const manifest = await createTemplateManifest("playwright-browser", root);
+
+  assert.equal(manifest.name, "playwright-demo");
+  assert.equal(manifest.targets.includes("claude-md"), true);
+  assert.match(manifest.summary, /Playwright/);
+  assert.match(manifest.skills[0].workflow.join("\n"), /npx playwright test/);
 });
 
 test("createTemplateManifest creates a compilable browser automation skillpack", async () => {

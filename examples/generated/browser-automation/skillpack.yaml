@@ -2,6 +2,7 @@ name: "browser-ops-demo"
 summary: "Browser automation workflows for testing, scraping, and operator tasks."
 targets:
   - "agents"
+  - "claude-md"
   - "claude"
   - "codex"
   - "cursor"

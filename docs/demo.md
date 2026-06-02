@@ -11,6 +11,12 @@ npx skillpack-forge@latest diff .
 npx skillpack-forge@latest check . --strict
 ```
 
+Or run the checked-in demo script:
+
+```bash
+npm run demo
+```
+
 Start from a template:
 
 ```bash
@@ -29,6 +35,7 @@ Expected generated files:
 
 ```text
 AGENTS.md
+CLAUDE.md
 .claude/skills/<skill>/SKILL.md
 .codex/skills/<skill>/SKILL.md
 .cursor/rules/<project>.mdc

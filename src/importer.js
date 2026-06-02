@@ -188,6 +188,13 @@ export async function importManifestFromProject(root = process.cwd()) {
     importedSkills.push(...skillsFromAgents(agents, name));
   }
 
+  const claudeMd = await readIfExists(path.join(projectRoot, "CLAUDE.md"));
+  if (claudeMd) {
+    targets.push("claude-md");
+    texts.push(claudeMd);
+    importedSkills.push(...skillsFromAgents(claudeMd, name));
+  }
+
   const copilot = await readIfExists(path.join(projectRoot, ".github/copilot-instructions.md"));
   if (copilot) {
     targets.push("copilot");
@@ -217,7 +224,7 @@ export async function importManifestFromProject(root = process.cwd()) {
   }
 
   if (!targets.length) {
-    throw new Error("No importable agent files found. Expected AGENTS.md, .github/copilot-instructions.md, .cursor/rules/*.mdc, or */SKILL.md.");
+    throw new Error("No importable agent files found. Expected AGENTS.md, CLAUDE.md, .github/copilot-instructions.md, .cursor/rules/*.mdc, or */SKILL.md.");
   }
 
   const principles = mergeUnique(texts.flatMap((text) => bullets(section(text, ["Working Principles", "Principles"]))));

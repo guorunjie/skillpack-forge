@@ -3,7 +3,7 @@ import path from "node:path";
 import { createManifestFromScan, slugify } from "./manifest.js";
 import { scanProject } from "./scanner.js";
 
-const TARGETS = ["agents", "claude", "codex", "cursor", "copilot"];
+const TARGETS = ["agents", "claude-md", "claude", "codex", "cursor", "copilot"];
 
 const DEFINITIONS = {
   automation: {
@@ -32,6 +32,22 @@ const DEFINITIONS = {
       "Run the browser flow in a narrow, repeatable scenario",
       "Inspect visible page state before and after each important action",
       "Save failure evidence and rerun focused verification"
+    ]
+  },
+  "playwright-browser": {
+    summary: "Playwright browser automation workflows for reliable UI tests, inspections, and scripted operator tasks.",
+    principles: [
+      "Use locators that reflect user-visible intent before falling back to brittle selectors",
+      "Capture screenshots, traces, or console output when a browser run fails",
+      "Keep browser state, credentials, and downloaded artifacts out of committed files",
+      "Prefer small reproducible flows over broad end-to-end scripts"
+    ],
+    workflow: [
+      "Identify the target URL, browser project, viewport, and expected user journey",
+      "Run the narrowest Playwright command first, such as npx playwright test path/to/spec --headed",
+      "Inspect page state with screenshots or traces before changing selectors",
+      "Update fixtures, waits, and assertions only after reproducing the failure",
+      "Rerun the focused Playwright test and document any skipped browser coverage"
     ]
   },
   "docs-automation": {

@@ -17,13 +17,14 @@ test("scanProject detects package metadata, commands, and docs", async () => {
         scripts: {
           dev: "vite --host 127.0.0.1",
           test: "node --test",
+          e2e: "playwright test",
           lint: "eslint .",
           compile: "node ./bin/demo.js compile .",
           diff: "node ./bin/demo.js diff .",
           doctor: "node ./bin/demo.js doctor ."
         },
         dependencies: {
-          playwright: "^1.0.0"
+          "@playwright/test": "^1.0.0"
         }
       },
       null,
@@ -40,6 +41,7 @@ test("scanProject detects package metadata, commands, and docs", async () => {
   assert.deepEqual(scan.languages, ["javascript"]);
   assert.equal(scan.commands.dev, "npm run dev");
   assert.equal(scan.commands.test, "npm test");
+  assert.equal(scan.commands.e2e, "npm run e2e");
   assert.equal(scan.commands.lint, "npm run lint");
   assert.equal(scan.commands.compile, "npm run compile");
   assert.equal(scan.commands.diff, "npm run diff");

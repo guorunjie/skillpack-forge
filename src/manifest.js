@@ -12,7 +12,7 @@ export function createManifestFromScan(scan) {
   return {
     name,
     summary: scan.summary ?? "Automation-ready repository",
-    targets: ["agents", "claude", "codex", "cursor", "copilot"],
+    targets: ["agents", "claude-md", "claude", "codex", "cursor", "copilot"],
     principles: [
       "Preserve user changes and keep edits scoped",
       "Inspect the current repo state before changing files",

@@ -1,7 +1,7 @@
 {
   "name": "skillpack-forge",
-  "version": "1.1.0",
-  "description": "One manifest for every AI coding agent: generate AGENTS.md, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions.",
+  "version": "1.2.0",
+  "description": "One manifest for every AI coding agent: generate AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions.",
   "type": "module",
   "bin": {
     "skillpack-forge": "bin/skillpack-forge.js"
@@ -12,6 +12,7 @@
     "compile": "node ./bin/skillpack-forge.js compile .",
     "templates": "node ./bin/skillpack-forge.js new --list",
     "import-json": "node ./bin/skillpack-forge.js import . --json",
+    "demo": "bash ./scripts/demo.sh",
     "doctor": "node ./bin/skillpack-forge.js doctor .",
     "diff": "node ./bin/skillpack-forge.js diff .",
     "check": "node ./bin/skillpack-forge.js check . --strict"
@@ -32,6 +33,7 @@
   "files": [
     "bin",
     "src",
+    "scripts",
     "docs",
     "examples",
     "action.yml",

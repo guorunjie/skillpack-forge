@@ -25,6 +25,7 @@ Compile one repo manifest into portable AGENTS.md, AI coding skills, agent rules
 - check: `npm run check`
 - templates: `npm run templates`
 - import-json: `npm run import-json`
+- demo: `npm run demo`
 
 ## Principles
 - Preserve user changes and keep edits scoped

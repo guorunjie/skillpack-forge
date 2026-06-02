@@ -117,6 +117,24 @@ ${list((manifest.skills?.[0]?.workflow) ?? [])}
 `;
 }
 
+function renderClaudeInstructions(manifest) {
+  return `# Claude Instructions for ${manifest.name}
+
+${GENERATED_MARKER}
+
+${manifest.summary}
+
+## Principles
+${list(manifest.principles ?? [])}
+
+## Commands
+${commandList(manifest.commands)}
+
+## Preferred Workflow
+${list((manifest.skills?.[0]?.workflow) ?? [])}
+`;
+}
+
 function expectedFiles(manifest) {
   return generatedArtifacts(manifest).map((artifact) => artifact.file);
 }
@@ -126,6 +144,7 @@ function generatedArtifacts(manifest) {
   const targets = new Set(manifest.targets ?? []);
   const skills = manifest.skills ?? [];
   if (targets.has("agents")) artifacts.push({ file: "AGENTS.md", content: renderAgents(manifest) });
+  if (targets.has("claude-md")) artifacts.push({ file: "CLAUDE.md", content: renderClaudeInstructions(manifest) });
   if (targets.has("cursor")) artifacts.push({ file: `.cursor/rules/${manifest.name}.mdc`, content: renderCursorRule(manifest) });
   if (targets.has("copilot")) artifacts.push({ file: ".github/copilot-instructions.md", content: renderCopilotInstructions(manifest) });
   for (const skill of skills) {
@@ -175,6 +194,7 @@ async function collectMatchingFiles(root, dir, matcher) {
 async function generatedFilesOnDisk(root) {
   const candidates = [
     "AGENTS.md",
+    "CLAUDE.md",
     ".github/copilot-instructions.md",
     ...(await collectMatchingFiles(root, ".cursor/rules", (file) => file.endsWith(".mdc"))),
     ...(await collectMatchingFiles(root, ".claude/skills", (file) => file.endsWith("/SKILL.md"))),

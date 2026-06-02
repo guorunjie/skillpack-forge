@@ -2,6 +2,7 @@ name: "browser-ops-agent"
 summary: "Browser automation skillpack for recurring operator workflows"
 targets:
   - "agents"
+  - "claude-md"
   - "claude"
   - "codex"
   - "cursor"

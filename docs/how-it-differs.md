@@ -25,6 +25,7 @@ npx skillpack-forge@latest check . --strict
 That gives one repo manifest and portable output for:
 
 - `AGENTS.md`
+- `CLAUDE.md`
 - Claude Skills
 - Codex Skills
 - Cursor rules

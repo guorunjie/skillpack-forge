@@ -2,7 +2,7 @@
 
 ## Repository Description
 
-One manifest for every AI coding agent: generate AGENTS.md, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions.
+One manifest for every AI coding agent: generate AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions.
 
 ## GitHub Topics
 
@@ -20,19 +20,17 @@ One manifest for every AI coding agent: generate AGENTS.md, Claude Skills, Codex
 
 Title:
 
-> I built a compiler for AI agent instructions: one skillpack.yaml to AGENTS.md, Claude, Codex, Cursor, and Copilot
+> I built a compiler for AI agent instructions: one skillpack.yaml to AGENTS.md, CLAUDE.md, Claude, Codex, Cursor, and Copilot
 
 Body:
 
-> AI coding agents all want the same repo context, but every tool asks for a different file. Skillpack Forge scans a repo, creates one `skillpack.yaml`, and compiles it into AGENTS.md, Claude Skills, Codex Skills, Cursor rules, and GitHub Copilot instructions.
+> AI coding agents all want the same repo context, but every tool asks for a different file. Skillpack Forge scans a repo, creates one `skillpack.yaml`, and compiles it into AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, and GitHub Copilot instructions.
 >
 > It is dependency-free Node.js, works locally, and has a `doctor` command for CI. The goal is to stop maintainers from hand-maintaining five versions of the same agent guidance.
 
 ## First Issues
 
-- Add a short terminal GIF for `init -> compile -> doctor`.
-- Add importer support for `CLAUDE.md`.
-- Add template pack for Playwright-specific browser automation.
+- Add a short terminal GIF for `init -> compile -> check`.
 - Add MCP target that exposes skillpack commands as tools.
 
 ## Distribution Checklist
@@ -42,6 +40,9 @@ Done:
 - Publish npm package.
 - Add test, release, license, and zero-dependency badges.
 - Add GitHub Action docs.
+- Add checked-in demo script.
+- Add Playwright-specific browser automation template.
+- Add `CLAUDE.md` target and importer support.
 
 Next:
 

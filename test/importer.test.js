@@ -16,7 +16,7 @@ test("importManifestFromProject detects generated agent targets and metadata", a
     stringifyManifest({
       name: "import-demo",
       summary: "Existing browser automation repo",
-      targets: ["agents", "claude", "codex", "cursor", "copilot"],
+      targets: ["agents", "claude-md", "claude", "codex", "cursor", "copilot"],
       principles: ["Keep edits scoped", "Run verification"],
       commands: {
         test: "npm test"
@@ -36,7 +36,7 @@ test("importManifestFromProject detects generated agent targets and metadata", a
 
   assert.equal(manifest.name, "import-demo");
   assert.equal(manifest.summary, "Existing browser automation repo");
-  assert.deepEqual(manifest.targets.sort(), ["agents", "claude", "codex", "copilot", "cursor"].sort());
+  assert.deepEqual(manifest.targets.sort(), ["agents", "claude-md", "claude", "codex", "copilot", "cursor"].sort());
   assert.equal(manifest.commands.test, "npm test");
   assert.equal(manifest.skills[0].name, "import-demo-developer");
 });
@@ -75,4 +75,36 @@ Use when changing handwritten-demo.
   assert.equal(manifest.commands.test, "npm test");
   assert.equal(manifest.skills[0].description, "Use when changing handwritten-demo.");
   assert.deepEqual(manifest.skills[0].workflow, ["Inspect context", "Run npm test"]);
+});
+
+test("importManifestFromProject imports CLAUDE.md as claude-md target", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-import-claude-md-"));
+  await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "claude-md-demo" }));
+  await writeFile(
+    path.join(root, "CLAUDE.md"),
+    `# Claude Instructions for claude-md-demo
+
+## Project
+Claude repo instructions.
+
+## Principles
+- Keep Claude focused
+
+## Commands
+- test: \`npm test\`
+
+## Preferred Workflow
+- Inspect the repo
+- Run npm test
+`
+  );
+
+  const manifest = await importManifestFromProject(root);
+
+  assert.equal(manifest.summary, "Claude repo instructions.");
+  assert.deepEqual(manifest.targets, ["claude-md"]);
+  assert.deepEqual(manifest.principles, ["Keep Claude focused"]);
+  assert.equal(manifest.commands.test, "npm test");
+  assert.equal(manifest.skills[0].name, "claude-md-demo-developer");
+  assert.deepEqual(manifest.skills[0].workflow, ["Inspect the repo", "Run npm test"]);
 });

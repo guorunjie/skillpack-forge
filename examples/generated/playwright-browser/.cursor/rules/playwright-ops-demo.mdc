@@ -1,0 +1,23 @@
+---
+description: Agent rules for playwright-ops-demo
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# playwright-ops-demo
+
+Generated from `skillpack.yaml` by Skillpack Forge.
+
+Playwright browser automation workflows for reliable UI tests, inspections, and scripted operator tasks.
+
+## Principles
+- Use locators that reflect user-visible intent before falling back to brittle selectors
+- Capture screenshots, traces, or console output when a browser run fails
+- Keep browser state, credentials, and downloaded artifacts out of committed files
+- Prefer small reproducible flows over broad end-to-end scripts
+
+## Commands
+- install: `npm install`
+- test: `npm test`
+- e2e: `npm run e2e`

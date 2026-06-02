@@ -12,7 +12,7 @@ test("compileProject writes AGENTS, skills, Cursor, and Copilot files", async ()
   const manifest = {
     name: "demo-agent-tool",
     summary: "Browser automation CLI",
-    targets: ["agents", "claude", "codex", "cursor", "copilot"],
+    targets: ["agents", "claude-md", "claude", "codex", "cursor", "copilot"],
     principles: ["Keep edits scoped", "Run verification before success claims"],
     commands: {
       install: "npm install",
@@ -38,10 +38,12 @@ test("compileProject writes AGENTS, skills, Cursor, and Copilot files", async ()
       ".codex/skills/demo-agent-tool-developer/SKILL.md",
       ".cursor/rules/demo-agent-tool.mdc",
       ".github/copilot-instructions.md",
+      "CLAUDE.md",
       "AGENTS.md"
     ].sort()
   );
   assert.match(await readFile(path.join(root, "AGENTS.md"), "utf8"), /demo-agent-tool/);
+  assert.match(await readFile(path.join(root, "CLAUDE.md"), "utf8"), /Claude Instructions/);
   assert.match(
     await readFile(path.join(root, ".codex/skills/demo-agent-tool-developer/SKILL.md"), "utf8"),
     /Run node --test/

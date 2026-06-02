@@ -21,7 +21,7 @@
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "enum": ["agents", "claude", "codex", "cursor", "copilot"]
+        "enum": ["agents", "claude-md", "claude", "codex", "cursor", "copilot"]
       }
     },
     "principles": {

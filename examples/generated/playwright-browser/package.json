@@ -1,0 +1,11 @@
+{
+  "name": "playwright-ops-demo",
+  "description": "Playwright automation demo project for Skillpack Forge.",
+  "scripts": {
+    "test": "playwright test",
+    "e2e": "playwright test --project=chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}

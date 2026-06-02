@@ -3,6 +3,7 @@
 AI coding agents all want the same project context, but each tool asks for a different file:
 
 - `AGENTS.md`
+- `CLAUDE.md`
 - Claude Skills
 - Codex Skills
 - Cursor rules
@@ -23,6 +24,7 @@ Use a template if you want a faster start:
 
 ```bash
 npx skillpack-forge@latest new browser-automation .
+npx skillpack-forge@latest new playwright-browser .
 npx skillpack-forge@latest new release-automation .
 ```
 
@@ -45,7 +47,7 @@ npx skillpack-forge@latest diff .
 npx skillpack-forge@latest check . --strict
 ```
 
-That turns an AI workflow safety scanner into portable agent instructions for Claude, Codex, Cursor, Copilot, and AGENTS.md-aware tools.
+That turns an AI workflow safety scanner into portable agent instructions for Claude, Codex, Cursor, Copilot, AGENTS.md-aware tools, and CLAUDE.md-aware tools.
 
 Repo: https://github.com/guorunjie/skillpack-forge
 
