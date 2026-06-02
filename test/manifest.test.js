@@ -20,7 +20,7 @@ test("createManifestFromScan produces portable agent targets", () => {
   });
 
   assert.equal(manifest.name, "demo-agent-tool");
-  assert.deepEqual(manifest.targets, ["agents", "claude-md", "claude", "codex", "cursor", "copilot"]);
+  assert.deepEqual(manifest.targets, ["agents", "claude-md", "claude", "codex", "cursor", "copilot", "mcp"]);
   assert.equal(manifest.commands.test, "npm test");
   assert.equal(manifest.skills[0].name, "demo-agent-tool-developer");
 });
@@ -29,7 +29,7 @@ test("stringifyManifest and parseManifest round-trip the supported schema", () =
   const manifest = {
     name: "demo-agent-tool",
     summary: "Browser automation CLI",
-    targets: ["agents", "claude-md", "claude", "codex"],
+    targets: ["agents", "claude-md", "claude", "codex", "mcp"],
     principles: ["Preserve user changes", "Verify before completion"],
     commands: {
       install: "npm install",
@@ -54,6 +54,6 @@ test("skillpack.schema.json describes the supported manifest shape", async () =>
 
   assert.equal(schema.title, "Skillpack Forge Manifest");
   assert.deepEqual(schema.required, ["name", "summary", "targets", "principles", "commands", "skills"]);
-  assert.deepEqual(schema.properties.targets.items.enum, ["agents", "claude-md", "claude", "codex", "cursor", "copilot"]);
+  assert.deepEqual(schema.properties.targets.items.enum, ["agents", "claude-md", "claude", "codex", "cursor", "copilot", "mcp"]);
   assert.equal(schema.properties.skills.items.required.includes("workflow"), true);
 });

@@ -39,7 +39,7 @@ Most repos either hand-maintain each format or only support one tool. That creat
 
 Create a compiler, not another prompt list.
 
-Skillpack Forge turns one `skillpack.yaml` into the files that multiple agents already look for. This includes both repo instruction files such as `AGENTS.md` and `CLAUDE.md`, plus skill/rule targets. This gives the project a clear GitHub hook:
+Skillpack Forge turns one `skillpack.yaml` into the files that multiple agents already look for. This includes repo instruction files such as `AGENTS.md` and `CLAUDE.md`, skill/rule targets, and a local MCP server. This gives the project a clear GitHub hook:
 
 > "Stop rewriting the same AI agent instructions five times."
 
@@ -62,4 +62,4 @@ The first stable version focuses on developer adoption:
 - Publish to Hacker News, X, Reddit, and relevant awesome lists with a comparison table.
 - Add more generated examples and a short terminal GIF.
 - Add deeper templates for release automation, docs automation, and ops automation.
-- Add an MCP target once the manifest model is stable.
+- Add MCPB packaging or remote MCP transport after local stdio adoption feedback.

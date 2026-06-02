@@ -1,0 +1,27 @@
+name: "docs-ops-demo"
+summary: "Documentation automation workflows for keeping project docs current."
+targets:
+  - "agents"
+  - "claude-md"
+  - "claude"
+  - "codex"
+  - "cursor"
+  - "copilot"
+  - "mcp"
+principles:
+  - "Prefer source-of-truth files over stale summaries"
+  - "Keep generated documentation concise and easy to review"
+  - "Link commands, files, and examples that readers can verify"
+commands:
+  install: "npm install"
+  test: "npm test"
+  docs: "npm run docs"
+  docs:check: "npm run docs:check"
+skills:
+  - name: "docs-ops-demo-docs-automation"
+    description: "Use when running docs automation workflows for docs-ops-demo."
+    workflow:
+      - "Scan README, docs, package metadata, and generated agent files"
+      - "Identify missing, stale, or duplicated documentation"
+      - "Update the smallest useful set of docs"
+      - "Run doc-related checks or explain why none exist"

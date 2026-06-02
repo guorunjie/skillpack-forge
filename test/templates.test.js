@@ -35,6 +35,7 @@ test("createTemplateManifest creates a Playwright-specific browser skillpack", a
 
   assert.equal(manifest.name, "playwright-demo");
   assert.equal(manifest.targets.includes("claude-md"), true);
+  assert.equal(manifest.targets.includes("mcp"), true);
   assert.match(manifest.summary, /Playwright/);
   assert.match(manifest.skills[0].workflow.join("\n"), /npx playwright test/);
 });
@@ -47,6 +48,7 @@ test("createTemplateManifest creates a compilable browser automation skillpack",
 
   assert.equal(manifest.name, "browser-demo");
   assert.equal(manifest.targets.includes("claude"), true);
+  assert.equal(manifest.targets.includes("mcp"), true);
   assert.match(manifest.summary, /Browser automation/);
   assert.equal(manifest.commands.test, "npm test");
   assert.equal(manifest.skills[0].name, "browser-demo-browser-automation");

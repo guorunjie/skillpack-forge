@@ -3,7 +3,7 @@ import path from "node:path";
 import { createManifestFromScan, slugify } from "./manifest.js";
 import { scanProject } from "./scanner.js";
 
-const TARGETS = ["agents", "claude-md", "claude", "codex", "cursor", "copilot"];
+const TARGETS = ["agents", "claude-md", "claude", "codex", "cursor", "copilot", "mcp"];
 
 const DEFINITIONS = {
   automation: {

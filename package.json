@@ -1,7 +1,7 @@
 {
   "name": "skillpack-forge",
-  "version": "1.2.0",
-  "description": "One manifest for every AI coding agent: generate AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions.",
+  "version": "1.3.0",
+  "description": "One manifest for every AI coding agent: generate AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, Copilot instructions, and MCP resources.",
   "type": "module",
   "bin": {
     "skillpack-forge": "bin/skillpack-forge.js"

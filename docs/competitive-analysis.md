@@ -90,12 +90,13 @@ Completed growth improvements:
 - `skillpack-forge check --strict` catches missing, stale, and unexpected old generated files in one command.
 - `claude-md` output generates `CLAUDE.md` while preserving Claude Skill output.
 - `playwright-browser` gives browser automation users a more specific starting template.
+- `mcp` output generates a local stdio MCP server with read-only manifest resources and tools.
 
 Highest-impact next improvements:
 
 - Add screenshots or a terminal GIF of `init -> compile -> check`.
-- Add more generated examples for release, docs, and ops automation templates.
-- Add MCP resources while keeping Claude/Codex Skill output.
+- Add a terminal GIF of `init -> compile -> check`.
+- Add MCPB packaging or remote MCP transport.
 - Add deeper template presets for release automation, docs automation, and ops automation.
 
 ## Selling Points

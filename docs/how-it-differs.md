@@ -30,6 +30,7 @@ That gives one repo manifest and portable output for:
 - Codex Skills
 - Cursor rules
 - GitHub Copilot instructions
+- MCP resources and tools
 
 ## Best Fit
 

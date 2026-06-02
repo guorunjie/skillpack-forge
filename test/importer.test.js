@@ -16,7 +16,7 @@ test("importManifestFromProject detects generated agent targets and metadata", a
     stringifyManifest({
       name: "import-demo",
       summary: "Existing browser automation repo",
-      targets: ["agents", "claude-md", "claude", "codex", "cursor", "copilot"],
+      targets: ["agents", "claude-md", "claude", "codex", "cursor", "copilot", "mcp"],
       principles: ["Keep edits scoped", "Run verification"],
       commands: {
         test: "npm test"
@@ -36,7 +36,7 @@ test("importManifestFromProject detects generated agent targets and metadata", a
 
   assert.equal(manifest.name, "import-demo");
   assert.equal(manifest.summary, "Existing browser automation repo");
-  assert.deepEqual(manifest.targets.sort(), ["agents", "claude-md", "claude", "codex", "copilot", "cursor"].sort());
+  assert.deepEqual(manifest.targets.sort(), ["agents", "claude-md", "claude", "codex", "copilot", "cursor", "mcp"].sort());
   assert.equal(manifest.commands.test, "npm test");
   assert.equal(manifest.skills[0].name, "import-demo-developer");
 });

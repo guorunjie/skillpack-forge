@@ -7,6 +7,7 @@ targets:
   - "codex"
   - "cursor"
   - "copilot"
+  - "mcp"
 principles:
   - "Use locators that reflect user-visible intent before falling back to brittle selectors"
   - "Capture screenshots, traces, or console output when a browser run fails"

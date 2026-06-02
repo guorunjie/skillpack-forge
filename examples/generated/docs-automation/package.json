@@ -1,0 +1,9 @@
+{
+  "name": "docs-ops-demo",
+  "description": "Documentation automation demo project for Skillpack Forge.",
+  "scripts": {
+    "test": "node --test",
+    "docs": "node scripts/docs.js",
+    "docs:check": "node scripts/docs-check.js"
+  }
+}

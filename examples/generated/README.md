@@ -16,6 +16,7 @@ Generated files:
 - `browser-automation/.codex/skills/browser-ops-demo-browser-automation/SKILL.md`
 - `browser-automation/.cursor/rules/browser-ops-demo.mdc`
 - `browser-automation/.github/copilot-instructions.md`
+- [`browser-automation/.mcp/README.md`](browser-automation/.mcp/README.md)
 
 Regenerate:
 
@@ -38,10 +39,53 @@ Generated files:
 - `playwright-browser/.codex/skills/playwright-ops-demo-playwright-browser/SKILL.md`
 - `playwright-browser/.cursor/rules/playwright-ops-demo.mdc`
 - `playwright-browser/.github/copilot-instructions.md`
+- [`playwright-browser/.mcp/README.md`](playwright-browser/.mcp/README.md)
 
 Regenerate:
 
 ```bash
 npx skillpack-forge@latest new playwright-browser examples/generated/playwright-browser --force
 npx skillpack-forge@latest compile examples/generated/playwright-browser
+```
+
+## Release Automation
+
+- [`release-automation/skillpack.yaml`](release-automation/skillpack.yaml)
+- [`release-automation/AGENTS.md`](release-automation/AGENTS.md)
+- [`release-automation/CLAUDE.md`](release-automation/CLAUDE.md)
+- [`release-automation/.mcp/README.md`](release-automation/.mcp/README.md)
+
+Regenerate:
+
+```bash
+npx skillpack-forge@latest new release-automation examples/generated/release-automation --force
+npx skillpack-forge@latest compile examples/generated/release-automation
+```
+
+## Docs Automation
+
+- [`docs-automation/skillpack.yaml`](docs-automation/skillpack.yaml)
+- [`docs-automation/AGENTS.md`](docs-automation/AGENTS.md)
+- [`docs-automation/CLAUDE.md`](docs-automation/CLAUDE.md)
+- [`docs-automation/.mcp/README.md`](docs-automation/.mcp/README.md)
+
+Regenerate:
+
+```bash
+npx skillpack-forge@latest new docs-automation examples/generated/docs-automation --force
+npx skillpack-forge@latest compile examples/generated/docs-automation
+```
+
+## Ops Automation
+
+- [`ops-automation/skillpack.yaml`](ops-automation/skillpack.yaml)
+- [`ops-automation/AGENTS.md`](ops-automation/AGENTS.md)
+- [`ops-automation/CLAUDE.md`](ops-automation/CLAUDE.md)
+- [`ops-automation/.mcp/README.md`](ops-automation/.mcp/README.md)
+
+Regenerate:
+
+```bash
+npx skillpack-forge@latest new ops-automation examples/generated/ops-automation --force
+npx skillpack-forge@latest compile examples/generated/ops-automation
 ```

@@ -8,6 +8,7 @@ AI coding agents all want the same project context, but each tool asks for a dif
 - Codex Skills
 - Cursor rules
 - GitHub Copilot instructions
+- MCP resources and tools
 
 Skillpack Forge gives maintainers one source of truth. Write or generate a `skillpack.yaml`, then compile it into the files the agents already know how to read.
 
@@ -47,7 +48,7 @@ npx skillpack-forge@latest diff .
 npx skillpack-forge@latest check . --strict
 ```
 
-That turns an AI workflow safety scanner into portable agent instructions for Claude, Codex, Cursor, Copilot, AGENTS.md-aware tools, and CLAUDE.md-aware tools.
+That turns an AI workflow safety scanner into portable agent instructions for Claude, Codex, Cursor, Copilot, AGENTS.md-aware tools, CLAUDE.md-aware tools, and MCP clients.
 
 Repo: https://github.com/guorunjie/skillpack-forge
 

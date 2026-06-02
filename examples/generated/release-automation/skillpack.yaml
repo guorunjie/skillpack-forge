@@ -1,0 +1,28 @@
+name: "release-ops-demo"
+summary: "Release automation workflows for changelogs, tags, packages, and CI checks."
+targets:
+  - "agents"
+  - "claude-md"
+  - "claude"
+  - "codex"
+  - "cursor"
+  - "copilot"
+  - "mcp"
+principles:
+  - "Verify a clean worktree and passing checks before release steps"
+  - "Keep version, tag, package, and release notes aligned"
+  - "Treat publish credentials and tokens as sensitive"
+commands:
+  install: "npm install"
+  test: "npm test"
+  build: "npm run build"
+  release: "npm run release"
+  check: "npm run check"
+skills:
+  - name: "release-ops-demo-release-automation"
+    description: "Use when running release automation workflows for release-ops-demo."
+    workflow:
+      - "Inspect git status, recent commits, package metadata, and release history"
+      - "Run tests and package dry-run checks"
+      - "Prepare release notes from concrete changes"
+      - "Publish only after verifying the target registry or GitHub release state"

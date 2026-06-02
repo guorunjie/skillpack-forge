@@ -19,6 +19,9 @@ test("scanProject detects package metadata, commands, and docs", async () => {
           test: "node --test",
           e2e: "playwright test",
           lint: "eslint .",
+          docs: "node scripts/docs.js",
+          "docs:check": "node scripts/docs-check.js",
+          release: "node scripts/release.js",
           compile: "node ./bin/demo.js compile .",
           diff: "node ./bin/demo.js diff .",
           doctor: "node ./bin/demo.js doctor ."
@@ -43,6 +46,9 @@ test("scanProject detects package metadata, commands, and docs", async () => {
   assert.equal(scan.commands.test, "npm test");
   assert.equal(scan.commands.e2e, "npm run e2e");
   assert.equal(scan.commands.lint, "npm run lint");
+  assert.equal(scan.commands.docs, "npm run docs");
+  assert.equal(scan.commands["docs:check"], "npm run docs:check");
+  assert.equal(scan.commands.release, "npm run release");
   assert.equal(scan.commands.compile, "npm run compile");
   assert.equal(scan.commands.diff, "npm run diff");
   assert.equal(scan.commands.doctor, "npm run doctor");

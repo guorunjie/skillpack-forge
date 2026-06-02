@@ -5,9 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
 
-Skillpack Forge turns one repo manifest into portable agent instructions, skills, and rules for AGENTS.md, CLAUDE.md, Claude, Codex, Cursor, and GitHub Copilot.
+Skillpack Forge turns one repo manifest into portable agent instructions, skills, rules, and MCP resources for AGENTS.md, CLAUDE.md, Claude, Codex, Cursor, GitHub Copilot, and MCP clients.
 
-AI coding tools now ask for the same project knowledge in different formats: `AGENTS.md`, `CLAUDE.md`, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, and MCP-adjacent docs. Skillpack Forge gives maintainers one source of truth.
+AI coding tools now ask for the same project knowledge in different formats: `AGENTS.md`, `CLAUDE.md`, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, and MCP resources. Skillpack Forge gives maintainers one source of truth.
 
 ## Try It In 30 Seconds
 
@@ -28,6 +28,8 @@ It scans the repo, writes `skillpack.yaml`, then compiles it into:
 - `.codex/skills/<skill>/SKILL.md`
 - `.cursor/rules/<project>.mdc`
 - `.github/copilot-instructions.md`
+- `.mcp/skillpack-server.mjs`
+- `.mcp/README.md`
 
 Start from an automation template instead:
 
@@ -113,7 +115,7 @@ This gives automation security projects a portable context bundle for `AGENTS.md
 
 See [`examples/skillpack.yaml`](examples/skillpack.yaml) and the generated files in [`examples/AGENTS.md`](examples/AGENTS.md), `examples/.claude/skills`, `examples/.codex/skills`, `examples/.cursor/rules`, and `examples/.github/copilot-instructions.md`.
 
-For template-driven examples, see [`examples/generated/browser-automation`](examples/generated/browser-automation), [`examples/generated/playwright-browser`](examples/generated/playwright-browser), and the [generated examples index](examples/generated/README.md).
+For template-driven examples, see [`examples/generated/browser-automation`](examples/generated/browser-automation), [`examples/generated/playwright-browser`](examples/generated/playwright-browser), [`examples/generated/release-automation`](examples/generated/release-automation), [`examples/generated/docs-automation`](examples/generated/docs-automation), [`examples/generated/ops-automation`](examples/generated/ops-automation), and the [generated examples index](examples/generated/README.md).
 
 ```yaml
 name: "my-agent-tool"
@@ -125,6 +127,7 @@ targets:
   - "codex"
   - "cursor"
   - "copilot"
+  - "mcp"
 principles:
   - "Preserve user changes and keep edits scoped"
   - "Inspect the current repo state before changing files"
@@ -222,7 +225,18 @@ skillpack-forge check . --strict
 
 ### JSON Schema
 
-Use [`skillpack.schema.json`](skillpack.schema.json) to validate manifest shape in editors or CI. The schema covers the current portable targets: AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, and Copilot instructions.
+Use [`skillpack.schema.json`](skillpack.schema.json) to validate manifest shape in editors or CI. The schema covers the current portable targets: AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, Copilot instructions, and MCP resources.
+
+### MCP Server
+
+Add `mcp` to `targets` to generate a zero-dependency local MCP stdio server:
+
+```bash
+skillpack-forge compile .
+node .mcp/skillpack-server.mjs
+```
+
+The generated server exposes read-only resources and tools for the manifest, summary, commands, and workflows. See `.mcp/README.md` after compilation.
 
 ### GitHub Action
 
@@ -250,7 +264,7 @@ It is intentionally small: no hosted service, no database, no LLM dependency, no
 ## Roadmap
 
 - Richer import support for hand-written agent files.
-- MCP server target that exposes the compiled skillpack as tools/resources.
+- Remote MCP and MCPB packaging once the local stdio target has more adoption feedback.
 - Browser automation recipe target for browser-use style tools.
 - Public gallery of reusable automation skillpacks.
 

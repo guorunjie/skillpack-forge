@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.0
+
+- Added `mcp` target that generates a zero-dependency local MCP stdio server.
+- Added MCP resources and tools for manifest, summary, commands, and workflows.
+- Added MCP generated output to strict checks.
+- Added generated release, docs, and ops automation examples.
+- Improved scanner support for docs and release scripts.
+
 ## 1.2.0
 
 - Added `claude-md` target to generate `CLAUDE.md` from `skillpack.yaml`.
