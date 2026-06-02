@@ -9,6 +9,8 @@ Skillpack Forge turns one repo manifest into portable agent instructions, skills
 
 AI coding tools now ask for the same project knowledge in different formats: `AGENTS.md`, `CLAUDE.md`, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, and MCP resources. Skillpack Forge gives maintainers one source of truth.
 
+![Skillpack Forge terminal demo](docs/assets/terminal-demo.svg)
+
 ## Try It In 30 Seconds
 
 ```bash
