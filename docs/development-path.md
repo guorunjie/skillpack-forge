@@ -19,6 +19,7 @@ Delivered in this repo:
 - `claude-md` target: generates `CLAUDE.md` alongside Claude Skill output.
 - Playwright browser template for focused UI automation workflows.
 - `mcp` target: exposes the manifest, summary, commands, and workflows as read-only MCP resources/tools, with an MCPB-ready `manifest.json`.
+- `mcpb`: packs generated `.mcp` directories into `.mcpb` bundles without runtime dependencies.
 - GitHub Action wrapper for `check --strict`.
 - JSON Schema for editor and CI validation of `skillpack.yaml`.
 - generated automation, browser automation, Playwright, release, docs, ops, data automation, and data pipeline examples under `examples/generated`.
@@ -46,7 +47,7 @@ Goal: prove it is safe enough for maintainers.
 Goal: turn the project from a compiler into a useful automation catalog.
 
 - Add deeper template packs for docs, release work, ops workflows, and additional data pipeline patterns.
-- Add an optional MCPB pack helper or remote MCP transport after local stdio adoption feedback.
+- Add MCPB signing docs or remote MCP transport after local stdio adoption feedback.
 
 ## Milestone 4: Community Flywheel
 

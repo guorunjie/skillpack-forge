@@ -27,15 +27,19 @@ Use this server as a local stdio MCP server:
 
 ## MCPB Packaging
 
-The generated `manifest.json` follows the MCPB manifest format and can be validated or packed with the official MCPB CLI:
+Pack this generated MCP server into a local MCPB bundle with Skillpack Forge:
 
 ```bash
-npm install -g @anthropic-ai/mcpb
-mcpb validate .mcp
-mcpb pack .mcp docs-ops-demo-skillpack.mcpb
+skillpack-forge mcpb . docs-ops-demo-skillpack.mcpb
 ```
 
-The server is read-only by default and does not require runtime dependencies beyond Node.js.
+The generated `manifest.json` follows the MCPB manifest format. To run an additional official schema validation check:
+
+```bash
+npx -y @anthropic-ai/mcpb validate .mcp
+```
+
+The server and bundle are read-only by default and do not require runtime dependencies beyond Node.js.
 
 ## Exposed Resources
 

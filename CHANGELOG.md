@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.7.0
+
+- Added `skillpack-forge mcpb [path] [output]` to pack generated `.mcp` directories into `.mcpb` bundles.
+- Kept MCPB packing zero-dependency by using a built-in deterministic ZIP writer.
+- Added tests for the pack helper and CLI command.
+- Updated MCPB docs and generated `.mcp/README.md` files to prefer the new helper.
+
 ## 1.6.0
 
 - Added a public automation skillpack gallery covering every current template.

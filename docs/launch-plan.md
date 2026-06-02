@@ -2,7 +2,7 @@
 
 ## Repository Description
 
-One manifest for every AI coding agent: generate AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, Copilot instructions, MCP resources, and MCPB manifests.
+One manifest for every AI coding agent: generate AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, Copilot instructions, MCP resources, and MCPB bundles.
 
 ## GitHub Topics
 
@@ -25,7 +25,7 @@ Title:
 
 Body:
 
-> AI coding agents all want the same repo context, but every tool asks for a different file. Skillpack Forge scans a repo, creates one `skillpack.yaml`, and compiles it into AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, a local MCP server, and an MCPB-ready manifest.
+> AI coding agents all want the same repo context, but every tool asks for a different file. Skillpack Forge scans a repo, creates one `skillpack.yaml`, and compiles it into AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, a local MCP server, and a packable MCPB bundle.
 >
 > It is dependency-free Node.js, works locally, and has a `doctor` command for CI. The goal is to stop maintainers from hand-maintaining five versions of the same agent guidance.
 
@@ -48,6 +48,7 @@ Done:
 - Add `CLAUDE.md` target and importer support.
 - Add local MCP stdio target.
 - Add MCPB-ready manifest generation.
+- Add zero-dependency MCPB bundle packing.
 - Add public automation skillpack gallery.
 - Submit to `punkpeye/awesome-mcp-servers`.
 

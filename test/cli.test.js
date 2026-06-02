@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
@@ -109,4 +109,24 @@ test("CLI new creates a template skillpack", async () => {
   const manifest = await readFile(path.join(root, "skillpack.yaml"), "utf8");
   assert.match(manifest, /Release automation/);
   assert.match(manifest, /new-cli-demo-release-automation/);
+});
+
+test("CLI mcpb packs a generated MCPB bundle", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-cli-mcpb-"));
+  await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "mcpb-cli-demo", scripts: { test: "node --test" } }));
+  await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "init", root], {
+    cwd: path.resolve(".")
+  });
+  await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "compile", root], {
+    cwd: path.resolve(".")
+  });
+
+  const output = path.join(root, "dist/mcpb-cli-demo.mcpb");
+  const result = await execFileAsync("node", [path.resolve("bin/skillpack-forge.js"), "mcpb", root, output], {
+    cwd: path.resolve(".")
+  });
+
+  assert.match(result.stdout, /packed/);
+  assert.match(result.stdout, /manifest\.json/);
+  assert.ok((await stat(output)).size > 0);
 });

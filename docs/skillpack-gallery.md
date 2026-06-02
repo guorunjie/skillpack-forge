@@ -1,6 +1,6 @@
 # Automation Skillpack Gallery
 
-Skillpack Forge templates are starter manifests for common AI coding-agent workflows. Each template compiles into the same portable target set: `AGENTS.md`, `CLAUDE.md`, Claude Skill, Codex Skill, Cursor rule, Copilot instructions, local MCP server, and MCPB-ready manifest.
+Skillpack Forge templates are starter manifests for common AI coding-agent workflows. Each template compiles into the same portable target set: `AGENTS.md`, `CLAUDE.md`, Claude Skill, Codex Skill, Cursor rule, Copilot instructions, local MCP server, and packable MCPB bundle.
 
 Use any template in a project:
 

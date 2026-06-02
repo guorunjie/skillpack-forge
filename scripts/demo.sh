@@ -27,3 +27,4 @@ echo "$ROOT"
 "${SKILLPACK_FORGE[@]}" compile "$ROOT" --dry-run
 "${SKILLPACK_FORGE[@]}" compile "$ROOT"
 "${SKILLPACK_FORGE[@]}" check "$ROOT" --strict
+"${SKILLPACK_FORGE[@]}" mcpb "$ROOT" "$ROOT/skillpack-demo-skillpack.mcpb"

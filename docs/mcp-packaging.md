@@ -1,10 +1,14 @@
 # MCP Packaging Design Note
 
-Skillpack Forge already generates a local read-only MCP stdio server from `skillpack.yaml`. The packaging question is how that server should become installable or shareable without making the core CLI heavier.
+Skillpack Forge generates a local read-only MCP stdio server from `skillpack.yaml`. The packaging question is how that server should become installable or shareable without making the core CLI heavier.
 
 ## Current Decision
 
-Generate `.mcp/manifest.json` next to `.mcp/skillpack-server.mjs`.
+Generate `.mcp/manifest.json` next to `.mcp/skillpack-server.mjs`, then provide a built-in zero-dependency pack helper:
+
+```bash
+skillpack-forge mcpb . project-skillpack.mcpb
+```
 
 This gives every `mcp` target an MCPB-ready directory:
 
@@ -15,20 +19,19 @@ This gives every `mcp` target an MCPB-ready directory:
   README.md
 ```
 
-Users can run the official MCPB CLI when they want a bundle:
+Users can still run the official MCPB CLI for additional schema validation:
 
 ```bash
-npm install -g @anthropic-ai/mcpb
-mcpb validate .mcp
-mcpb pack .mcp project-skillpack.mcpb
+npx -y @anthropic-ai/mcpb validate .mcp
 ```
 
 ## Options Compared
 
 | Option | Pros | Cons | Decision |
 | --- | --- | --- | --- |
-| Generate MCPB `manifest.json` | Zero new dependencies, deterministic output, easy to validate, works with official MCPB CLI | User still runs the final pack command | Ship now |
-| Add `skillpack-forge mcpb pack` | One-command bundle creation | Requires zip packaging logic or an added dependency; duplicates official CLI behavior | Future helper only |
+| Generate MCPB `manifest.json` | Zero new dependencies, deterministic output, easy to validate, works with official MCPB CLI | User still needs a pack step | Shipped in v1.5.0 |
+| Add `skillpack-forge mcpb` | One-command bundle creation, no global MCPB install, can stay dependency-free with a small ZIP writer | Maintains ZIP packaging logic in Skillpack Forge | Shipped in v1.7.0 |
+| Shell out to official `mcpb pack` | Delegates all packaging behavior to the official CLI | Requires global install or networked `npx`, weaker offline story | Keep as optional external path |
 | Generate client-specific install snippets | Simple and useful for local setup | Does not create a portable bundle artifact | Keep in `.mcp/README.md` |
 | Remote MCP transport | Better for hosted public connectors | More operational complexity and not repo-local | Separate future product path |
 
@@ -42,10 +45,11 @@ mcpb pack .mcp project-skillpack.mcpb
    - `skillpack_commands`
    - `skillpack_workflows`
    - `skillpack_manifest`
-5. Update `.mcp/README.md` with `mcpb validate` and `mcpb pack` commands.
+5. Update `.mcp/README.md` with `skillpack-forge mcpb` packing and optional official validation commands.
 6. Include the manifest in strict generated-file checks.
-7. Defer a built-in pack command until users ask for it or MCPB packaging becomes stable enough to justify the extra command surface.
+7. Add `skillpack-forge mcpb [path] [output]` with a deterministic built-in ZIP writer and no runtime dependencies.
+8. Keep signing and installer-specific flows out of scope until user feedback justifies them.
 
 ## Why This Fits Skillpack Forge
 
-Skillpack Forge should stay a small compiler, not become a package manager. Generating the manifest is the compiler-shaped part of the problem. Packing, signing, and installer-specific workflows are distribution actions that the official MCPB CLI already handles.
+Skillpack Forge should stay a small compiler, not become a package manager. Generating the manifest and packing the local MCPB archive are compiler-shaped tasks because they are deterministic file transformations. Signing and installer-specific workflows remain distribution actions that are better handled by dedicated tooling.

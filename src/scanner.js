@@ -101,6 +101,7 @@ export async function scanProject(root = process.cwd()) {
       "scan",
       "diff",
       "check",
+      "mcpb",
       "templates",
       "import-json"
     ]) {

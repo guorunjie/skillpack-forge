@@ -5,6 +5,7 @@ import path from "node:path";
 import { checkProject, compileProjectWithOptions, diffProject, doctorProject } from "../src/compiler.js";
 import { importManifestFromProject } from "../src/importer.js";
 import { createManifestFromScan, stringifyManifest } from "../src/manifest.js";
+import { packMcpb } from "../src/mcpb.js";
 import { scanProject } from "../src/scanner.js";
 import { createTemplateManifest, templateNames } from "../src/templates.js";
 
@@ -26,6 +27,7 @@ Usage:
   skillpack-forge import [path] [--force] [--json]
   skillpack-forge new [template] [path] [--force] [--json]
   skillpack-forge compile [path] [--dry-run]
+  skillpack-forge mcpb [path] [output]
   skillpack-forge doctor [path]
   skillpack-forge diff [path]
   skillpack-forge check [path] [--strict]
@@ -136,6 +138,16 @@ async function main(argv = process.argv.slice(2)) {
     } else {
       for (const file of result.files) console.log(`wrote ${file}`);
     }
+    return 0;
+  }
+
+  if (command === "mcpb" || command === "pack-mcpb") {
+    const values = positionals(args);
+    const root = values[0] ?? process.cwd();
+    const output = values[1];
+    const result = await packMcpb(root, output);
+    console.log(`packed ${result.output}`);
+    console.log(`files: ${result.files.join(", ")}`);
     return 0;
   }
 

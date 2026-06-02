@@ -1,7 +1,7 @@
 {
   "name": "skillpack-forge",
-  "version": "1.6.0",
-  "description": "One manifest for every AI coding agent: generate AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, Copilot instructions, MCP resources, and MCPB manifests.",
+  "version": "1.7.0",
+  "description": "One manifest for every AI coding agent: generate AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, Copilot instructions, MCP resources, and MCPB bundles.",
   "type": "module",
   "bin": {
     "skillpack-forge": "bin/skillpack-forge.js"
@@ -15,7 +15,8 @@
     "demo": "bash ./scripts/demo.sh",
     "doctor": "node ./bin/skillpack-forge.js doctor .",
     "diff": "node ./bin/skillpack-forge.js diff .",
-    "check": "node ./bin/skillpack-forge.js check . --strict"
+    "check": "node ./bin/skillpack-forge.js check . --strict",
+    "mcpb": "node ./bin/skillpack-forge.js mcpb ."
   },
   "keywords": [
     "agents.md",
@@ -26,6 +27,9 @@
     "copilot-instructions",
     "agent-skills",
     "mcp",
+    "mcpb",
+    "mcp-bundles",
+    "model-context-protocol",
     "workflow-automation",
     "automation",
     "developer-tools"

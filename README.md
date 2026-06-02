@@ -5,9 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
 
-Skillpack Forge turns one repo manifest into portable agent instructions, skills, rules, MCP resources, and MCPB-ready manifests for AGENTS.md, CLAUDE.md, Claude, Codex, Cursor, GitHub Copilot, and MCP clients.
+Skillpack Forge turns one repo manifest into portable agent instructions, skills, rules, MCP resources, MCPB-ready manifests, and local MCPB bundles for AGENTS.md, CLAUDE.md, Claude, Codex, Cursor, GitHub Copilot, and MCP clients.
 
-AI coding tools now ask for the same project knowledge in different formats: `AGENTS.md`, `CLAUDE.md`, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, MCP resources, and local MCP bundle manifests. Skillpack Forge gives maintainers one source of truth.
+AI coding tools now ask for the same project knowledge in different formats: `AGENTS.md`, `CLAUDE.md`, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, MCP resources, local MCP bundle manifests, and `.mcpb` bundles. Skillpack Forge gives maintainers one source of truth.
 
 ![Skillpack Forge terminal demo](docs/assets/terminal-demo.svg)
 
@@ -20,6 +20,7 @@ npx skillpack-forge@latest compile .
 npx skillpack-forge@latest doctor .
 npx skillpack-forge@latest diff .
 npx skillpack-forge@latest check . --strict
+npx skillpack-forge@latest mcpb .
 ```
 
 It scans the repo, writes `skillpack.yaml`, then compiles it into:
@@ -44,7 +45,7 @@ It scans the repo, writes `skillpack.yaml`, then compiles it into:
 | `codex` | `.codex/skills/<skill>/SKILL.md` | Codex Skills-compatible agents | Skill |
 | `cursor` | `.cursor/rules/<project>.mdc` | Cursor | Rule |
 | `copilot` | `.github/copilot-instructions.md` | GitHub Copilot | Repo instructions |
-| `mcp` | `.mcp/manifest.json`, `.mcp/skillpack-server.mjs` | MCP clients and MCPB-aware installers | Local read-only MCP server plus MCPB manifest |
+| `mcp` | `.mcp/manifest.json`, `.mcp/skillpack-server.mjs`, optional `.mcpb` bundle | MCP clients and MCPB-aware installers | Local read-only MCP server plus MCPB packaging |
 
 Start from an automation template instead:
 
@@ -95,6 +96,7 @@ npx skillpack-forge@latest compile /path/to/project
 npx skillpack-forge@latest doctor /path/to/project
 npx skillpack-forge@latest diff /path/to/project
 npx skillpack-forge@latest check /path/to/project --strict
+npx skillpack-forge@latest mcpb /path/to/project
 ```
 
 Inspect a repo without writing files:
@@ -217,6 +219,15 @@ skillpack-forge compile .
 skillpack-forge compile . --dry-run
 ```
 
+### `mcpb`
+
+Packs the generated `.mcp` directory into a local `.mcpb` bundle without adding runtime dependencies. Run `compile` first so `.mcp/manifest.json` and `.mcp/skillpack-server.mjs` exist.
+
+```bash
+skillpack-forge mcpb .
+skillpack-forge mcpb . dist/my-project-skillpack.mcpb
+```
+
 ### `doctor`
 
 Checks that generated files exist and do not contain placeholder text.
@@ -255,12 +266,16 @@ skillpack-forge compile .
 node .mcp/skillpack-server.mjs
 ```
 
-The generated server exposes read-only resources and tools for the manifest, summary, commands, and workflows. The generated `.mcp/manifest.json` can be validated or packed with the official `mcpb` CLI:
+The generated server exposes read-only resources and tools for the manifest, summary, commands, and workflows. Pack the generated `.mcp` directory into a local `.mcpb` bundle:
 
 ```bash
-npm install -g @anthropic-ai/mcpb
-mcpb validate .mcp
-mcpb pack .mcp my-project-skillpack.mcpb
+skillpack-forge mcpb . my-project-skillpack.mcpb
+```
+
+Run an additional official MCPB schema check when needed:
+
+```bash
+npx -y @anthropic-ai/mcpb validate .mcp
 ```
 
 See `.mcp/README.md` after compilation and the [MCP packaging design note](docs/mcp-packaging.md).
@@ -297,10 +312,11 @@ Recently delivered:
 - Data pipeline automation template and generated example.
 - MCPB-ready manifest generation for local MCP servers.
 - Public automation skillpack gallery with generated examples for every template.
+- Zero-dependency MCPB bundle packing via `skillpack-forge mcpb`.
 
 Next:
 
-- Optional `skillpack-forge mcpb pack` helper after MCPB adoption feedback.
+- Optional MCPB signing and install-flow documentation after user feedback.
 - Public gallery of reusable automation skillpacks.
 
 ## Development

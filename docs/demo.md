@@ -9,6 +9,7 @@ npx skillpack-forge@latest compile .
 npx skillpack-forge@latest doctor .
 npx skillpack-forge@latest diff .
 npx skillpack-forge@latest check . --strict
+npx skillpack-forge@latest mcpb .
 ```
 
 Or run the checked-in demo script:
@@ -43,4 +44,5 @@ CLAUDE.md
 .mcp/manifest.json
 .mcp/skillpack-server.mjs
 .mcp/README.md
+<project>-skillpack-1.0.0.mcpb
 ```
