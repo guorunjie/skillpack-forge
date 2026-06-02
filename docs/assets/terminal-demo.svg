@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
   <title id="title">Skillpack Forge terminal demo</title>
-  <desc id="desc">A terminal preview showing Skillpack Forge init, compile, generated files, and strict check output.</desc>
+  <desc id="desc">An animated terminal preview showing Skillpack Forge init, compile, generated files, and strict check output.</desc>
   <defs>
     <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#111827"/>
@@ -19,18 +19,21 @@
     <circle cx="136" cy="70" r="7" fill="#28c840"/>
     <text x="480" y="76" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="15" fill="#cbd5e1">skillpack-forge demo</text>
     <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="19">
-      <text x="86" y="132" fill="#93c5fd">$ npx skillpack-forge@latest init .</text>
-      <text x="86" y="164" fill="#d1d5db">created skillpack.yaml</text>
-      <text x="86" y="210" fill="#93c5fd">$ npx skillpack-forge@latest compile .</text>
-      <text x="86" y="242" fill="#d1d5db">wrote AGENTS.md</text>
-      <text x="86" y="270" fill="#d1d5db">wrote CLAUDE.md</text>
-      <text x="86" y="298" fill="#d1d5db">wrote .claude/skills/.../SKILL.md</text>
-      <text x="86" y="326" fill="#d1d5db">wrote .codex/skills/.../SKILL.md</text>
-      <text x="86" y="354" fill="#d1d5db">wrote .cursor/rules/project.mdc</text>
-      <text x="86" y="382" fill="#d1d5db">wrote .github/copilot-instructions.md</text>
-      <text x="86" y="410" fill="#d1d5db">wrote .mcp/skillpack-server.mjs</text>
-      <text x="86" y="442" fill="#93c5fd">$ npx skillpack-forge@latest check . --strict</text>
-      <text x="86" y="464" fill="#86efac">ok: strict skillpack checks passed</text>
+      <text x="86" y="132" fill="#93c5fd">$ npx skillpack-forge@latest init .<animate attributeName="opacity" values="0;0;1" dur="0.35s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="164" fill="#d1d5db">created skillpack.yaml<animate attributeName="opacity" values="0;0;1" dur="0.8s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="210" fill="#93c5fd">$ npx skillpack-forge@latest compile .<animate attributeName="opacity" values="0;0;1" dur="1.25s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="242" fill="#d1d5db">wrote AGENTS.md<animate attributeName="opacity" values="0;0;1" dur="1.65s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="270" fill="#d1d5db">wrote CLAUDE.md<animate attributeName="opacity" values="0;0;1" dur="1.9s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="298" fill="#d1d5db">wrote .claude/skills/.../SKILL.md<animate attributeName="opacity" values="0;0;1" dur="2.15s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="326" fill="#d1d5db">wrote .codex/skills/.../SKILL.md<animate attributeName="opacity" values="0;0;1" dur="2.4s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="354" fill="#d1d5db">wrote .cursor/rules/project.mdc<animate attributeName="opacity" values="0;0;1" dur="2.65s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="382" fill="#d1d5db">wrote .github/copilot-instructions.md<animate attributeName="opacity" values="0;0;1" dur="2.9s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="410" fill="#d1d5db">wrote .mcp/skillpack-server.mjs<animate attributeName="opacity" values="0;0;1" dur="3.15s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="442" fill="#93c5fd">$ npx skillpack-forge@latest check . --strict<animate attributeName="opacity" values="0;0;1" dur="3.65s" begin="0s" fill="freeze"/></text>
+      <text x="86" y="464" fill="#86efac">ok: strict skillpack checks passed<animate attributeName="opacity" values="0;0;1" dur="4.15s" begin="0s" fill="freeze"/></text>
+      <rect x="428" y="449" width="11" height="21" fill="#86efac">
+        <animate attributeName="opacity" values="0;0;1;0;1;0;1" dur="5s" begin="0s" repeatCount="indefinite"/>
+      </rect>
     </g>
   </g>
 </svg>
