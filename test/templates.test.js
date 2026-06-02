@@ -21,6 +21,14 @@ test("templateNames lists automation presets", () => {
   ]);
 });
 
+test("automation skillpack gallery lists every template", async () => {
+  const gallery = await readFile(path.resolve("docs/skillpack-gallery.md"), "utf8");
+  for (const template of templateNames()) {
+    assert.match(gallery, new RegExp(`\\\`${template}\\\``));
+    assert.match(gallery, new RegExp(`examples/generated/${template}`));
+  }
+});
+
 test("createTemplateManifest creates a Playwright-specific browser skillpack", async () => {
   const root = await mkdtemp(path.join(tmpdir(), "skillpack-playwright-template-"));
   await writeFile(

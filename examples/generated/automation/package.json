@@ -1,0 +1,9 @@
+{
+  "name": "automation-demo",
+  "description": "General automation demo project for Skillpack Forge.",
+  "scripts": {
+    "test": "node --test",
+    "validate": "node scripts/validate.js",
+    "check": "node scripts/check.js"
+  }
+}

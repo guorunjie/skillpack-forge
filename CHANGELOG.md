@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.0
+
+- Added a public automation skillpack gallery covering every current template.
+- Added generated `automation` and `data-automation` example outputs.
+- Linked the gallery from the README and generated examples index.
+- Added test coverage to keep the gallery synchronized with available templates.
+
 ## 1.5.0
 
 - Added MCPB-ready `.mcp/manifest.json` generation for the `mcp` target.

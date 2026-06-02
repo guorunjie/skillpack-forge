@@ -1,0 +1,10 @@
+{
+  "name": "data-automation-demo",
+  "description": "Data automation demo project for Skillpack Forge.",
+  "scripts": {
+    "test": "node --test",
+    "data:extract": "node scripts/extract-data.js",
+    "data:validate": "node scripts/validate-data.js",
+    "data:report": "node scripts/report-data.js"
+  }
+}

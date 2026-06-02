@@ -21,7 +21,8 @@ Delivered in this repo:
 - `mcp` target: exposes the manifest, summary, commands, and workflows as read-only MCP resources/tools, with an MCPB-ready `manifest.json`.
 - GitHub Action wrapper for `check --strict`.
 - JSON Schema for editor and CI validation of `skillpack.yaml`.
-- generated browser automation, Playwright, release, docs, ops, and data pipeline examples under `examples/generated`.
+- generated automation, browser automation, Playwright, release, docs, ops, data automation, and data pipeline examples under `examples/generated`.
+- generated automation template gallery covering every current template.
 - checked-in `npm run demo` script for the quick-start flow.
 - tests for scanner, manifest round-trip, compiler, doctor, and CLI flow.
 - README, market map, roadmap, and launch positioning.

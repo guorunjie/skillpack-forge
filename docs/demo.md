@@ -40,6 +40,7 @@ CLAUDE.md
 .codex/skills/<skill>/SKILL.md
 .cursor/rules/<project>.mdc
 .github/copilot-instructions.md
+.mcp/manifest.json
 .mcp/skillpack-server.mjs
 .mcp/README.md
 ```

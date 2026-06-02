@@ -2,6 +2,32 @@
 
 These examples are created with the Skillpack Forge CLI so the checked-in files match real command output.
 
+For a use-case oriented view, see the [automation skillpack gallery](../../docs/skillpack-gallery.md).
+
+## Automation
+
+Source manifest:
+
+- [`automation/skillpack.yaml`](automation/skillpack.yaml)
+
+Generated files:
+
+- [`automation/AGENTS.md`](automation/AGENTS.md)
+- [`automation/CLAUDE.md`](automation/CLAUDE.md)
+- `automation/.claude/skills/automation-demo-automation/SKILL.md`
+- `automation/.codex/skills/automation-demo-automation/SKILL.md`
+- `automation/.cursor/rules/automation-demo.mdc`
+- `automation/.github/copilot-instructions.md`
+- [`automation/.mcp/manifest.json`](automation/.mcp/manifest.json)
+- [`automation/.mcp/README.md`](automation/.mcp/README.md)
+
+Regenerate:
+
+```bash
+npx skillpack-forge@latest new automation examples/generated/automation --force
+npx skillpack-forge@latest compile examples/generated/automation
+```
+
 ## Browser Automation
 
 Source manifest:
@@ -93,6 +119,21 @@ Regenerate:
 ```bash
 npx skillpack-forge@latest new ops-automation examples/generated/ops-automation --force
 npx skillpack-forge@latest compile examples/generated/ops-automation
+```
+
+## Data Automation
+
+- [`data-automation/skillpack.yaml`](data-automation/skillpack.yaml)
+- [`data-automation/AGENTS.md`](data-automation/AGENTS.md)
+- [`data-automation/CLAUDE.md`](data-automation/CLAUDE.md)
+- [`data-automation/.mcp/manifest.json`](data-automation/.mcp/manifest.json)
+- [`data-automation/.mcp/README.md`](data-automation/.mcp/README.md)
+
+Regenerate:
+
+```bash
+npx skillpack-forge@latest new data-automation examples/generated/data-automation --force
+npx skillpack-forge@latest compile examples/generated/data-automation
 ```
 
 ## Data Pipeline

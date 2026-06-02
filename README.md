@@ -55,6 +55,8 @@ npx skillpack-forge@latest new data-pipeline .
 npx skillpack-forge@latest compile . --dry-run
 ```
 
+Browse the [automation skillpack gallery](docs/skillpack-gallery.md) for all templates and generated examples.
+
 Import existing agent files into one manifest:
 
 ```bash
@@ -131,7 +133,7 @@ This gives automation security projects a portable context bundle for `AGENTS.md
 
 See [`examples/skillpack.yaml`](examples/skillpack.yaml) and the generated files in [`examples/AGENTS.md`](examples/AGENTS.md), `examples/.claude/skills`, `examples/.codex/skills`, `examples/.cursor/rules`, and `examples/.github/copilot-instructions.md`.
 
-For template-driven examples, see [`examples/generated/browser-automation`](examples/generated/browser-automation), [`examples/generated/playwright-browser`](examples/generated/playwright-browser), [`examples/generated/release-automation`](examples/generated/release-automation), [`examples/generated/docs-automation`](examples/generated/docs-automation), [`examples/generated/ops-automation`](examples/generated/ops-automation), [`examples/generated/data-pipeline`](examples/generated/data-pipeline), and the [generated examples index](examples/generated/README.md).
+For template-driven examples, see the [automation skillpack gallery](docs/skillpack-gallery.md) and the [generated examples index](examples/generated/README.md).
 
 ```yaml
 name: "my-agent-tool"
@@ -294,6 +296,7 @@ Recently delivered:
 - Target compatibility matrix across AGENTS.md, Claude, Codex, Cursor, Copilot, and MCP.
 - Data pipeline automation template and generated example.
 - MCPB-ready manifest generation for local MCP servers.
+- Public automation skillpack gallery with generated examples for every template.
 
 Next:
 

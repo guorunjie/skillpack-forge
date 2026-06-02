@@ -10,6 +10,8 @@ Skillpack Forge compiles one `skillpack.yaml` into AGENTS.md, CLAUDE.md, Claude/
 
 Skillpack Forge is a zero-dependency Node.js CLI for maintainers who want one source of truth for AI coding-agent context. It scans a repo, creates `skillpack.yaml`, and generates portable instructions for AGENTS.md, Claude, Codex, Cursor, GitHub Copilot, and MCP clients, including MCPB-ready local server manifests.
 
+The automation skillpack gallery gives new users concrete starting points for browser automation, Playwright, docs, release, ops, data automation, and data pipeline workflows.
+
 ## Suggested Categories
 
 - AI coding agents
