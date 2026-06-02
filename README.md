@@ -5,9 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
 
-Skillpack Forge turns one repo manifest into portable agent instructions, skills, rules, and MCP resources for AGENTS.md, CLAUDE.md, Claude, Codex, Cursor, GitHub Copilot, and MCP clients.
+Skillpack Forge turns one repo manifest into portable agent instructions, skills, rules, MCP resources, and MCPB-ready manifests for AGENTS.md, CLAUDE.md, Claude, Codex, Cursor, GitHub Copilot, and MCP clients.
 
-AI coding tools now ask for the same project knowledge in different formats: `AGENTS.md`, `CLAUDE.md`, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, and MCP resources. Skillpack Forge gives maintainers one source of truth.
+AI coding tools now ask for the same project knowledge in different formats: `AGENTS.md`, `CLAUDE.md`, Claude Skills, Codex Skills, Cursor rules, GitHub Copilot instructions, MCP resources, and local MCP bundle manifests. Skillpack Forge gives maintainers one source of truth.
 
 ![Skillpack Forge terminal demo](docs/assets/terminal-demo.svg)
 
@@ -30,6 +30,7 @@ It scans the repo, writes `skillpack.yaml`, then compiles it into:
 - `.codex/skills/<skill>/SKILL.md`
 - `.cursor/rules/<project>.mdc`
 - `.github/copilot-instructions.md`
+- `.mcp/manifest.json`
 - `.mcp/skillpack-server.mjs`
 - `.mcp/README.md`
 
@@ -43,7 +44,7 @@ It scans the repo, writes `skillpack.yaml`, then compiles it into:
 | `codex` | `.codex/skills/<skill>/SKILL.md` | Codex Skills-compatible agents | Skill |
 | `cursor` | `.cursor/rules/<project>.mdc` | Cursor | Rule |
 | `copilot` | `.github/copilot-instructions.md` | GitHub Copilot | Repo instructions |
-| `mcp` | `.mcp/skillpack-server.mjs` | MCP clients | Local read-only MCP server |
+| `mcp` | `.mcp/manifest.json`, `.mcp/skillpack-server.mjs` | MCP clients and MCPB-aware installers | Local read-only MCP server plus MCPB manifest |
 
 Start from an automation template instead:
 
@@ -241,18 +242,26 @@ skillpack-forge check . --strict
 
 ### JSON Schema
 
-Use [`skillpack.schema.json`](skillpack.schema.json) to validate manifest shape in editors or CI. The schema covers the current portable targets: AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, Copilot instructions, and MCP resources.
+Use [`skillpack.schema.json`](skillpack.schema.json) to validate manifest shape in editors or CI. The schema covers the current portable targets: AGENTS.md, CLAUDE.md, Claude Skills, Codex Skills, Cursor rules, Copilot instructions, MCP resources, and MCPB-ready manifests.
 
 ### MCP Server
 
-Add `mcp` to `targets` to generate a zero-dependency local MCP stdio server:
+Add `mcp` to `targets` to generate a zero-dependency local MCP stdio server and MCPB manifest:
 
 ```bash
 skillpack-forge compile .
 node .mcp/skillpack-server.mjs
 ```
 
-The generated server exposes read-only resources and tools for the manifest, summary, commands, and workflows. See `.mcp/README.md` after compilation.
+The generated server exposes read-only resources and tools for the manifest, summary, commands, and workflows. The generated `.mcp/manifest.json` can be validated or packed with the official `mcpb` CLI:
+
+```bash
+npm install -g @anthropic-ai/mcpb
+mcpb validate .mcp
+mcpb pack .mcp my-project-skillpack.mcpb
+```
+
+See `.mcp/README.md` after compilation and the [MCP packaging design note](docs/mcp-packaging.md).
 
 ### GitHub Action
 
@@ -284,10 +293,11 @@ Recently delivered:
 - Animated terminal demo for the README first screen.
 - Target compatibility matrix across AGENTS.md, Claude, Codex, Cursor, Copilot, and MCP.
 - Data pipeline automation template and generated example.
+- MCPB-ready manifest generation for local MCP servers.
 
 Next:
 
-- [MCPB packaging exploration](https://github.com/guorunjie/skillpack-forge/issues/4) for generated local MCP servers.
+- Optional `skillpack-forge mcpb pack` helper after MCPB adoption feedback.
 - Public gallery of reusable automation skillpacks.
 
 ## Development

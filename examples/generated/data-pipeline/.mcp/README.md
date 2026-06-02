@@ -2,7 +2,7 @@
 
 Generated from `skillpack.yaml` by Skillpack Forge.
 
-This directory contains a zero-dependency local MCP stdio server generated from `skillpack.yaml`.
+This directory contains a zero-dependency local MCP stdio server and MCPB manifest generated from `skillpack.yaml`.
 
 ## Run
 
@@ -24,6 +24,18 @@ Use this server as a local stdio MCP server:
   }
 }
 ```
+
+## MCPB Packaging
+
+The generated `manifest.json` follows the MCPB manifest format and can be validated or packed with the official MCPB CLI:
+
+```bash
+npm install -g @anthropic-ai/mcpb
+mcpb validate .mcp
+mcpb pack .mcp data-pipeline-demo-skillpack.mcpb
+```
+
+The server is read-only by default and does not require runtime dependencies beyond Node.js.
 
 ## Exposed Resources
 

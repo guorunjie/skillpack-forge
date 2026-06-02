@@ -10,7 +10,7 @@ Delivered in this repo:
 
 - `scan`: detects project metadata, commands, docs, and automation capabilities.
 - `init`: creates `skillpack.yaml`.
-- `compile`: writes AGENTS, CLAUDE.md, Claude Skill, Codex Skill, Cursor rule, Copilot instructions, and a local MCP stdio server.
+- `compile`: writes AGENTS, CLAUDE.md, Claude Skill, Codex Skill, Cursor rule, Copilot instructions, a local MCP stdio server, and an MCPB-ready manifest.
 - `doctor`: verifies generated files exist and contain no placeholder text.
 - `diff`: detects stale or missing generated agent files.
 - `check --strict`: combines health, drift, and unexpected generated-file checks.
@@ -18,7 +18,7 @@ Delivered in this repo:
 - `new`: creates automation skillpack templates for browser, docs, release, ops, data automation, and data pipeline workflows.
 - `claude-md` target: generates `CLAUDE.md` alongside Claude Skill output.
 - Playwright browser template for focused UI automation workflows.
-- `mcp` target: exposes the manifest, summary, commands, and workflows as read-only MCP resources/tools.
+- `mcp` target: exposes the manifest, summary, commands, and workflows as read-only MCP resources/tools, with an MCPB-ready `manifest.json`.
 - GitHub Action wrapper for `check --strict`.
 - JSON Schema for editor and CI validation of `skillpack.yaml`.
 - generated browser automation, Playwright, release, docs, ops, and data pipeline examples under `examples/generated`.
@@ -45,7 +45,7 @@ Goal: prove it is safe enough for maintainers.
 Goal: turn the project from a compiler into a useful automation catalog.
 
 - Add deeper template packs for docs, release work, ops workflows, and additional data pipeline patterns.
-- Add MCPB packaging or remote MCP transport after local stdio adoption feedback.
+- Add an optional MCPB pack helper or remote MCP transport after local stdio adoption feedback.
 
 ## Milestone 4: Community Flywheel
 

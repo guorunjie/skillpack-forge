@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { test } from "node:test";
@@ -107,4 +107,33 @@ Claude repo instructions.
   assert.equal(manifest.commands.test, "npm test");
   assert.equal(manifest.skills[0].name, "claude-md-demo-developer");
   assert.deepEqual(manifest.skills[0].workflow, ["Inspect the repo", "Run npm test"]);
+});
+
+test("importManifestFromProject detects an MCPB manifest as the mcp target", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-import-mcpb-"));
+  await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "mcpb-demo" }));
+  await mkdir(path.join(root, ".mcp"), { recursive: true });
+  await writeFile(
+    path.join(root, ".mcp/manifest.json"),
+    JSON.stringify({
+      manifest_version: "0.3",
+      name: "mcpb-demo-skillpack",
+      version: "1.0.0",
+      description: "Generated MCPB manifest",
+      author: { name: "mcpb-demo" },
+      server: {
+        type: "node",
+        entry_point: "skillpack-server.mjs",
+        mcp_config: {
+          command: "node",
+          args: ["${__dirname}/skillpack-server.mjs"]
+        }
+      }
+    })
+  );
+
+  const manifest = await importManifestFromProject(root);
+
+  assert.deepEqual(manifest.targets, ["mcp"]);
+  assert.equal(manifest.name, "mcpb-demo");
 });

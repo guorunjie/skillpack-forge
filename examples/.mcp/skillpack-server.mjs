@@ -100,24 +100,40 @@ const resources = [
 
 const tools = [
   {
-    name: "skillpack_summary",
-    description: "Return the project summary, targets, and principles.",
-    inputSchema: { type: "object", additionalProperties: false, properties: {} }
+    "name": "skillpack_summary",
+    "description": "Return the project summary, targets, and principles.",
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    }
   },
   {
-    name: "skillpack_commands",
-    description: "Return the project commands from skillpack.yaml.",
-    inputSchema: { type: "object", additionalProperties: false, properties: {} }
+    "name": "skillpack_commands",
+    "description": "Return the project commands from skillpack.yaml.",
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    }
   },
   {
-    name: "skillpack_workflows",
-    description: "Return agent workflows from skillpack.yaml.",
-    inputSchema: { type: "object", additionalProperties: false, properties: {} }
+    "name": "skillpack_workflows",
+    "description": "Return agent workflows from skillpack.yaml.",
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    }
   },
   {
-    name: "skillpack_manifest",
-    description: "Return the full skillpack manifest as JSON.",
-    inputSchema: { type: "object", additionalProperties: false, properties: {} }
+    "name": "skillpack_manifest",
+    "description": "Return the full skillpack manifest as JSON.",
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    }
   }
 ];
 
@@ -153,7 +169,7 @@ function handle(message) {
           tools: {}
         },
         serverInfo: {
-          name: `${manifest.name}-skillpack`,
+          name: "browser-ops-agent-skillpack",
           version: "1.0.0"
         }
       });

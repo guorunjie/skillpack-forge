@@ -208,7 +208,8 @@ export async function importManifestFromProject(root = process.cwd()) {
 
   const mcpReadme = await readIfExists(path.join(projectRoot, ".mcp/README.md"));
   const mcpServer = await readIfExists(path.join(projectRoot, ".mcp/skillpack-server.mjs"));
-  if (mcpReadme || mcpServer) {
+  const mcpManifest = await readIfExists(path.join(projectRoot, ".mcp/manifest.json"));
+  if (mcpReadme || mcpServer || mcpManifest) {
     targets.push("mcp");
     if (mcpReadme) texts.push(mcpReadme);
   }
@@ -231,7 +232,7 @@ export async function importManifestFromProject(root = process.cwd()) {
   }
 
   if (!targets.length) {
-    throw new Error("No importable agent files found. Expected AGENTS.md, CLAUDE.md, .github/copilot-instructions.md, .cursor/rules/*.mdc, .mcp/skillpack-server.mjs, or */SKILL.md.");
+    throw new Error("No importable agent files found. Expected AGENTS.md, CLAUDE.md, .github/copilot-instructions.md, .cursor/rules/*.mdc, .mcp/manifest.json, .mcp/skillpack-server.mjs, or */SKILL.md.");
   }
 
   const principles = mergeUnique(texts.flatMap((text) => bullets(section(text, ["Working Principles", "Principles"]))));

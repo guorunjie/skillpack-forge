@@ -65,6 +65,7 @@ test("compileProject writes AGENTS, skills, MCP, Cursor, and Copilot files", asy
       ".codex/skills/demo-agent-tool-developer/SKILL.md",
       ".cursor/rules/demo-agent-tool.mdc",
       ".github/copilot-instructions.md",
+      ".mcp/manifest.json",
       ".mcp/README.md",
       ".mcp/skillpack-server.mjs",
       "CLAUDE.md",
@@ -78,7 +79,51 @@ test("compileProject writes AGENTS, skills, MCP, Cursor, and Copilot files", asy
     /Run node --test/
   );
   await stat(path.join(root, ".github/copilot-instructions.md"));
+  await stat(path.join(root, ".mcp/manifest.json"));
   await stat(path.join(root, ".mcp/skillpack-server.mjs"));
+});
+
+test("generated MCPB manifest describes the local read-only MCP server", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-mcpb-manifest-"));
+  await writeFile(
+    path.join(root, "skillpack.yaml"),
+    stringifyManifest({
+      name: "demo-agent-tool",
+      summary: "Browser automation CLI",
+      targets: ["mcp"],
+      principles: ["Keep edits scoped"],
+      commands: {
+        test: "npm test"
+      },
+      skills: [
+        {
+          name: "demo-agent-tool-developer",
+          description: "Use when changing the demo agent tool.",
+          workflow: ["Inspect project context", "Run npm test"]
+        }
+      ]
+    })
+  );
+
+  await compileProject(root);
+
+  const mcpb = JSON.parse(await readFile(path.join(root, ".mcp/manifest.json"), "utf8"));
+  assert.equal(mcpb.manifest_version, "0.3");
+  assert.equal(mcpb.name, "demo-agent-tool-skillpack");
+  assert.equal(mcpb.display_name, "demo-agent-tool Skillpack MCP Server");
+  assert.equal(mcpb.version, "1.0.0");
+  assert.equal(mcpb.author.name, "demo-agent-tool");
+  assert.equal(mcpb.server.type, "node");
+  assert.equal(mcpb.server.entry_point, "skillpack-server.mjs");
+  assert.equal(mcpb.server.mcp_config.command, "node");
+  assert.deepEqual(mcpb.server.mcp_config.args, ["${__dirname}/skillpack-server.mjs"]);
+  assert.deepEqual(
+    mcpb.tools.map((tool) => tool.name),
+    ["skillpack_summary", "skillpack_commands", "skillpack_workflows", "skillpack_manifest"]
+  );
+  assert.ok(mcpb.keywords.includes("mcp"));
+  assert.equal(mcpb.compatibility.runtimes.node, ">=20.0.0");
+  assert.match(mcpb._meta["io.github.guorunjie.skillpack-forge"].generated_marker, /Skillpack Forge/);
 });
 
 test("generated MCP server exposes skillpack resources and tools", async () => {

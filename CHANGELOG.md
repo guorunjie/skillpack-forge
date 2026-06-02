@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.0
+
+- Added MCPB-ready `.mcp/manifest.json` generation for the `mcp` target.
+- Added MCPB validation and packing instructions to generated `.mcp/README.md`.
+- Added an MCP packaging design note comparing manifest generation, pack helpers, client snippets, and remote MCP.
+- Added strict-check coverage and tests for generated MCPB manifests.
+
 ## 1.4.0
 
 - Added `data-pipeline` template for extraction, validation, transformation, and reporting workflows.
