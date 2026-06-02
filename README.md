@@ -33,6 +33,18 @@ It scans the repo, writes `skillpack.yaml`, then compiles it into:
 - `.mcp/skillpack-server.mjs`
 - `.mcp/README.md`
 
+## Target Matrix
+
+| Target | Generated path | Intended client | Output type |
+| --- | --- | --- | --- |
+| `agents` | `AGENTS.md` | Codex and other AGENTS.md-aware coding agents | Repo instructions |
+| `claude-md` | `CLAUDE.md` | Claude Code | Repo instructions |
+| `claude` | `.claude/skills/<skill>/SKILL.md` | Claude Skills-compatible agents | Skill |
+| `codex` | `.codex/skills/<skill>/SKILL.md` | Codex Skills-compatible agents | Skill |
+| `cursor` | `.cursor/rules/<project>.mdc` | Cursor | Rule |
+| `copilot` | `.github/copilot-instructions.md` | GitHub Copilot | Repo instructions |
+| `mcp` | `.mcp/skillpack-server.mjs` | MCP clients | Local read-only MCP server |
+
 Start from an automation template instead:
 
 ```bash
