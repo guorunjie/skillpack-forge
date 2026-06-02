@@ -265,9 +265,10 @@ It is intentionally small: no hosted service, no database, no LLM dependency, no
 
 ## Roadmap
 
-- Richer import support for hand-written agent files.
-- Remote MCP and MCPB packaging once the local stdio target has more adoption feedback.
-- Browser automation recipe target for browser-use style tools.
+- [Animated terminal demo](https://github.com/guorunjie/skillpack-forge/issues/1) for the README first screen.
+- [Target compatibility matrix](https://github.com/guorunjie/skillpack-forge/issues/2) across AGENTS.md, Claude, Codex, Cursor, Copilot, and MCP.
+- [Deeper data-pipeline automation templates](https://github.com/guorunjie/skillpack-forge/issues/3).
+- [MCPB packaging exploration](https://github.com/guorunjie/skillpack-forge/issues/4) for generated local MCP servers.
 - Public gallery of reusable automation skillpacks.
 
 ## Development
