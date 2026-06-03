@@ -35,7 +35,7 @@ Goal: make the project immediately understandable in under 30 seconds.
 
 - Animated terminal preview of `init -> compile -> check`.
 - Public repo fixture demo: https://github.com/guorunjie/skillpack-forge-demo.
-- Add npm version badge once the badge endpoint stabilizes for the new package.
+- npm package badge and package link in the README.
 
 ## Milestone 2: Developer Trust
 

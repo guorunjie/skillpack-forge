@@ -1,9 +1,11 @@
 # Skillpack Forge
 
 [![test](https://github.com/guorunjie/skillpack-forge/actions/workflows/test.yml/badge.svg)](https://github.com/guorunjie/skillpack-forge/actions/workflows/test.yml)
+[![npm](https://img.shields.io/npm/v/skillpack-forge.svg)](https://www.npmjs.com/package/skillpack-forge)
 [![GitHub release](https://img.shields.io/github/v/release/guorunjie/skillpack-forge?include_prereleases&sort=semver)](https://github.com/guorunjie/skillpack-forge/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
+[![Live demo](https://img.shields.io/badge/live-demo-blue)](https://github.com/guorunjie/skillpack-forge-demo)
 
 Skillpack Forge turns one repo manifest into portable agent instructions, skills, rules, MCP resources, MCPB-ready manifests, and local MCPB bundles for AGENTS.md, CLAUDE.md, Claude, Codex, Cursor, GitHub Copilot, and MCP clients.
 
@@ -24,6 +26,8 @@ npx skillpack-forge@latest diff .
 npx skillpack-forge@latest check . --strict
 npx skillpack-forge@latest mcpb .
 ```
+
+No global install is required: the CLI is published on [npm](https://www.npmjs.com/package/skillpack-forge) and works through `npx`.
 
 It scans the repo, writes `skillpack.yaml`, then compiles it into:
 

@@ -40,6 +40,7 @@ Done:
 
 - Publish npm package.
 - Add test, release, license, and zero-dependency badges.
+- Add npm package badge.
 - Add GitHub Action docs.
 - Add checked-in demo script.
 - Add animated terminal preview to the README.
@@ -58,6 +59,7 @@ Done:
 - Submit to `rohitg00/awesome-claude-code-toolkit`.
 - Submit to `e2b-dev/awesome-ai-sdks`.
 - Prepare manual `hesreallyhim/awesome-claude-code` submission packet.
+- Add npm/live fixture reviewer proof comments to the Copilot, Claude Skills, and Claude Code toolkit PRs.
 
 Next:
 
