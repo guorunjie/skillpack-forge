@@ -324,6 +324,7 @@ Next:
 
 - Optional MCPB signing and install-flow documentation after user feedback.
 - Public gallery of reusable automation skillpacks.
+- Community starter issues for templates, MCP docs, and importer improvements.
 
 ## Development
 
@@ -336,4 +337,4 @@ node ./bin/skillpack-forge.js diff .
 
 The implementation is dependency-free Node.js so the CLI stays easy to audit and install.
 
-Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md) or open a template request for a workflow you want Skillpack Forge to generate.
+Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), browse the [community roadmap](docs/community-roadmap.md), or open a template request for a workflow you want Skillpack Forge to generate.

@@ -9,6 +9,14 @@ Thanks for helping make repo context portable across AI coding agents.
 - Add generated examples under `examples/generated`.
 - Improve docs for real workflows such as release, docs, ops, data, and browser automation.
 
+Current starter issues:
+
+- [Template: add test-automation skillpack preset](https://github.com/guorunjie/skillpack-forge/issues/7)
+- [Docs: add MCP client install snippets](https://github.com/guorunjie/skillpack-forge/issues/8)
+- [Community: add reusable skillpack submission guide](https://github.com/guorunjie/skillpack-forge/issues/10)
+
+See the [community roadmap](docs/community-roadmap.md) for contribution lanes and deeper roadmap issues.
+
 ## Local Setup
 
 ```bash

@@ -55,7 +55,7 @@ Goal: turn the project from a compiler into a useful automation catalog.
 Goal: become the place people share portable skills.
 
 - Create `awesome-skillpacks` directory or companion repo.
-- Accept community templates.
+- Accept community templates through the template request issue form and starter issues.
 - Add compatibility matrix across Codex, Claude, Cursor, Copilot, and MCP clients.
 - Add website with copy-paste install and examples.
 

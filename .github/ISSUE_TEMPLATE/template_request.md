@@ -2,7 +2,7 @@
 name: Template request
 about: Suggest a new automation skillpack template or generated example.
 title: "Template: "
-labels: enhancement
+labels: enhancement, templates, community
 ---
 
 ## Workflow type

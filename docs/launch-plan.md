@@ -16,6 +16,8 @@ One manifest for every AI coding agent: generate AGENTS.md, CLAUDE.md, Claude Sk
 - mcpb
 - automation
 - developer-tools
+- community
+- good-first-issue
 
 ## Launch Post
 
@@ -60,6 +62,8 @@ Done:
 - Submit to `e2b-dev/awesome-ai-sdks`.
 - Prepare manual `hesreallyhim/awesome-claude-code` submission packet.
 - Add npm/live fixture reviewer proof comments to the Copilot, Claude Skills, and Claude Code toolkit PRs.
+- Seed community labels and open starter issues for templates, MCP docs, importer work, and contribution docs.
+- Add GitHub topics for `community` and `good-first-issue`.
 
 Next:
 
