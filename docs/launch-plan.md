@@ -43,6 +43,7 @@ Done:
 - Add GitHub Action docs.
 - Add checked-in demo script.
 - Add animated terminal preview to the README.
+- Create public live fixture demo at https://github.com/guorunjie/skillpack-forge-demo.
 - Add Playwright-specific browser automation template.
 - Add data pipeline automation template and generated example.
 - Add `CLAUDE.md` target and importer support.

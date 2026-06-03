@@ -12,6 +12,8 @@ Skillpack Forge is a zero-dependency Node.js CLI for maintainers who want one so
 
 The automation skillpack gallery gives new users concrete starting points for browser automation, Playwright, docs, release, ops, data automation, and data pipeline workflows.
 
+Live proof: https://github.com/guorunjie/skillpack-forge-demo shows one checked-in `skillpack.yaml`, generated AGENTS/CLAUDE/Claude/Codex/Cursor/Copilot/MCP outputs, a packed `.mcpb` bundle, and a passing GitHub Actions check.
+
 ## Suggested Categories
 
 - AI coding agents

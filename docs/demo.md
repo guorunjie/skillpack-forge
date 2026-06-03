@@ -1,5 +1,7 @@
 # 30-Second Demo
 
+For a real checked-in output set, open the live fixture repo: https://github.com/guorunjie/skillpack-forge-demo
+
 Run Skillpack Forge in any repo:
 
 ```bash
@@ -44,5 +46,5 @@ CLAUDE.md
 .mcp/manifest.json
 .mcp/skillpack-server.mjs
 .mcp/README.md
-<project>-skillpack-1.0.0.mcpb
+bundles/<project>.mcpb
 ```

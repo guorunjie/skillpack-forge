@@ -11,6 +11,8 @@ AI coding tools now ask for the same project knowledge in different formats: `AG
 
 ![Skillpack Forge terminal demo](docs/assets/terminal-demo.svg)
 
+Want to inspect a real generated repo first? Open the [live fixture demo](https://github.com/guorunjie/skillpack-forge-demo). It checks in one `skillpack.yaml`, every generated target file, a packed `.mcpb` bundle, and a passing GitHub Actions workflow.
+
 ## Try It In 30 Seconds
 
 ```bash
@@ -135,7 +137,7 @@ This gives automation security projects a portable context bundle for `AGENTS.md
 
 See [`examples/skillpack.yaml`](examples/skillpack.yaml) and the generated files in [`examples/AGENTS.md`](examples/AGENTS.md), `examples/.claude/skills`, `examples/.codex/skills`, `examples/.cursor/rules`, and `examples/.github/copilot-instructions.md`.
 
-For template-driven examples, see the [automation skillpack gallery](docs/skillpack-gallery.md) and the [generated examples index](examples/generated/README.md).
+For template-driven examples, see the [automation skillpack gallery](docs/skillpack-gallery.md) and the [generated examples index](examples/generated/README.md). For an end-to-end public fixture, see [guorunjie/skillpack-forge-demo](https://github.com/guorunjie/skillpack-forge-demo).
 
 ```yaml
 name: "my-agent-tool"

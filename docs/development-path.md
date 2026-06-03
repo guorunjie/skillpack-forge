@@ -25,6 +25,7 @@ Delivered in this repo:
 - generated automation, browser automation, Playwright, release, docs, ops, data automation, and data pipeline examples under `examples/generated`.
 - generated automation template gallery covering every current template.
 - checked-in `npm run demo` script for the quick-start flow.
+- public live fixture demo at https://github.com/guorunjie/skillpack-forge-demo.
 - tests for scanner, manifest round-trip, compiler, doctor, and CLI flow.
 - README, market map, roadmap, and launch positioning.
 
@@ -33,7 +34,7 @@ Delivered in this repo:
 Goal: make the project immediately understandable in under 30 seconds.
 
 - Animated terminal preview of `init -> compile -> check`.
-- Create a public repo fixture demo.
+- Public repo fixture demo: https://github.com/guorunjie/skillpack-forge-demo.
 - Add npm version badge once the badge endpoint stabilizes for the new package.
 
 ## Milestone 2: Developer Trust
