@@ -66,6 +66,7 @@ Done:
 - Add GitHub topics for `community` and `good-first-issue`.
 - Enable GitHub Discussions.
 - Add share kit for HN, Reddit, X, LinkedIn, and maintainer-focused launch posts.
+- Add copy-paste local MCP setup and MCPB packaging docs for issue #8.
 
 Next:
 

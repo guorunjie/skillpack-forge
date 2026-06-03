@@ -19,6 +19,47 @@ This gives every `mcp` target an MCPB-ready directory:
   README.md
 ```
 
+## Copy-Paste Local Setup
+
+Generate MCP output:
+
+```bash
+npx skillpack-forge@latest compile .
+```
+
+Run the generated stdio server directly:
+
+```bash
+node .mcp/skillpack-server.mjs
+```
+
+Wire the server into a local MCP client with an absolute path:
+
+```json
+{
+  "mcpServers": {
+    "my-project-skillpack": {
+      "command": "node",
+      "args": ["/absolute/path/to/my-project/.mcp/skillpack-server.mjs"]
+    }
+  }
+}
+```
+
+Pack the same generated server into an `.mcpb` bundle:
+
+```bash
+npx skillpack-forge@latest mcpb . my-project-skillpack.mcpb
+```
+
+Or omit the output path to use the default bundle name from `.mcp/manifest.json`:
+
+```bash
+npx skillpack-forge@latest mcpb .
+```
+
+The local stdio server and `.mcpb` bundle expose the same read-only project context: manifest, summary, commands, and workflows.
+
 Users can still run the official MCPB CLI for additional schema validation:
 
 ```bash

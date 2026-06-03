@@ -81,6 +81,10 @@ test("compileProject writes AGENTS, skills, MCP, Cursor, and Copilot files", asy
   await stat(path.join(root, ".github/copilot-instructions.md"));
   await stat(path.join(root, ".mcp/manifest.json"));
   await stat(path.join(root, ".mcp/skillpack-server.mjs"));
+  const mcpReadme = await readFile(path.join(root, ".mcp/README.md"), "utf8");
+  assert.match(mcpReadme, /Replace the path with an absolute path/);
+  assert.match(mcpReadme, /skillpack-forge mcpb \./);
+  assert.match(mcpReadme, /same read-only Skillpack Forge context/);
 });
 
 test("generated MCPB manifest describes the local read-only MCP server", async () => {
