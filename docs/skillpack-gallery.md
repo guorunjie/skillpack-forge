@@ -17,6 +17,7 @@ npx skillpack-forge@latest compile .
 | `browser-automation` | Browser testing, scraping, and operator tasks | [`examples/generated/browser-automation`](../examples/generated/browser-automation) |
 | `playwright-browser` | Playwright UI tests and browser inspections | [`examples/generated/playwright-browser`](../examples/generated/playwright-browser) |
 | `test-automation` | Reproducing failures, focused tests, fixtures, and verification output | [`examples/generated/test-automation`](../examples/generated/test-automation) |
+| `ci-triage` | Inspecting failing CI runs, isolating causes, and classifying flaky versus real failures | [`examples/generated/ci-triage`](../examples/generated/ci-triage) |
 | `docs-automation` | README, docs, and generated documentation maintenance | [`examples/generated/docs-automation`](../examples/generated/docs-automation) |
 | `release-automation` | Changelogs, versions, tags, packages, and release checks | [`examples/generated/release-automation`](../examples/generated/release-automation) |
 | `ops-automation` | Runbooks, recurring checks, monitors, and operational workflows | [`examples/generated/ops-automation`](../examples/generated/ops-automation) |
@@ -66,6 +67,17 @@ npx skillpack-forge@latest compile .
 ```
 
 Example: [`examples/generated/test-automation/skillpack.yaml`](../examples/generated/test-automation/skillpack.yaml)
+
+## CI Triage
+
+Use `ci-triage` when agents should inspect failing workflow logs, avoid blind reruns, isolate the smallest failing command, and document whether a failure is flaky or a real regression.
+
+```bash
+npx skillpack-forge@latest new ci-triage .
+npx skillpack-forge@latest compile .
+```
+
+Example: [`examples/generated/ci-triage/skillpack.yaml`](../examples/generated/ci-triage/skillpack.yaml)
 
 ## Docs Automation
 

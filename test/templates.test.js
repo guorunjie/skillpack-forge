@@ -14,6 +14,7 @@ test("templateNames lists automation presets", () => {
     "browser-automation",
     "playwright-browser",
     "test-automation",
+    "ci-triage",
     "docs-automation",
     "release-automation",
     "ops-automation",
@@ -28,6 +29,36 @@ test("automation skillpack gallery lists every template", async () => {
     assert.match(gallery, new RegExp(`\\\`${template}\\\``));
     assert.match(gallery, new RegExp(`examples/generated/${template}`));
   }
+});
+
+test("createTemplateManifest creates a CI triage skillpack", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-ci-triage-template-"));
+  await writeFile(
+    path.join(root, "package.json"),
+    JSON.stringify({
+      name: "ci-triage-demo",
+      scripts: {
+        test: "node --test",
+        lint: "node scripts/lint.js",
+        "ci:failed": "gh run view --log-failed"
+      }
+    })
+  );
+
+  const manifest = await createTemplateManifest("ci-triage", root);
+
+  assert.equal(manifest.name, "ci-triage-demo");
+  assert.equal(manifest.targets.includes("claude"), true);
+  assert.equal(manifest.targets.includes("mcp"), true);
+  assert.equal(manifest.commands["ci:failed"], "npm run ci:failed");
+  assert.match(manifest.summary, /CI triage/);
+  assert.match(manifest.skills[0].workflow.join("\n"), /failed step logs/);
+  assert.match(manifest.skills[0].workflow.join("\n"), /likely flaky/);
+
+  await writeFile(path.join(root, "skillpack.yaml"), stringifyManifest(manifest));
+  await compileProject(root);
+  const doctor = await doctorProject(root);
+  assert.equal(doctor.ok, true);
 });
 
 test("createTemplateManifest creates a focused test automation skillpack", async () => {

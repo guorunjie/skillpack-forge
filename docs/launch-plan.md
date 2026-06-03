@@ -49,6 +49,7 @@ Done:
 - Create public live fixture demo at https://github.com/guorunjie/skillpack-forge-demo.
 - Add Playwright-specific browser automation template.
 - Add test automation template and generated example.
+- Add CI triage template and generated example.
 - Add data pipeline automation template and generated example.
 - Add `CLAUDE.md` target and importer support.
 - Add local MCP stdio target.
@@ -69,6 +70,7 @@ Done:
 - Add share kit for HN, Reddit, X, LinkedIn, and maintainer-focused launch posts.
 - Add copy-paste local MCP setup and MCPB packaging docs for issue #8.
 - Prepare v1.8.0 with `test-automation` template, generated example, and npm release.
+- Prepare v1.9.0 with `ci-triage` template, generated example, and npm release.
 
 Next:
 

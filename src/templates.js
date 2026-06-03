@@ -66,6 +66,22 @@ const DEFINITIONS = {
       "Rerun the focused test, then the broader relevant suite, and document any remaining risk"
     ]
   },
+  "ci-triage": {
+    summary: "CI triage workflows for inspecting failing runs, isolating causes, and documenting flaky versus real failures.",
+    principles: [
+      "Read failing logs and changed files before rerunning jobs",
+      "Reproduce the smallest failing command locally when possible",
+      "Separate flaky infrastructure failures from real regressions with evidence",
+      "Record the failing job, suspected cause, rerun decision, and final verification"
+    ],
+    workflow: [
+      "Identify the failing workflow, job, commit, and relevant changed files",
+      "Read the failed step logs before changing code or rerunning CI",
+      "Map the failure to the narrowest local command, test, or package script",
+      "Classify the failure as likely flaky, environment-related, or a real regression",
+      "Apply the smallest fix or rerun decision, then document verification and remaining risk"
+    ]
+  },
   "docs-automation": {
     summary: "Documentation automation workflows for keeping project docs current.",
     principles: [

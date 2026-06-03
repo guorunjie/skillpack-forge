@@ -15,15 +15,16 @@ Delivered in this repo:
 - `diff`: detects stale or missing generated agent files.
 - `check --strict`: combines health, drift, and unexpected generated-file checks.
 - `import`: creates `skillpack.yaml` from existing agent files.
-- `new`: creates automation skillpack templates for browser, Playwright, test, docs, release, ops, data automation, and data pipeline workflows.
+- `new`: creates automation skillpack templates for browser, Playwright, test, CI triage, docs, release, ops, data automation, and data pipeline workflows.
 - `claude-md` target: generates `CLAUDE.md` alongside Claude Skill output.
 - Playwright browser template for focused UI automation workflows.
 - Test automation template for reproducing failures, focused checks, and verification output.
+- CI triage template for inspecting failing runs, isolating causes, and documenting flaky versus real failures.
 - `mcp` target: exposes the manifest, summary, commands, and workflows as read-only MCP resources/tools, with an MCPB-ready `manifest.json`.
 - `mcpb`: packs generated `.mcp` directories into `.mcpb` bundles without runtime dependencies.
 - GitHub Action wrapper for `check --strict`.
 - JSON Schema for editor and CI validation of `skillpack.yaml`.
-- generated automation, browser automation, Playwright, test automation, release, docs, ops, data automation, and data pipeline examples under `examples/generated`.
+- generated automation, browser automation, Playwright, test automation, CI triage, release, docs, ops, data automation, and data pipeline examples under `examples/generated`.
 - generated automation template gallery covering every current template.
 - checked-in `npm run demo` script for the quick-start flow.
 - public live fixture demo at https://github.com/guorunjie/skillpack-forge-demo.

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.0
+
+- Added `ci-triage` template for inspecting failing CI runs, isolating causes, and classifying flaky versus real failures.
+- Added generated `ci-triage` example output under `examples/generated`.
+- Added scanner support for `ci` and `ci:failed` package scripts.
+- Updated the template gallery, generated examples index, README, launch docs, and changelog for the new CI triage workflow.
+
 ## 1.8.0
 
 - Added `test-automation` template for reproducing failures, running focused checks, keeping fixtures minimal, and documenting verification output.

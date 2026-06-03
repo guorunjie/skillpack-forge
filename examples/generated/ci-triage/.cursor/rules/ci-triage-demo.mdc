@@ -1,0 +1,24 @@
+---
+description: Agent rules for ci-triage-demo
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# ci-triage-demo
+
+Generated from `skillpack.yaml` by Skillpack Forge.
+
+CI triage workflows for inspecting failing runs, isolating causes, and documenting flaky versus real failures.
+
+## Principles
+- Read failing logs and changed files before rerunning jobs
+- Reproduce the smallest failing command locally when possible
+- Separate flaky infrastructure failures from real regressions with evidence
+- Record the failing job, suspected cause, rerun decision, and final verification
+
+## Commands
+- install: `npm install`
+- test: `npm test`
+- lint: `npm run lint`
+- ci:failed: `npm run ci:failed`

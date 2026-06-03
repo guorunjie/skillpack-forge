@@ -85,6 +85,8 @@ export async function scanProject(root = process.cwd()) {
       "e2e",
       "test:e2e",
       "lint",
+      "ci",
+      "ci:failed",
       "build",
       "format",
       "docs",

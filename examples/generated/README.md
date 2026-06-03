@@ -100,6 +100,30 @@ npx skillpack-forge@latest new test-automation examples/generated/test-automatio
 npx skillpack-forge@latest compile examples/generated/test-automation
 ```
 
+## CI Triage
+
+Source manifest:
+
+- [`ci-triage/skillpack.yaml`](ci-triage/skillpack.yaml)
+
+Generated files:
+
+- [`ci-triage/AGENTS.md`](ci-triage/AGENTS.md)
+- [`ci-triage/CLAUDE.md`](ci-triage/CLAUDE.md)
+- `ci-triage/.claude/skills/ci-triage-demo-ci-triage/SKILL.md`
+- `ci-triage/.codex/skills/ci-triage-demo-ci-triage/SKILL.md`
+- `ci-triage/.cursor/rules/ci-triage-demo.mdc`
+- `ci-triage/.github/copilot-instructions.md`
+- [`ci-triage/.mcp/manifest.json`](ci-triage/.mcp/manifest.json)
+- [`ci-triage/.mcp/README.md`](ci-triage/.mcp/README.md)
+
+Regenerate:
+
+```bash
+npx skillpack-forge@latest new ci-triage examples/generated/ci-triage --force
+npx skillpack-forge@latest compile examples/generated/ci-triage
+```
+
 ## Release Automation
 
 - [`release-automation/skillpack.yaml`](release-automation/skillpack.yaml)
