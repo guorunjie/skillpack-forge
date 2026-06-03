@@ -32,7 +32,7 @@ Body:
 ## First Issues
 
 - Add a short terminal GIF for `init -> compile -> check`.
-- Add MCPB packaging or remote MCP transport.
+- Add remote MCP transport after the local MCPB flow has enough users.
 
 ## Distribution Checklist
 
@@ -52,7 +52,9 @@ Done:
 - Add public automation skillpack gallery.
 - Submit to `punkpeye/awesome-mcp-servers`.
 - Submit to `github/awesome-copilot`.
+- Fix generated README update on the `github/awesome-copilot` PR.
+- Submit to `ComposioHQ/awesome-claude-skills`.
 
 Next:
 
-- Submit to `ComposioHQ/awesome-claude-skills`.
+- Monitor external PR reviews and respond quickly.

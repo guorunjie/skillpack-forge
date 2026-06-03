@@ -23,9 +23,9 @@ The automation skillpack gallery gives new users concrete starting points for br
 
 ## Candidate Directories
 
-- `github/awesome-copilot`: [PR #1904](https://github.com/github/awesome-copilot/pull/1904) opened for a Skillpack Forge custom instruction that teaches Copilot to create, compile, verify, and package portable agent context.
-- `punkpeye/awesome-mcp-servers`: fit through the generated repo-local read-only MCP server and MCPB bundle output.
-- `ComposioHQ/awesome-claude-skills`: possible fit, but less direct because Skillpack Forge is a skill compiler rather than a single Claude Skill.
+- `punkpeye/awesome-mcp-servers`: [PR #7299](https://github.com/punkpeye/awesome-mcp-servers/pull/7299) opened for the generated repo-local read-only MCP server and MCPB bundle output.
+- `github/awesome-copilot`: [PR #1905](https://github.com/github/awesome-copilot/pull/1905) opened for a Skillpack Forge custom instruction that teaches Copilot to create, compile, verify, and package portable agent context.
+- `ComposioHQ/awesome-claude-skills`: [PR #996](https://github.com/ComposioHQ/awesome-claude-skills/pull/996) opened for a Claude Skill that guides agents through Skillpack Forge workflows.
 
 ## Submission Angle
 
