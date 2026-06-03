@@ -11,9 +11,8 @@ Thanks for helping make repo context portable across AI coding agents.
 
 Current starter issues:
 
-- [Template: add test-automation skillpack preset](https://github.com/guorunjie/skillpack-forge/issues/7)
-- [Docs: add MCP client install snippets](https://github.com/guorunjie/skillpack-forge/issues/8)
-- [Community: add reusable skillpack submission guide](https://github.com/guorunjie/skillpack-forge/issues/10)
+- Browse the current [`good first issue`](https://github.com/guorunjie/skillpack-forge/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) list.
+- Use the [community skillpack submission guide](docs/community-skillpacks.md) when proposing a reusable workflow template.
 
 See the [community roadmap](docs/community-roadmap.md) for contribution lanes and deeper roadmap issues.
 

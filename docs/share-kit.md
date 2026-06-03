@@ -9,6 +9,7 @@ Use these short posts when sharing Skillpack Forge. Keep the first link pointed 
 - Live fixture: https://github.com/guorunjie/skillpack-forge-demo
 - Good first issues: https://github.com/guorunjie/skillpack-forge/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22
 - Discussions: https://github.com/guorunjie/skillpack-forge/discussions
+- Community skillpack guide: https://github.com/guorunjie/skillpack-forge/blob/main/docs/community-skillpacks.md
 
 ## One-Liner
 
@@ -61,8 +62,8 @@ Skillpack Forge can generate a repo-local read-only MCP stdio server from `skill
 
 Looking for starter contributions:
 
-- Improve MCP client install docs
-- Write a reusable skillpack submission guide
+- Improve existing automation templates with real-world verification commands
+- Add examples from repos that use multiple AI coding agents
 - Suggest a practical automation template from your own repo
 
 Starter issues: https://github.com/guorunjie/skillpack-forge/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22

@@ -4,12 +4,9 @@ Skillpack Forge grows best when contributors can add practical agent workflows w
 
 ## Good First Issues
 
-- [Community: add reusable skillpack submission guide](https://github.com/guorunjie/skillpack-forge/issues/10)
-- [Docs: add client-specific MCP setup examples](https://github.com/guorunjie/skillpack-forge/issues/11)
-
 Browse all current starter tasks with the [`good first issue`](https://github.com/guorunjie/skillpack-forge/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) label.
 
-Use [GitHub Discussions](https://github.com/guorunjie/skillpack-forge/discussions) for template ideas, workflow examples, and questions that are not yet ready to become issues.
+Use the [community skillpack submission guide](community-skillpacks.md) when proposing a reusable workflow. Use [GitHub Discussions](https://github.com/guorunjie/skillpack-forge/discussions) for template ideas, workflow examples, and questions that are not yet ready to become issues.
 
 ## Deeper Roadmap Issues
 
@@ -19,7 +16,7 @@ Use [GitHub Discussions](https://github.com/guorunjie/skillpack-forge/discussion
 
 ### Templates
 
-Add reusable automation presets in `src/templates.js`, generate examples under `examples/generated`, and update the gallery in `docs/skillpack-gallery.md`.
+Add reusable automation presets in `src/templates.js`, generate examples under `examples/generated`, and update the gallery in `docs/skillpack-gallery.md`. Start with the [community skillpack submission guide](community-skillpacks.md).
 
 ### Documentation
 

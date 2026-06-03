@@ -346,4 +346,4 @@ node ./bin/skillpack-forge.js diff .
 
 The implementation is dependency-free Node.js so the CLI stays easy to audit and install.
 
-Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), browse the [community roadmap](docs/community-roadmap.md), join [Discussions](https://github.com/guorunjie/skillpack-forge/discussions), or open a template request for a workflow you want Skillpack Forge to generate. Sharing the project? Use the [share kit](docs/share-kit.md).
+Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), browse the [community roadmap](docs/community-roadmap.md), read the [community skillpack submission guide](docs/community-skillpacks.md), join [Discussions](https://github.com/guorunjie/skillpack-forge/discussions), or open a template request for a workflow you want Skillpack Forge to generate. Sharing the project? Use the [share kit](docs/share-kit.md).
