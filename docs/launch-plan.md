@@ -71,9 +71,11 @@ Done:
 - Add share kit for HN, Reddit, X, LinkedIn, and maintainer-focused launch posts.
 - Add copy-paste local MCP setup and MCPB packaging docs for issue #8.
 - Add MCP client setup examples and reusable skillpack submission guide.
+- Add Cursor rule metadata preservation for importer migrations.
 - Prepare v1.8.0 with `test-automation` template, generated example, and npm release.
 - Prepare v1.9.0 with `ci-triage` template, generated example, and npm release.
 - Prepare v1.10.0 with `dependency-upgrade` template, generated example, and npm release.
+- Prepare v1.11.0 with Cursor rule metadata import preservation.
 
 Next:
 

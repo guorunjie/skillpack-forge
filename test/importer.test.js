@@ -109,6 +109,53 @@ Claude repo instructions.
   assert.deepEqual(manifest.skills[0].workflow, ["Inspect the repo", "Run npm test"]);
 });
 
+test("importManifestFromProject preserves Cursor rule frontmatter metadata", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-import-cursor-"));
+  await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "cursor-metadata-demo", scripts: { test: "node --test" } }));
+  await mkdir(path.join(root, ".cursor/rules"), { recursive: true });
+  await writeFile(
+    path.join(root, ".cursor/rules/typescript.mdc"),
+    `---
+description: Use for TypeScript source and tests.
+globs:
+  - "src/**/*.ts"
+  - "test/**/*.ts"
+alwaysApply: false
+---
+
+# TypeScript workflow
+
+Use typed automation guidance.
+
+## Principles
+- Keep TypeScript strict
+
+## Commands
+- test: \`npm test\`
+`
+  );
+
+  const manifest = await importManifestFromProject(root);
+
+  assert.deepEqual(manifest.targets, ["cursor"]);
+  assert.equal(manifest.summary, "Use typed automation guidance.");
+  assert.deepEqual(manifest.cursor, {
+    description: "Use for TypeScript source and tests.",
+    globs: ["src/**/*.ts", "test/**/*.ts"],
+    alwaysApply: false
+  });
+  assert.deepEqual(manifest.principles, ["Keep TypeScript strict"]);
+  assert.equal(manifest.commands.test, "npm test");
+
+  await writeFile(path.join(root, "skillpack.yaml"), stringifyManifest(manifest));
+  await compileProject(root);
+  const cursorRule = await readFile(path.join(root, ".cursor/rules/cursor-metadata-demo.mdc"), "utf8");
+  assert.match(cursorRule, /description: Use for TypeScript source and tests\./);
+  assert.match(cursorRule, /  - "src\/\*\*\/\*.ts"/);
+  assert.match(cursorRule, /  - "test\/\*\*\/\*.ts"/);
+  assert.match(cursorRule, /alwaysApply: false/);
+});
+
 test("importManifestFromProject detects an MCPB manifest as the mcp target", async () => {
   const root = await mkdtemp(path.join(tmpdir(), "skillpack-import-mcpb-"));
   await writeFile(path.join(root, "package.json"), JSON.stringify({ name: "mcpb-demo" }));

@@ -205,6 +205,19 @@ skillpack-forge import . --force
 skillpack-forge import . --json
 ```
 
+For Cursor rules, import preserves supported frontmatter in a top-level `cursor` block:
+
+```yaml
+cursor:
+  description: "Use for TypeScript source and tests."
+  globs:
+    - "src/**/*.ts"
+    - "test/**/*.ts"
+  alwaysApply: false
+```
+
+When multiple Cursor rule files are imported, Skillpack Forge unions `globs`, keeps the first description, and sets `alwaysApply` to true if any imported rule is always-on. Per-rule ordering and unsupported Cursor metadata remain outside the current single-rule output model.
+
 ### `new`
 
 Creates a template manifest for common automation skillpacks.

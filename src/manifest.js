@@ -36,12 +36,15 @@ export function createManifestFromScan(scan) {
 }
 
 function scalar(value) {
+  if (typeof value === "boolean") return value ? "true" : "false";
   return JSON.stringify(String(value));
 }
 
 function parseScalar(value) {
   const trimmed = value.trim();
   if (!trimmed) return "";
+  if (trimmed === "true") return true;
+  if (trimmed === "false") return false;
   if (
     (trimmed.startsWith("\"") && trimmed.endsWith("\"")) ||
     (trimmed.startsWith("'") && trimmed.endsWith("'"))
@@ -49,15 +52,6 @@ function parseScalar(value) {
     return JSON.parse(trimmed);
   }
   return trimmed;
-}
-
-function parseIndentedScalarPair(line, indent) {
-  const prefix = " ".repeat(indent);
-  if (!line.startsWith(prefix)) return null;
-  const body = line.slice(indent);
-  const pair = body.match(/^(.*):\s+(.+)$/);
-  if (!pair) return null;
-  return [pair[1], parseScalar(pair[2])];
 }
 
 export function stringifyManifest(manifest) {
@@ -87,7 +81,12 @@ export function stringifyManifest(manifest) {
     if (value && typeof value === "object") {
       lines.push(`${key}:`);
       for (const [nestedKey, nestedValue] of Object.entries(value)) {
-        lines.push(`  ${nestedKey}: ${scalar(nestedValue)}`);
+        if (Array.isArray(nestedValue)) {
+          lines.push(`  ${nestedKey}:`);
+          for (const child of nestedValue) lines.push(`    - ${scalar(child)}`);
+        } else {
+          lines.push(`  ${nestedKey}: ${scalar(nestedValue)}`);
+        }
       }
       continue;
     }
@@ -160,10 +159,22 @@ export function parseManifest(text) {
     const object = {};
     i += 1;
     while (i < lines.length) {
-      const nested = parseIndentedScalarPair(lines[i], 2);
-      if (!nested) break;
-      object[nested[0]] = nested[1];
+      const inlinePair = lines[i].match(/^  (.*):\s+(.+)$/);
+      if (inlinePair) {
+        object[inlinePair[1]] = parseScalar(inlinePair[2]);
+        i += 1;
+        continue;
+      }
+      const nestedLine = lines[i].match(/^  (.*):\s*$/);
+      if (!nestedLine) break;
+      const nestedKey = nestedLine[1];
+      const values = [];
       i += 1;
+      while (i < lines.length && /^    - /.test(lines[i])) {
+        values.push(parseScalar(lines[i].replace(/^    - /, "")));
+        i += 1;
+      }
+      object[nestedKey] = values;
     }
     manifest[key] = object;
   }

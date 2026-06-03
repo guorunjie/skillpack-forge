@@ -74,25 +74,76 @@ function commandsFrom(text) {
   return found;
 }
 
+function frontmatterBlock(text) {
+  if (!text.startsWith("---\n") && !text.startsWith("---\r\n")) return "";
+  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  return match?.[1] ?? "";
+}
+
+function stripFrontmatter(text) {
+  if (!text.startsWith("---\n") && !text.startsWith("---\r\n")) return text;
+  return text.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, "");
+}
+
+function parseFrontmatterScalar(value) {
+  const trimmed = value.trim();
+  if (trimmed === "true") return true;
+  if (trimmed === "false") return false;
+  if (
+    (trimmed.startsWith("\"") && trimmed.endsWith("\"")) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1);
+  }
+  return trimmed;
+}
+
+function parseFrontmatterInlineList(value) {
+  const trimmed = value.trim();
+  if (!trimmed.startsWith("[") || !trimmed.endsWith("]")) return null;
+  return trimmed
+    .slice(1, -1)
+    .split(",")
+    .map((item) => parseFrontmatterScalar(item))
+    .filter(Boolean);
+}
+
 function frontmatter(text) {
-  if (!text.startsWith("---\n")) return {};
-  const end = text.indexOf("\n---", 4);
-  if (end === -1) return {};
+  const block = frontmatterBlock(text);
+  if (!block) return {};
   const values = {};
-  for (const line of text.slice(4, end).split(/\r?\n/)) {
-    const match = line.match(/^([A-Za-z0-9_-]+):\s*(.+)$/);
-    if (match) values[match[1]] = match[2].trim();
+  const lines = block.split(/\r?\n/);
+  for (let i = 0; i < lines.length; i += 1) {
+    const match = lines[i].match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!match) continue;
+    const [, key, raw] = match;
+    if (raw.trim()) {
+      values[key] = parseFrontmatterInlineList(raw) ?? parseFrontmatterScalar(raw);
+      continue;
+    }
+    const items = [];
+    i += 1;
+    while (i < lines.length) {
+      const item = lines[i].match(/^\s*-\s+(.+)$/);
+      if (!item) {
+        i -= 1;
+        break;
+      }
+      items.push(parseFrontmatterScalar(item[1]));
+      i += 1;
+    }
+    values[key] = items;
   }
   return values;
 }
 
 function summaryFrom(text) {
   const project = section(text, ["Project"]);
-  const source = project || text;
+  const source = project || stripFrontmatter(text);
   return source
     .split(/\r?\n/)
     .map((line) => line.trim())
-    .find((line) => line && !line.startsWith("#") && !line.startsWith("---") && !line.startsWith("- ")) ?? "";
+    .find((line) => line && !line.startsWith("#") && !line.startsWith("---") && !line.startsWith("- ") && !line.startsWith("Generated from `skillpack.yaml`")) ?? "";
 }
 
 function firstHeading(text) {
@@ -150,6 +201,41 @@ function mergeUnique(values) {
   return [...new Set(values.filter(Boolean))];
 }
 
+function globList(value) {
+  if (Array.isArray(value)) return value.map(String).map((item) => item.trim()).filter(Boolean);
+  if (typeof value !== "string") return [];
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function cursorMetadataFrom(text) {
+  const meta = frontmatter(text);
+  const cursor = {};
+  if (meta.description) cursor.description = String(meta.description);
+  const globs = globList(meta.globs);
+  if (globs.length) cursor.globs = globs;
+  if (typeof meta.alwaysApply === "boolean") cursor.alwaysApply = meta.alwaysApply;
+  if (typeof meta.alwaysApply === "string" && /^(true|false)$/.test(meta.alwaysApply)) {
+    cursor.alwaysApply = meta.alwaysApply === "true";
+  }
+  return Object.keys(cursor).length ? cursor : null;
+}
+
+function mergeCursorMetadata(metadata) {
+  const globs = mergeUnique(metadata.flatMap((item) => item.globs ?? []));
+  const alwaysApplyValues = metadata
+    .map((item) => item.alwaysApply)
+    .filter((value) => typeof value === "boolean");
+  const cursor = {};
+  const description = metadata.map((item) => item.description).find(Boolean);
+  if (description) cursor.description = description;
+  if (globs.length) cursor.globs = globs;
+  if (alwaysApplyValues.length) cursor.alwaysApply = alwaysApplyValues.includes(true);
+  return Object.keys(cursor).length ? cursor : null;
+}
+
 function mergeSkills(skills, fallbackSkill) {
   const byName = new Map();
   for (const skill of skills) {
@@ -180,6 +266,7 @@ export async function importManifestFromProject(root = process.cwd()) {
   const targets = [];
   const texts = [];
   const importedSkills = [];
+  const cursorMetadata = [];
 
   const agents = await readIfExists(path.join(projectRoot, "AGENTS.md"));
   if (agents) {
@@ -203,7 +290,12 @@ export async function importManifestFromProject(root = process.cwd()) {
   }
 
   const cursorFiles = await collectFiles(projectRoot, ".cursor/rules", (relative) => relative.endsWith(".mdc"));
-  for (const relative of cursorFiles) texts.push(await readFile(path.join(projectRoot, relative), "utf8"));
+  for (const relative of cursorFiles) {
+    const text = await readFile(path.join(projectRoot, relative), "utf8");
+    texts.push(text);
+    const metadata = cursorMetadataFrom(text);
+    if (metadata) cursorMetadata.push(metadata);
+  }
   if (cursorFiles.length) targets.push("cursor");
 
   const mcpReadme = await readIfExists(path.join(projectRoot, ".mcp/README.md"));
@@ -238,8 +330,9 @@ export async function importManifestFromProject(root = process.cwd()) {
   const principles = mergeUnique(texts.flatMap((text) => bullets(section(text, ["Working Principles", "Principles"]))));
   const commands = texts.reduce((acc, text) => ({ ...acc, ...commandsFrom(text) }), {});
   const summary = texts.map(summaryFrom).find(Boolean);
+  const cursor = mergeCursorMetadata(cursorMetadata);
 
-  return {
+  const manifest = {
     ...base,
     name,
     summary: summary || base.summary,
@@ -248,4 +341,6 @@ export async function importManifestFromProject(root = process.cwd()) {
     commands: Object.keys(commands).length ? commands : base.commands,
     skills: importedSkills.length ? mergeSkills(importedSkills, base.skills[0]) : base.skills
   };
+  if (cursor) manifest.cursor = cursor;
+  return manifest;
 }

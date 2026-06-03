@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.11.0
+
+- Added `cursor` manifest metadata for preserving Cursor rule frontmatter during import and compile.
+- Preserved imported Cursor rule `description`, `globs`, and `alwaysApply` values when generating `.cursor/rules/<project>.mdc`.
+- Added tests for Cursor rule metadata import and manifest round-tripping.
+- Documented Cursor metadata preservation and current merge behavior for multi-rule imports.
+
 ## 1.10.0
 
 - Added `dependency-upgrade` template for reviewing outdated packages, applying safe dependency updates, and documenting verification.

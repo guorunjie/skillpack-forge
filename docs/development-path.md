@@ -15,6 +15,7 @@ Delivered in this repo:
 - `diff`: detects stale or missing generated agent files.
 - `check --strict`: combines health, drift, and unexpected generated-file checks.
 - `import`: creates `skillpack.yaml` from existing agent files.
+- Cursor import metadata preservation for rule `description`, `globs`, and `alwaysApply` frontmatter.
 - `new`: creates automation skillpack templates for browser, Playwright, test, CI triage, dependency upgrade, docs, release, ops, data automation, and data pipeline workflows.
 - `claude-md` target: generates `CLAUDE.md` alongside Claude Skill output.
 - Playwright browser template for focused UI automation workflows.

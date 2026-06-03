@@ -37,6 +37,11 @@ test("stringifyManifest and parseManifest round-trip the supported schema", () =
       "test:e2e": "npm run test:e2e",
       "data:validate": "npm run data:validate"
     },
+    cursor: {
+      description: "Use for TypeScript source and test files.",
+      globs: ["src/**/*.ts", "test/**/*.ts"],
+      alwaysApply: false
+    },
     skills: [
       {
         name: "demo-agent-tool-developer",
@@ -57,5 +62,6 @@ test("skillpack.schema.json describes the supported manifest shape", async () =>
   assert.equal(schema.title, "Skillpack Forge Manifest");
   assert.deepEqual(schema.required, ["name", "summary", "targets", "principles", "commands", "skills"]);
   assert.deepEqual(schema.properties.targets.items.enum, ["agents", "claude-md", "claude", "codex", "cursor", "copilot", "mcp"]);
+  assert.deepEqual(Object.keys(schema.properties.cursor.properties), ["description", "globs", "alwaysApply"]);
   assert.equal(schema.properties.skills.items.required.includes("workflow"), true);
 });

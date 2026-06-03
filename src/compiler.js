@@ -101,12 +101,35 @@ ${list(manifest.principles ?? [])}
 `;
 }
 
+function cursorConfig(manifest) {
+  const cursor = manifest.cursor ?? {};
+  const globs = Array.isArray(cursor.globs)
+    ? cursor.globs.map(String).filter(Boolean)
+    : String(cursor.globs ?? "")
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+  const rawAlwaysApply = cursor.alwaysApply;
+  const alwaysApply =
+    typeof rawAlwaysApply === "boolean"
+      ? rawAlwaysApply
+      : typeof rawAlwaysApply === "string" && /^(true|false)$/.test(rawAlwaysApply)
+        ? rawAlwaysApply === "true"
+        : true;
+  return {
+    description: cursor.description || `Agent rules for ${manifest.name}`,
+    globs: globs.length ? globs : ["**/*"],
+    alwaysApply
+  };
+}
+
 function renderCursorRule(manifest) {
+  const cursor = cursorConfig(manifest);
   return `---
-description: Agent rules for ${manifest.name}
+description: ${cursor.description}
 globs:
-  - "**/*"
-alwaysApply: true
+${cursor.globs.map((glob) => `  - ${JSON.stringify(glob)}`).join("\n")}
+alwaysApply: ${cursor.alwaysApply ? "true" : "false"}
 ---
 
 # ${manifest.name}
