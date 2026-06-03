@@ -288,7 +288,7 @@ Run an additional official MCPB schema check when needed:
 npx -y @anthropic-ai/mcpb validate .mcp
 ```
 
-See `.mcp/README.md` after compilation and the [MCP packaging design note](docs/mcp-packaging.md).
+See `.mcp/README.md` after compilation, the [MCP packaging design note](docs/mcp-packaging.md), and the [MCP client setup examples](docs/mcp-client-setup.md).
 
 ### GitHub Action
 

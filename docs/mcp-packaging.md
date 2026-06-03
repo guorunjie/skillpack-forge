@@ -60,6 +60,8 @@ npx skillpack-forge@latest mcpb .
 
 The local stdio server and `.mcpb` bundle expose the same read-only project context: manifest, summary, commands, and workflows.
 
+For client-specific install examples built on top of this generated output, see [MCP client setup examples](mcp-client-setup.md).
+
 Users can still run the official MCPB CLI for additional schema validation:
 
 ```bash
