@@ -24,6 +24,7 @@ Start from a template:
 
 ```bash
 npx skillpack-forge@latest new browser-automation .
+npx skillpack-forge@latest new test-automation .
 npx skillpack-forge@latest compile . --dry-run
 ```
 

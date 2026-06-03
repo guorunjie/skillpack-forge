@@ -13,6 +13,7 @@ test("templateNames lists automation presets", () => {
     "automation",
     "browser-automation",
     "playwright-browser",
+    "test-automation",
     "docs-automation",
     "release-automation",
     "ops-automation",
@@ -27,6 +28,36 @@ test("automation skillpack gallery lists every template", async () => {
     assert.match(gallery, new RegExp(`\\\`${template}\\\``));
     assert.match(gallery, new RegExp(`examples/generated/${template}`));
   }
+});
+
+test("createTemplateManifest creates a focused test automation skillpack", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-test-automation-template-"));
+  await writeFile(
+    path.join(root, "package.json"),
+    JSON.stringify({
+      name: "test-automation-demo",
+      scripts: {
+        test: "node --test",
+        "test:watch": "node --watch --test",
+        coverage: "node --test --experimental-test-coverage"
+      }
+    })
+  );
+
+  const manifest = await createTemplateManifest("test-automation", root);
+
+  assert.equal(manifest.name, "test-automation-demo");
+  assert.equal(manifest.targets.includes("claude-md"), true);
+  assert.equal(manifest.targets.includes("mcp"), true);
+  assert.equal(manifest.commands.test, "npm test");
+  assert.match(manifest.summary, /Test automation/);
+  assert.match(manifest.skills[0].workflow.join("\n"), /focused test/);
+  assert.match(manifest.skills[0].workflow.join("\n"), /broader relevant suite/);
+
+  await writeFile(path.join(root, "skillpack.yaml"), stringifyManifest(manifest));
+  await compileProject(root);
+  const doctor = await doctorProject(root);
+  assert.equal(doctor.ok, true);
 });
 
 test("createTemplateManifest creates a Playwright-specific browser skillpack", async () => {

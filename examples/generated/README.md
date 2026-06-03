@@ -76,6 +76,30 @@ npx skillpack-forge@latest new playwright-browser examples/generated/playwright-
 npx skillpack-forge@latest compile examples/generated/playwright-browser
 ```
 
+## Test Automation
+
+Source manifest:
+
+- [`test-automation/skillpack.yaml`](test-automation/skillpack.yaml)
+
+Generated files:
+
+- [`test-automation/AGENTS.md`](test-automation/AGENTS.md)
+- [`test-automation/CLAUDE.md`](test-automation/CLAUDE.md)
+- `test-automation/.claude/skills/test-automation-demo-test-automation/SKILL.md`
+- `test-automation/.codex/skills/test-automation-demo-test-automation/SKILL.md`
+- `test-automation/.cursor/rules/test-automation-demo.mdc`
+- `test-automation/.github/copilot-instructions.md`
+- [`test-automation/.mcp/manifest.json`](test-automation/.mcp/manifest.json)
+- [`test-automation/.mcp/README.md`](test-automation/.mcp/README.md)
+
+Regenerate:
+
+```bash
+npx skillpack-forge@latest new test-automation examples/generated/test-automation --force
+npx skillpack-forge@latest compile examples/generated/test-automation
+```
+
 ## Release Automation
 
 - [`release-automation/skillpack.yaml`](release-automation/skillpack.yaml)

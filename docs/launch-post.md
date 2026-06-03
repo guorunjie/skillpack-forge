@@ -26,6 +26,7 @@ Use a template if you want a faster start:
 ```bash
 npx skillpack-forge@latest new browser-automation .
 npx skillpack-forge@latest new playwright-browser .
+npx skillpack-forge@latest new test-automation .
 npx skillpack-forge@latest new release-automation .
 ```
 

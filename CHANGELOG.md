@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.8.0
+
+- Added `test-automation` template for reproducing failures, running focused checks, keeping fixtures minimal, and documenting verification output.
+- Added generated `test-automation` example output under `examples/generated`.
+- Updated the template gallery, generated examples index, launch docs, and share copy for the new test automation workflow.
+- Added test coverage to keep the new template compilable and listed in the gallery.
+
 ## 1.7.0
 
 - Added `skillpack-forge mcpb [path] [output]` to pack generated `.mcp` directories into `.mcpb` bundles.

@@ -1,0 +1,22 @@
+---
+description: Agent rules for test-automation-demo
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# test-automation-demo
+
+Generated from `skillpack.yaml` by Skillpack Forge.
+
+Test automation workflows for reproducing failures, running focused checks, and documenting verification.
+
+## Principles
+- Reproduce failures with the smallest reliable command before changing code
+- Prefer focused tests and minimal fixtures over broad test runs during diagnosis
+- Keep verification output, failing inputs, and skipped coverage easy to review
+- Broaden to the full relevant test suite before reporting completion
+
+## Commands
+- install: `npm install`
+- test: `npm test`

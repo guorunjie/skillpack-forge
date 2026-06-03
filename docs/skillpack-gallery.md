@@ -16,6 +16,7 @@ npx skillpack-forge@latest compile .
 | `automation` | General repeatable automation workflows | [`examples/generated/automation`](../examples/generated/automation) |
 | `browser-automation` | Browser testing, scraping, and operator tasks | [`examples/generated/browser-automation`](../examples/generated/browser-automation) |
 | `playwright-browser` | Playwright UI tests and browser inspections | [`examples/generated/playwright-browser`](../examples/generated/playwright-browser) |
+| `test-automation` | Reproducing failures, focused tests, fixtures, and verification output | [`examples/generated/test-automation`](../examples/generated/test-automation) |
 | `docs-automation` | README, docs, and generated documentation maintenance | [`examples/generated/docs-automation`](../examples/generated/docs-automation) |
 | `release-automation` | Changelogs, versions, tags, packages, and release checks | [`examples/generated/release-automation`](../examples/generated/release-automation) |
 | `ops-automation` | Runbooks, recurring checks, monitors, and operational workflows | [`examples/generated/ops-automation`](../examples/generated/ops-automation) |
@@ -54,6 +55,17 @@ npx skillpack-forge@latest compile .
 ```
 
 Example: [`examples/generated/playwright-browser/skillpack.yaml`](../examples/generated/playwright-browser/skillpack.yaml)
+
+## Test Automation
+
+Use `test-automation` when agents should reproduce failures, run focused tests, keep fixtures minimal, and document verification output.
+
+```bash
+npx skillpack-forge@latest new test-automation .
+npx skillpack-forge@latest compile .
+```
+
+Example: [`examples/generated/test-automation/skillpack.yaml`](../examples/generated/test-automation/skillpack.yaml)
 
 ## Docs Automation
 

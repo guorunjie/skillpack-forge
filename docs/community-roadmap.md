@@ -4,9 +4,9 @@ Skillpack Forge grows best when contributors can add practical agent workflows w
 
 ## Good First Issues
 
-- [Template: add test-automation skillpack preset](https://github.com/guorunjie/skillpack-forge/issues/7)
 - [Community: add reusable skillpack submission guide](https://github.com/guorunjie/skillpack-forge/issues/10)
 - [Docs: add client-specific MCP setup examples](https://github.com/guorunjie/skillpack-forge/issues/11)
+- [Template: add ci-triage automation skillpack preset](https://github.com/guorunjie/skillpack-forge/issues/12)
 
 Browse all current starter tasks with the [`good first issue`](https://github.com/guorunjie/skillpack-forge/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) label.
 

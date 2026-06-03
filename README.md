@@ -58,6 +58,7 @@ Start from an automation template instead:
 ```bash
 npx skillpack-forge@latest new browser-automation .
 npx skillpack-forge@latest new playwright-browser .
+npx skillpack-forge@latest new test-automation .
 npx skillpack-forge@latest new data-pipeline .
 npx skillpack-forge@latest compile . --dry-run
 ```
@@ -209,6 +210,7 @@ Creates a template manifest for common automation skillpacks.
 skillpack-forge new --list
 skillpack-forge new browser-automation .
 skillpack-forge new playwright-browser .
+skillpack-forge new test-automation .
 skillpack-forge new docs-automation .
 skillpack-forge new release-automation .
 skillpack-forge new ops-automation .
@@ -315,6 +317,7 @@ Recently delivered:
 
 - Animated terminal demo for the README first screen.
 - Target compatibility matrix across AGENTS.md, Claude, Codex, Cursor, Copilot, and MCP.
+- Test automation template and generated example.
 - Data pipeline automation template and generated example.
 - MCPB-ready manifest generation for local MCP servers.
 - Public automation skillpack gallery with generated examples for every template.
