@@ -26,6 +26,7 @@ Start from a template:
 npx skillpack-forge@latest new browser-automation .
 npx skillpack-forge@latest new test-automation .
 npx skillpack-forge@latest new ci-triage .
+npx skillpack-forge@latest new dependency-upgrade .
 npx skillpack-forge@latest compile . --dry-run
 ```
 

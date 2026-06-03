@@ -60,6 +60,7 @@ npx skillpack-forge@latest new browser-automation .
 npx skillpack-forge@latest new playwright-browser .
 npx skillpack-forge@latest new test-automation .
 npx skillpack-forge@latest new ci-triage .
+npx skillpack-forge@latest new dependency-upgrade .
 npx skillpack-forge@latest new data-pipeline .
 npx skillpack-forge@latest compile . --dry-run
 ```
@@ -118,6 +119,7 @@ Generate a template skillpack:
 ```bash
 npx skillpack-forge@latest new --list
 npx skillpack-forge@latest new release-automation /path/to/project
+npx skillpack-forge@latest new dependency-upgrade /path/to/project
 ```
 
 Import existing agent files:
@@ -213,6 +215,7 @@ skillpack-forge new browser-automation .
 skillpack-forge new playwright-browser .
 skillpack-forge new test-automation .
 skillpack-forge new ci-triage .
+skillpack-forge new dependency-upgrade .
 skillpack-forge new docs-automation .
 skillpack-forge new release-automation .
 skillpack-forge new ops-automation .

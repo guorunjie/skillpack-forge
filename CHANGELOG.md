@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.10.0
+
+- Added `dependency-upgrade` template for reviewing outdated packages, applying safe dependency updates, and documenting verification.
+- Added scanner support for dependency maintenance scripts such as `outdated`, `audit`, `deps:check`, `deps:update`, `deps:audit`, and `deps:dedupe`.
+- Added generated `dependency-upgrade` example output under `examples/generated`.
+- Updated the template gallery, generated examples index, README, launch docs, and changelog for the new dependency upgrade workflow.
+
 ## 1.9.0
 
 - Added `ci-triage` template for inspecting failing CI runs, isolating causes, and classifying flaky versus real failures.

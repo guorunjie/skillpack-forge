@@ -87,6 +87,12 @@ export async function scanProject(root = process.cwd()) {
       "lint",
       "ci",
       "ci:failed",
+      "audit",
+      "outdated",
+      "deps:check",
+      "deps:update",
+      "deps:audit",
+      "deps:dedupe",
       "build",
       "format",
       "docs",
@@ -112,7 +118,13 @@ export async function scanProject(root = process.cwd()) {
     if (["data:validate", "data:extract", "data:transform", "data:load", "data:report"].some((scriptName) => pkg.scripts?.[scriptName])) {
       capabilities.push("data-pipeline");
     }
+    if (["audit", "outdated", "deps:check", "deps:update", "deps:audit", "deps:dedupe"].some((scriptName) => pkg.scripts?.[scriptName])) {
+      capabilities.push("dependency-upgrade");
+    }
     const deps = dependencyNames(pkg);
+    if (deps.some((dep) => ["npm-check-updates", "renovate", "syncpack"].includes(dep))) {
+      capabilities.push("dependency-upgrade");
+    }
     if (deps.some((dep) => ["playwright", "@playwright/test", "puppeteer", "selenium-webdriver"].includes(dep))) {
       capabilities.push("browser-automation");
     }

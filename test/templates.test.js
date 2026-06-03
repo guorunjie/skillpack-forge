@@ -15,6 +15,7 @@ test("templateNames lists automation presets", () => {
     "playwright-browser",
     "test-automation",
     "ci-triage",
+    "dependency-upgrade",
     "docs-automation",
     "release-automation",
     "ops-automation",
@@ -29,6 +30,42 @@ test("automation skillpack gallery lists every template", async () => {
     assert.match(gallery, new RegExp(`\\\`${template}\\\``));
     assert.match(gallery, new RegExp(`examples/generated/${template}`));
   }
+});
+
+test("createTemplateManifest creates a dependency upgrade skillpack", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "skillpack-dependency-upgrade-template-"));
+  await writeFile(
+    path.join(root, "package.json"),
+    JSON.stringify({
+      name: "dependency-upgrade-demo",
+      scripts: {
+        test: "node --test",
+        outdated: "npm outdated",
+        "deps:update": "npx npm-check-updates -u",
+        "deps:audit": "npm audit"
+      },
+      devDependencies: {
+        "npm-check-updates": "^17.0.0"
+      }
+    })
+  );
+
+  const manifest = await createTemplateManifest("dependency-upgrade", root);
+
+  assert.equal(manifest.name, "dependency-upgrade-demo");
+  assert.equal(manifest.targets.includes("claude-md"), true);
+  assert.equal(manifest.targets.includes("mcp"), true);
+  assert.equal(manifest.commands.outdated, "npm run outdated");
+  assert.equal(manifest.commands["deps:update"], "npm run deps:update");
+  assert.equal(manifest.commands["deps:audit"], "npm run deps:audit");
+  assert.match(manifest.summary, /Dependency upgrade/);
+  assert.match(manifest.skills[0].workflow.join("\n"), /patch and minor updates/);
+  assert.match(manifest.skills[0].workflow.join("\n"), /deferred upgrades/);
+
+  await writeFile(path.join(root, "skillpack.yaml"), stringifyManifest(manifest));
+  await compileProject(root);
+  const doctor = await doctorProject(root);
+  assert.equal(doctor.ok, true);
 });
 
 test("createTemplateManifest creates a CI triage skillpack", async () => {

@@ -1,0 +1,26 @@
+---
+description: Agent rules for dependency-upgrade-demo
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# dependency-upgrade-demo
+
+Generated from `skillpack.yaml` by Skillpack Forge.
+
+Dependency upgrade workflows for reviewing outdated packages, applying safe updates, and verifying compatibility.
+
+## Principles
+- Review changelogs, release notes, and lockfile changes before broad upgrades
+- Prefer one dependency group at a time so regressions stay attributable
+- Run audit, focused tests, and the relevant full suite before reporting success
+- Document skipped major versions, risky transitive changes, and follow-up work
+
+## Commands
+- install: `npm install`
+- test: `npm test`
+- outdated: `npm run outdated`
+- deps:check: `npm run deps:check`
+- deps:update: `npm run deps:update`
+- deps:audit: `npm run deps:audit`

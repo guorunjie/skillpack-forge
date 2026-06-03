@@ -61,8 +61,8 @@ Skillpack Forge can generate a repo-local read-only MCP stdio server from `skill
 
 Looking for starter contributions:
 
-- Add a `dependency-upgrade` template
 - Improve MCP client install docs
 - Write a reusable skillpack submission guide
+- Suggest a practical automation template from your own repo
 
 Starter issues: https://github.com/guorunjie/skillpack-forge/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22

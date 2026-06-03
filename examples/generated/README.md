@@ -124,6 +124,30 @@ npx skillpack-forge@latest new ci-triage examples/generated/ci-triage --force
 npx skillpack-forge@latest compile examples/generated/ci-triage
 ```
 
+## Dependency Upgrade
+
+Source manifest:
+
+- [`dependency-upgrade/skillpack.yaml`](dependency-upgrade/skillpack.yaml)
+
+Generated files:
+
+- [`dependency-upgrade/AGENTS.md`](dependency-upgrade/AGENTS.md)
+- [`dependency-upgrade/CLAUDE.md`](dependency-upgrade/CLAUDE.md)
+- `dependency-upgrade/.claude/skills/dependency-upgrade-demo-dependency-upgrade/SKILL.md`
+- `dependency-upgrade/.codex/skills/dependency-upgrade-demo-dependency-upgrade/SKILL.md`
+- `dependency-upgrade/.cursor/rules/dependency-upgrade-demo.mdc`
+- `dependency-upgrade/.github/copilot-instructions.md`
+- [`dependency-upgrade/.mcp/manifest.json`](dependency-upgrade/.mcp/manifest.json)
+- [`dependency-upgrade/.mcp/README.md`](dependency-upgrade/.mcp/README.md)
+
+Regenerate:
+
+```bash
+npx skillpack-forge@latest new dependency-upgrade examples/generated/dependency-upgrade --force
+npx skillpack-forge@latest compile examples/generated/dependency-upgrade
+```
+
 ## Release Automation
 
 - [`release-automation/skillpack.yaml`](release-automation/skillpack.yaml)

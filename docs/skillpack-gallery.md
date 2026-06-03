@@ -18,6 +18,7 @@ npx skillpack-forge@latest compile .
 | `playwright-browser` | Playwright UI tests and browser inspections | [`examples/generated/playwright-browser`](../examples/generated/playwright-browser) |
 | `test-automation` | Reproducing failures, focused tests, fixtures, and verification output | [`examples/generated/test-automation`](../examples/generated/test-automation) |
 | `ci-triage` | Inspecting failing CI runs, isolating causes, and classifying flaky versus real failures | [`examples/generated/ci-triage`](../examples/generated/ci-triage) |
+| `dependency-upgrade` | Reviewing outdated packages, applying safe updates, and verifying compatibility | [`examples/generated/dependency-upgrade`](../examples/generated/dependency-upgrade) |
 | `docs-automation` | README, docs, and generated documentation maintenance | [`examples/generated/docs-automation`](../examples/generated/docs-automation) |
 | `release-automation` | Changelogs, versions, tags, packages, and release checks | [`examples/generated/release-automation`](../examples/generated/release-automation) |
 | `ops-automation` | Runbooks, recurring checks, monitors, and operational workflows | [`examples/generated/ops-automation`](../examples/generated/ops-automation) |
@@ -78,6 +79,17 @@ npx skillpack-forge@latest compile .
 ```
 
 Example: [`examples/generated/ci-triage/skillpack.yaml`](../examples/generated/ci-triage/skillpack.yaml)
+
+## Dependency Upgrade
+
+Use `dependency-upgrade` when agents should review outdated packages, apply safe patch/minor updates first, inspect changelog and lockfile changes, and document deferred major upgrades.
+
+```bash
+npx skillpack-forge@latest new dependency-upgrade .
+npx skillpack-forge@latest compile .
+```
+
+Example: [`examples/generated/dependency-upgrade/skillpack.yaml`](../examples/generated/dependency-upgrade/skillpack.yaml)
 
 ## Docs Automation
 

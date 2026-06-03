@@ -22,6 +22,11 @@ test("scanProject detects package metadata, commands, and docs", async () => {
           docs: "node scripts/docs.js",
           "docs:check": "node scripts/docs-check.js",
           release: "node scripts/release.js",
+          audit: "npm audit",
+          outdated: "npm outdated",
+          "deps:check": "npx npm-check-updates",
+          "deps:update": "npx npm-check-updates -u",
+          "deps:audit": "npm audit",
           "data:validate": "node scripts/validate-data.js",
           "data:transform": "node scripts/transform-data.js",
           "data:report": "node scripts/report-data.js",
@@ -30,7 +35,8 @@ test("scanProject detects package metadata, commands, and docs", async () => {
           doctor: "node ./bin/demo.js doctor ."
         },
         dependencies: {
-          "@playwright/test": "^1.0.0"
+          "@playwright/test": "^1.0.0",
+          "npm-check-updates": "^17.0.0"
         }
       },
       null,
@@ -52,6 +58,11 @@ test("scanProject detects package metadata, commands, and docs", async () => {
   assert.equal(scan.commands.docs, "npm run docs");
   assert.equal(scan.commands["docs:check"], "npm run docs:check");
   assert.equal(scan.commands.release, "npm run release");
+  assert.equal(scan.commands.audit, "npm run audit");
+  assert.equal(scan.commands.outdated, "npm run outdated");
+  assert.equal(scan.commands["deps:check"], "npm run deps:check");
+  assert.equal(scan.commands["deps:update"], "npm run deps:update");
+  assert.equal(scan.commands["deps:audit"], "npm run deps:audit");
   assert.equal(scan.commands["data:validate"], "npm run data:validate");
   assert.equal(scan.commands["data:transform"], "npm run data:transform");
   assert.equal(scan.commands["data:report"], "npm run data:report");
@@ -60,6 +71,7 @@ test("scanProject detects package metadata, commands, and docs", async () => {
   assert.equal(scan.commands.doctor, "npm run doctor");
   assert.ok(scan.capabilities.includes("browser-automation"));
   assert.ok(scan.capabilities.includes("data-pipeline"));
+  assert.ok(scan.capabilities.includes("dependency-upgrade"));
   assert.ok(scan.docs.includes("README.md"));
   assert.ok(scan.docs.includes("docs/runbook.md"));
 });
