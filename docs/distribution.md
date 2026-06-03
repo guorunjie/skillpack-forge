@@ -14,6 +14,8 @@ The automation skillpack gallery gives new users concrete starting points for br
 
 Live proof: https://github.com/guorunjie/skillpack-forge-demo shows one checked-in `skillpack.yaml`, generated AGENTS/CLAUDE/Claude/Codex/Cursor/Copilot/MCP outputs, a packed `.mcpb` bundle, and a passing GitHub Actions check.
 
+For ready-to-post social copy, use [`docs/share-kit.md`](share-kit.md).
+
 ## Suggested Categories
 
 - AI coding agents

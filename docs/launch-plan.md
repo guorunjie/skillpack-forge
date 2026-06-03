@@ -64,6 +64,8 @@ Done:
 - Add npm/live fixture reviewer proof comments to the Copilot, Claude Skills, and Claude Code toolkit PRs.
 - Seed community labels and open starter issues for templates, MCP docs, importer work, and contribution docs.
 - Add GitHub topics for `community` and `good-first-issue`.
+- Enable GitHub Discussions.
+- Add share kit for HN, Reddit, X, LinkedIn, and maintainer-focused launch posts.
 
 Next:
 

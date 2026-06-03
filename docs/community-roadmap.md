@@ -10,6 +10,8 @@ Skillpack Forge grows best when contributors can add practical agent workflows w
 
 Browse all current starter tasks with the [`good first issue`](https://github.com/guorunjie/skillpack-forge/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) label.
 
+Use [GitHub Discussions](https://github.com/guorunjie/skillpack-forge/discussions) for template ideas, workflow examples, and questions that are not yet ready to become issues.
+
 ## Deeper Roadmap Issues
 
 - [Importer: preserve Cursor glob metadata when importing rules](https://github.com/guorunjie/skillpack-forge/issues/9)
