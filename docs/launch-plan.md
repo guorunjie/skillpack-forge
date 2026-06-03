@@ -54,7 +54,12 @@ Done:
 - Submit to `github/awesome-copilot`.
 - Fix generated README update on the `github/awesome-copilot` PR.
 - Submit to `ComposioHQ/awesome-claude-skills`.
+- Submit to `rohitg00/awesome-claude-code-toolkit`.
+- Submit to `e2b-dev/awesome-ai-sdks`.
+- Prepare manual `hesreallyhim/awesome-claude-code` submission packet.
 
 Next:
 
+- Sign the e2b CLA for PR #222, then comment `@cla-bot check`.
+- Submit the `hesreallyhim/awesome-claude-code` issue form manually from the prepared packet.
 - Monitor external PR reviews and respond quickly.

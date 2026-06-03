@@ -26,6 +26,10 @@ The automation skillpack gallery gives new users concrete starting points for br
 - `punkpeye/awesome-mcp-servers`: [PR #7299](https://github.com/punkpeye/awesome-mcp-servers/pull/7299) opened for the generated repo-local read-only MCP server and MCPB bundle output.
 - `github/awesome-copilot`: [PR #1905](https://github.com/github/awesome-copilot/pull/1905) opened for a Skillpack Forge custom instruction that teaches Copilot to create, compile, verify, and package portable agent context.
 - `ComposioHQ/awesome-claude-skills`: [PR #996](https://github.com/ComposioHQ/awesome-claude-skills/pull/996) opened for a Claude Skill that guides agents through Skillpack Forge workflows.
+- `rohitg00/awesome-claude-code-toolkit`: [PR #484](https://github.com/rohitg00/awesome-claude-code-toolkit/pull/484) opened for the Claude Code toolkit list.
+- `e2b-dev/awesome-ai-sdks`: [PR #222](https://github.com/e2b-dev/awesome-ai-sdks/pull/222) opened for the AI agent SDK/tooling list. This PR requires the repository owner to sign the e2b CLA at https://e2b.dev/docs/cla and then comment `@cla-bot check`.
+- `hesreallyhim/awesome-claude-code`: manual Web UI issue form only. Prepared submission fields in [`docs/awesome-claude-code-submission.md`](awesome-claude-code-submission.md).
+- `appcypher/awesome-mcp-servers`: fork branch prepared in `guorunjie/awesome-mcp-servers-1:add-skillpack-forge`, but GitHub returned `FORBIDDEN` when creating the PR by API because of fork/permission handling. Use the GitHub compare UI if pursuing this directory.
 
 ## Submission Angle
 
