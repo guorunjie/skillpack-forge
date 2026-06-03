@@ -51,8 +51,8 @@ Done:
 - Add zero-dependency MCPB bundle packing.
 - Add public automation skillpack gallery.
 - Submit to `punkpeye/awesome-mcp-servers`.
+- Submit to `github/awesome-copilot`.
 
 Next:
 
-- Submit to `github/awesome-copilot`.
 - Submit to `ComposioHQ/awesome-claude-skills`.
